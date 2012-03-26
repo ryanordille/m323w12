@@ -1,0 +1,815 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ...
+%\geometry{landscape}                % Activate for for rotated page geometry
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{dsfont}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{MATH 323: Lecture Notes}
+\author{Ryan Ordille}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+Starting from after the midterm and break:
+
+\section{28 February}
+\subsection{Random variable distributions}
+Cumulative distribution function (CDF): $F_X (x) = P(X \leq x)$
+
+For discrete random variables: $P(X = x) = P_X (x)$
+
+\subsubsection{Binomial distribution}
+
+The random variable $X$ has a \emph{binomial distribution} with parameters $n$ and $p$ if
+\[
+	P(X = x) = {n \choose x} p^x (1-p)^{n-x}
+\]
+for $x = 0, 1, \ldots, n$, where $n$ is a non-negative integer and $0 \leq p \leq 1$.
+
+Note that we should check if:
+\begin{enumerate}
+	\item $P_X (x) \geq 0$ (obvious)
+	\item $\sum_{\textnormal{all x in range}} P_X (x) = 1$ (easy to check)
+\end{enumerate}
+
+We write $X ~ Bin (n, p)$ ($X$ has the binomial distribution).
+
+\textbf{How the binomial distribution arises:} (the binomial setup)
+
+Firstly, we have a sequence of $n$ independent trials. That is, the outcomes of these trials are mutually independent.
+
+Secondly, each trial can result in exactly one of two possible outcomes: ``success" (S) or ``failure" (F). We call such trials \emph{Bernoulli trials}.
+
+Thirdly, the probability of success at trial $i$ is constant and equal to $p$, for every $i = 1, 2, \ldots, n$. For example, in a coin toss, we cannot change the probability of heads halfway through, so the probability of success is constant.
+
+\emph{Theorem:} Let $X$ be the number of successes observed in these $n$ trials. Then,
+\[
+	P(X = x) = {n \choose x} p^x (1-p)^{n - x} \; \textnormal{ for } x = 0,1,2,\ldots, n
+\]
+
+\emph{Proof:} (same idea for the genetic mutation example) First, note that the probability of any particular configuration in which there are $x$ successes (and $(n-x)$ failures) is just $p^x (1-p)^{n-x}$.
+
+E.g:
+\[ P(S_1 \cap S_2 \cap \ldots \cap S_x \cap F_{x+1} \cap F_{x+2} \cap \ldots \cap F_n) = P(S_1) P(S_2) \ldots P(S_x) P(F_{x+1}) \ldots P(F_n) \]
+Assuming these are all independent. This is equal to
+\[
+	p p \ldots p (1-p) \ldots (1-p) = p^x (1-p)^{n-x}
+\]
+But,
+\[
+	\{ X = x \} = \cup_{\textnormal{all possible configurations}} \{ \textnormal{configuration $i$ with $x$ successes} \}
+\]
+
+Note that the configurations are disjoint, so therefore, by axiom 3:
+
+\[
+	P(X = x) = \sum_{\textnormal{all configurations}} P(\textnormal{Configuration} i) = \sum p^x (1-p)^{n-x}
+\]
+
+Since each configuration is defined by a choice of $x$ objects from $n$ total objects, then for every $x = 0, 1, \ldots, n$:
+\[
+	P (X = x) = {n \choose x} p^x (1-p)^{n-x}
+\]
+
+\emph{Example:} Suppose that the five year survival probability for lung cancer is $.10$. If thirty people with lung cancer are sampled, what is the probability that at least three will survive five years or longer?
+
+\emph{Solution:} Let $Y =$ the number out of thirty who will survive five or more years. We shall reasonably assume the binomial setup, with $n = 30$ and $P(S_i) = .10$, where $S_i$ is the event where the $i$th subject survives five or more years. Therefore,
+\[
+	P(Y \geq 3) = \sum_{y=3}^{30} {30 \choose y} (.10)^y (1-.10)^{30-y} = 1 - \sum_{y=0}^{2} {30 \choose y} (.10)^y (1-.10)^{30-y}
+\]
+
+Important note: do not immediately have the ``burning desire" to use the binomial distribution as soon as you see a bunch of trials, each of which can result in exactly one of two outcomes. You must check if the trials are independent -- they will not be if you are sampling without replacement!
+
+Observe that the Bernoulli distribution is a special case of the binomial distribution, where $n = 1$. So, $P_X (x) = p^x (1-p)^{1-x}$ for $x = 0,1$.
+
+
+\subsubsection{Poisson distribution}
+
+The random variable $X$ is said to have a \emph{Poisson distribution} with parameter $\lambda > 0$ if
+\[
+	P(X = x) = \frac{ \lambda^x e^{- \lambda}}{x!} \; \textnormal{ for } x = 0,1,2,\ldots
+\]
+
+(Note the infinite range of $x$)
+
+Check that:
+\begin{enumerate}
+	\item $P_X (x) \geq 0$ -- obvious
+	\item $\sum_0^{\infty} P_X (x) = 1$ -- Taylor series expansion for $e^{\lambda}$
+\end{enumerate}
+
+The Poisson distribution arises as an approximation to the binomial for ``large $n$ and small $p$".
+
+\textbf{Theorem:} let $X ~ Bin(n,p)$, then the limit of $P(X=x)$ as $n$ tends to infinity and $p$ tends to 0, in such a way that $n \times p$ is constant ($ = \lambda$), is
+\[
+	\frac{ \lambda^x e^{- \lambda}}{x!} \; \textnormal{ for } x = 0,1,2,\ldots
+\]
+(e.g. $p = \frac{6}{n} : np = n(\frac{6}{n}) = 6$)
+
+\emph{Proof:} We shall use the following result in proving our theorem.
+\[
+	\lim{n \to \infty} (1 + \frac{a}{n})^n = e^a
+\]
+
+\[
+	P(X = x) = {n \choose x} p^x (1-p)^{n-x} \; \textnormal{ for } x = 0,1,\ldots,n
+\]
+\[
+	(*) = \frac{n!}{x! (n-x)!} p^x (1-p)^n (1-p)^{-x}
+\]
+Now since $\lambda = np$, we have $p = \frac{\lambda}{n}$. Then, $(*)$ becomes:
+\[
+	\frac{n!}{x! (n-x)!} \frac{\lambda^x}{n^x} (1 - \frac{\lambda}{n})^n (1 - \frac{\lambda}{n})^{-x}
+\]
+After some algebraic manipulation, this becomes:
+\[
+	\frac{1}{x!} \frac{n (n-1) (n-2) \ldots (n-x+1)}{n n \ldots n} (1 - \frac{\lambda}{n})^n (1 - \frac{\lambda}{n})^{-x} \lambda^x
+\]
+Notice that the second term has $x$ terms on both the top and the bottom. Now, let $n$ go to infinity to get the limit:
+\[
+	\frac{\lambda^x}{x!} e^{- \lambda} \; \blacksquare
+\]
+
+% make-up notes -- missed class
+\section{01 March}
+\subsection{Poisson distribution continued}
+\[
+    P(X = x) = \frac{\lambda^x e^{- \lambda}}{x!} \; \textnormal{where } x = 0, 1, 2, \ldots
+\]
+
+\textbf{Example:} Suppose that in a book of 1000 pages, on any particular page, there can be either zero errors or one error. Suppose further that the probability of an error on any particular page is $.002$. what is the approximate probability that there will be at most three errors in the book?
+
+\textbf{Exact solution:} There is a binomial setup -- errors are likely to occur independently amongst the $n = 1000$ trials. Each trial can result in either a success (an error is found) or a failure (an error is not found). There is also a constant probability of success ($.002$) for every trial. Let $X$ be the number of successes in 1000 pages. Then $X ~ Bin(1000, .002)$.
+
+\[
+    P(X \leq 3) = \sum_{x = 0}^{3} {1000 \choose x} (.002)^x (1 - .002)^{1000-x}
+\]
+
+\textbf{Approximate solution:} Since $n$ is large and $p$ is small, we can use the Poisson approximation with $x = n \times p = 1000 \times \frac{2}{1000} = 2$. Therefore:
+\[
+    P(X \leq 3) = \sum_{x = 0}^{3} P(X = x) = \sum_{x=0}^{3} \frac{2^x e^{-2}}{x!}
+\]
+If $X$ has a Poisson distribution with parameter $\lambda$, we write $X ~ Po(\lambda)$.
+
+\subsection{The Hypergeometric Distribution}
+
+The random variable X has a hypergeometric distribution with parameters $N$, $a$, and $n$ if:
+\[
+    P(X = x) = \frac{{a \choose x} {{N - a} \choose {n -x}}}{N \choose n}
+\]
+(for $x \leq a$ and $n-x \leq N-a$)
+
+\subsection{The Geometric Distribution}
+
+$X$ is said to have a geometric distribution with parameter $p$ if $P(X = x) = P_x (x) = (1-p)^{x-1} p$ for $x = 1, 2, \ldots$.
+
+\[
+    p \sum_{x = 1}^{\infty} (1-p)^{x-1} = p \frac{1}{1-(p-1)} = 1
+\]
+
+The geometric r.v. is used to describe or model the trial number at which the first success occurs in a sequence of independent Bernoulli trials, each with the probability of success $p$.
+
+\subsection{Expected values}
+The probability distribution of a random variable provides the complete story about the r.v.. There is no information about a r.v. once we know its probability distribution. However, we often wish to summarize a probability distribution. The two most common summaries are:
+\begin{enumerate}
+    \item a parameter that discusses the ``centre of distribution" and
+    \item a parameter that discusses how spread out the values are from the centre.
+\end{enumerate}
+
+To this end, we give the following definition:
+
+\textbf{Expected value:} let $Y$ be a discrete r.v. with the probability function $P_Y (y)$. Then, we define the expected value of $y$ denoted by $E(Y)$ to be
+\[
+    E(Y) = \sum_{\textnormal{all } y} y P_Y (y) = \sum_{\textnormal{all } y} y P(Y = y)
+\]
+
+\section{06 March}
+\subsection{Review}
+Recall: given a r.v. $Y$, we define the expected value or expectation of $Y$ denoted by $E(Y)$ to be:
+\[
+    E(Y) = \sum_{\textnormal{all } y} y P(Y = y)
+\]
+provided that the sum is finite.
+
+\subsection{Theory}
+Notes:
+\begin{enumerate}
+    \item $E(Y)$ is often denoted by $\mu_y$, and also is termed the \emph{mean} of $Y$ (also called the ``population mean").
+    \item \textbf{Interpretation:} $E(Y)$ is a weighted average or mean of the possible values of the random variable $Y$, where the weights are the probabilities of these values. \\
+        For example, in the special case where $Y$ has a discrete uniform distribution $a_1, a_2, \ldots, a_N$, then \\
+            \[
+                E(Y) = \sum_{i = 1}^{N} a_i P(Y = a_i) = \frac{1}{N} \sum_{i = 1}^{N} a_i
+            \]
+         \\ So think of $\mu$ as the ``average value" of $Y$.
+    \item $\mu$ is a constant, a parameter specific to a given probability distribution. You need the distribution to compute $\mu$.
+    \item $E(c Y) = c E(Y)$ where $c$ is a constant, and $E (\sum_{i=1}^{n} Y_i) = \sum_{i=1}^{n} E(Y_i)$ (the proof will come later)
+    \item Note, however, that in general, $E(XY) \neq E(X)E(Y)$.
+    \item Let $g$ be some real-valued function of a r.v. $Y$. Then, if $X = g(y)$, we have
+        \[
+            E(X) = E(g(y)) = \sum_{\textnormal{all } y} g(y) P(Y=y)
+        \]
+        The point of this: by definition, $E(g(y)) = E(X) = \sum_{\textnormal{all } x} x P(X = x)$. Thus, in order to find $E(g(y))$, it would appear that we first need to find the probability distribution of $X = g(y)$. We'll see such transformations later -- they can be difficult. You do not have to first find the distribution of $X$ -- you can use the distribution of the original $Y$ and sum $g(y)P(Y=y)$.
+\end{enumerate}
+
+In particular, if $g(Y) = Y^k$, we can call $E(g(Y)) = E(Y^k)$ is called the $k$th moment of $Y$. $\mu$ is called the first moment of $Y$.
+\[
+    E(Y^k) = \sum_{\textnormal{all } y} y^k P(Y=y)
+\]
+
+Of particular importance is a special function of $Y$:
+\[
+    g(Y) = (Y - \mu_Y)^2
+\]
+In this case, $E(g(Y)) = E ((Y - \mu_Y)^2)$ is called the \emph{variance} of $Y$, and is denoted by $Var(Y)$, also $\sigma_Y^2$. This gives the average squared distance between the values of $Y$ and its mean. It is a measure of spread or variation of $Y$ (i.e. its distribution). We call $\sqrt{\sigma_Y^2}$ the \emph{standard deviation} of $Y$. This is more convenient than $Var(Y)$, since it is in the same units as $Y$, unlike $Var(Y)$.
+
+\textbf{Result:}
+\[
+    Var(Y) = E((Y - \mu_Y)^2) = E(Y^2) - \mu_Y^2
+\]
+Proof:
+\begin{align*}
+    E((Y-\mu_Y)^2) &= E(Y^2 - 2 \mu_Y Y + \mu_Y^2) \\
+        &= E(Y^2) - E(2 \mu_Y Y) + E(\mu_Y^2) \\
+        &= E(Y^2) - 2 \mu_Y E(Y) + \mu_Y^2 \\
+        &= E(Y^2) - 2 \mu_Y^2 + \mu_Y^2 \\
+        &= E(Y^2) - \mu_Y^2 \; \blacksquare
+\end{align*}
+
+\emph{Final note:} $Var(c Y) \neq c \times Var(Y)$, but $Var(c Y) = c^2 \times Var(Y)$.
+
+\subsection{Examples}
+\subsubsection{Example 1}
+\textbf{The calculation of insurance premiums:} An insurance company will insure your computer against theft for \$1000. It is known with a probability $.05$ that your computer will be stolen. What premium should the insurance company charge so that its expected gain is 0?
+
+\textbf{Solution:} Let $c$ be the required premium. Let $Y$ be the gain of the company in a given year. We need to find the value of $c$ such that $E(Y) = 0$.
+
+First, we need $P_Y (y)$ for all $y$. We have $P(Y = c) = .95$ (where the computer was not stolen) and $P(Y = (c - 1000)) = .05$ (where the computer was stolen). Therefore,
+\[
+    E(Y) = c \times .95 + (c - 100) \times .05
+\]
+Setting $E(Y) = 0$ and solving for $c$, we get $c = 50$. Thus, if the company charges \$50 for the policy, on average, over a large number of clients, they would neither lose nor gain money.
+
+\subsubsection{Example 2}
+\textbf{``Nuts and Bolts" Example:} suppose that the r.v. $x$ has the probability distribution:
+\begin{align*}
+    P(X = -1.2) &= .32 \\
+    P(X = 2.6)  &= .40 \\
+    P(X = 0)    &= .28 \\
+\end{align*}
+Find $E(X)$ and $Var(X)$.
+
+\[
+    E(X) = -1.2 \times .32 + 0 \times .28 + 2.6 \times .40 = .66 = \mu_X
+\]
+\begin{align*}
+    Var(X) &= E(X^2) - \mu_X^2 = \sum x^2 P(X = x) \\
+    E(X^2) &= (-1.2)^2 \times .32 + 0^2 \times .28 + (2.6)^2 \times .40 \\
+        &= 3.1648 \\
+    \therefore Var(X) &= 3.1648 - (.66)^2 \\
+        &= 2.7292 \\
+    \textnormal{Also, } \sigma &= \sqrt{2.7292} = 1.652
+\end{align*}
+
+%%
+\section{08 March}
+\subsection{Summary}
+Centre -- $E(X) = \mu$
+
+Spread -- $Var(x) = \sigma^2$
+
+Standard Deviation -- $\sqrt{\sigma^2} = \sigma$
+
+\[
+    \sum (x - \mu)^2 P(X = x) = \sum x^2 P(X = x) - \mu^2
+\]
+
+\subsection{The Mean and Variance of Some Named Distributions}
+\subsubsection{Binonmial}
+\begin{align*}
+    E(X) = \mu &= \sum_{x=1}^{n} x {n \choose x} p^x (1-p)^{n-x} \\
+        &= \sum \frac{n(n-1)!}{(x-1)! (n-1-(x-1))!} p p^{x-1} (1-p)^{n-1-(x-1)} \; \textnormal{ as } (n-x)! = (n-1-(x-1))! \\
+        &= n p \sum {{n-1} \choose {x-1}} p^{x-1} (1-p)^{n-1-(x-1)} \\
+        &= n p \sum_{y=0}^{n-1} {{n-1} \choose y} p^y (1-p)^{n-1-y} \\
+        &= n p
+\end{align*}
+
+The sum above is equal to 1 since it is just a sum of $n-1$ $Bin(n-1,p)$ probabilities.
+
+To find $Var(X)$, we first have to find $E(X^2)$. By definition:
+\[
+    E(X^2) = \sum_{x=1}^{n} x^2 {n \choose x} p^x (1-p)^{n-x}
+\]
+
+Note that $x^2$ will not cancel with the leading terms of $x!$ as before, so we have to use a trick. We first calculate $E(X(X-1))$, which is easy. Then, notice that
+\[
+    E(X (X-1)) = E(X^2) - E(X) = E(X^2) - \mu
+\]
+So, $E(X^2) = E(X(X-1)) + \mu$. Finally, $Var(X) = E(X(X-1)) + \mu - \mu^2$.
+
+\begin{align*}
+    E(X(X-1)) &= \sum_{x=2}^{n} x (x-1) {n \choose x} p^x (1-p)^{n-x} \\
+        &= n (n-1) p^2 \sum \frac{(n-2)!}{(x-2)! (n-2-(x-2))!} p^{x-2} (1-p)^{n-2-(x-2)} \\
+        &= n (n-1) P^2 \sum {{n-2} \choose {x-2}} p^{x-2} (1-p)^{n-2-(x-2)} \\
+        &= n (n-1) p^2
+\end{align*}
+
+\[
+    Var(X) = n (n-1) p^2 + np - n^2 p^2 = n p (1-p)
+\]
+
+\subsubsection{Bernoulli}
+
+In particular, the mean and variance of a Bernoulli r.v. are $p$ and $p (1-p)$ respectively (because $n=1$).
+
+\subsubsection{Poisson}
+
+\begin{align*}
+    E(X) &= \sum_{x=1}^{\infty} x \frac{\lambda^{x} e^{- \lambda}}{x!} \\
+        &= e^{- \lambda} \lambda \sum_{x-1 = 0}^{\infty} \frac{\lambda^{x-1}}{(x-1)!} \\
+        &= \lambda
+\end{align*}
+
+So, the mean of a Poisson r.v. is just its parameter $\lambda$.
+
+For the variance, first find $E(X(X-1))$. We find $Var(X) = \lambda$, the same as the mean.
+
+\subsubsection{Geometric}
+
+\begin{align*}
+    E(X) &= \sum_{x=1}^{\infty} x p (1-p)^{x-1} \\
+    \textnormal{using our trick... }   &=  p \sum_{x=1}^{\infty} x (1-p)^{x-1} \\
+        &= p \sum_{x=1}^{\infty} - \frac{d}{dp} (1-p)^{x} \\
+        &= -p \frac{d}{dp} \sum_{x=1}^{\infty} (1-p)^{x} \; \textnormal{we can interchange the derivative and the sum} \\
+        &= -p \frac{d}{dp} \frac{1-p}{1-(1-p)} \; \textnormal{ where } (1-p) = r \\
+        &= -p \frac{d}{dp} (\frac{1}{p} - 1) \\
+        &= \frac{1}{p}
+\end{align*}
+
+For the variance, first find $E(X(X-1))$ (2 derivatives), and then you can find the variance.
+\[
+    Var(X) = \frac{1-p}{p^2}
+\]
+
+\subsection{Continuous probability distributions}
+\textbf{Defintion:} a r.v. $X$ with cdf $F_X$ is said to be continuous if $F_X$ is continuous for all $- \infty < x < \infty$.
+
+The continuous cdfs split into two types:
+\begin{enumerate}
+    \item the so-called ``absolutely continuous" cdfs (essentially, they are differentiable) and
+    \item the so-called ``singular" cdfs (without derivatives).
+\end{enumerate}
+
+From now on in this course, we'll assume for continuos cdfs $F_X$, that they are differentiable for all $- \infty < x < \infty$.
+
+It follows that if $X$ is continuous, then $P(X=x)=0$ for every $x$. Consider the ``area under a curve" analogy.
+
+Remember (as $F_X (x) = P(X \leq x)$):
+\[
+    P(X=x) = F_X (x) - P(X < x)
+\]
+
+Hence, we cannot specify a continuous r.v. by specifying the values $P(X=x)$ for all $x$ that $X$ can assume, as we did in the discrete case. Instead, we introduce an analogue of the probability function known as the \emph{probability density function} (pdf). It will turn out that the pdf also uniquely determines the probability distribution.
+
+\textbf{Definition:} A real-valued function $f_x$ is said to be the probability density function of a r.v. $X$ if:
+\begin{enumerate}
+    \item $f_x (x) \geq 0$ for all $- \infty < x < \infty$ and
+    \item $P(X \in A) = \int_A f_x (x) dx$ (i.e. $f_x$ has the property that when you integrate it over a set, you get the probability of the set).
+\end{enumerate}
+
+%%
+\section{13 March}
+\subsection{The probability density function}
+\textbf{Definition:} the probability density function (p.d.f.) of a r.v. $X$ is any function $f_X (x)$ such that:
+\begin{enumerate}
+    \item $f_X (x) \geq 0 \; \forall - \infty < x < \infty$ and
+    \item $P(X \in A) = \int_A f_X (s) dx \; \forall \textnormal{ events } A \in \mathds[R]$
+\end{enumerate}
+
+A pdf gives $P(X \in A)$ by integrating over $A$.
+
+\subsection{Notes on the p.d.f.}
+%[
+\textbf{(1)} In particular, if $A$ is of the form $(- \infty, x]$ then %)
+\[
+    P(X \in A) = P(X \leq x) = \int_{-\infty}^{x} f_X (y) dy
+\]
+
+In short, $F_X (x) = \int_{-\infty}^{x} f_x (y) dy$.
+
+\textbf{(2)} Conversely, we can recover the p.d.f. from the c.d.f. by the Fundamental Theorem of Calculus, since:
+\[
+    \frac{d}{dx} F_X (x) = F_X (x) = f_X (x) \forall x
+\]
+
+Thus, in particular, if $f_X$ is a p.d.f., then:
+\[
+    \int_{-\infty}^{\infty} f_X (x) dx = 1
+\]
+
+\textbf{(3)} Interpretation of a p.d.f: We have, for small $\Delta x$, that:
+\[
+    \frac{F_X (x + \delta x) - F_X (x)}{\Delta x} \approx f_X (x)
+\]
+So it follows that:
+\[
+    F_X (x+\delta x) - F_X (x) \approx \Delta x f_X (x)
+\]
+
+%[
+But the left hand side is just $P(x < X \leq x + \Delta x)$. Finally, we have that $f_X (x) \Delta x$ is approximately the probability that $X$ lies in $(x, x + \Delta x]$. %)
+
+Note that, because the p.d.f. does not represent a probability on its own, it can be greater than 1 or less than 0. When multiplied by a small $\Delta x$, it gives an \emph{approximate} probability.
+
+Any function whose total area equals 1 can qualify as a p.d.f., even if some points are larger than 1.
+
+\textbf{(4)} For continuous r.v.s, we define:
+\[
+    E(g(X)) = \sum_{\textnormal{all} x} g(x) P_X (x) = \int_{-\infty}^{\infty} g(x) f_X (x) dx
+\]
+
+As before, when $g(X) = X^k$, then we refer to the $E(g(X)) = E(X^k)$ as the $k$th moment. Of particular importance are the first moment ($k=1$) and the second moment ($k=2$). Again, as before, we call the first moment the \emph{mean} or the \emph{expected value} of $X$.
+
+So, by definition:
+\[
+    E(X) = \mu_X = \int_{-\infty}^{\infty} x f_X (x) dx
+\]
+and
+\[
+    E(X^2) = \int_{-\infty}^{\infty} x^2 f_x (x) dx)
+\]
+
+Finally, as before:
+\[
+    Var(X) = E((X - \mu_X)^2) = \int_{\infty}^{\infty} (x - \mu_X)^2 f_X (x) dx = E(X^2) - \mu_X^2
+\]
+and
+\[
+    Var(X) = \int_{-\infty}^{\infty} x^2 f_X (x) dx - (\int_{-\infty}^{\infty} x f_X (x) dx)^2
+\]
+
+Note: watch out for a p.d.f. that may change its form in different ranges of $(-\infty,\infty)$ when carrying out an integration.
+
+\subsection{Examples}
+\subsubsection{Example 1}
+Let $f_X (x) = c(x^2 + 1)$ for $0 < x < 1$ and $f_X (x) = 0$ elsewhere ($c$ is a constant).
+\begin{enumerate}
+    \item Find $c$.
+    \item Find $P(.25 < X \leq .50)$.
+    \item Find $P(.25 < X < .50)$.
+    \item Find $F_X$.
+    \item Find $E(X)$ and $\sigma_X$.
+\end{enumerate}
+
+\textbf{(1)} Since $\int_{-\infty}^{\infty} f_X (x) dx = 1$, we must have:
+\[
+    \int_{-\infty}^{0} 0 dx + \int_{0}^{1} c(x^2 + 1) dx + \int_{1}^{\infty} 0 dx = 1
+\]
+This gives $c=.75$.
+
+\textbf{(2)}
+\[
+    P(.25 < X \leq .50) = \int_{.25}^{.50} (.75)(x^2 + 1) dx = \frac{55}{256}
+\]
+
+\textbf{(3)} For a continuous p.d.f., these two values are the same (by rules of integration).
+\[
+    P(.25 < X < .50) = P(.25 < X \leq .50) = \frac{55}{256}
+\]
+
+\textbf{(4)}
+\begin{align*}
+    F_X (x) &= 0 \; \forall x \leq 0 \\
+    F_X (x) &= \int_{-\infty}^{x} f_X (y) dy \; \forall 0 < x < 1 \\
+        &= \int_{-\infty}^{0} 0 dy + \int_{0}^{x} (.75)(y^2 + 1) dy \\
+        &= (.75)(\frac{x^3}{3} + x) \\
+    F_X (x) &= 1 \; \forall x \geq 1
+\end{align*}
+
+\textbf{(5)}
+\begin{align*}
+    E(X) &= \int_{-\infty}^{\infty} x f_X (x) dx \\
+        &= \int_{0}^{1} x (.75) (x^2 + 1) dx \\
+        &= (.75) (\frac{x^4}{4} + \frac{x^2}{2}) \textnormal{(0 to 1)} \\
+        &= (.75)(.25 + .50) \\
+        &= \frac{9}{16}
+\end{align*}
+
+To find $\sigma_X$, first find:
+\begin{align*}
+    E(X^2) &= \int_{-\infty}^{0} 0 dx + \int_0^1 x^2 (.75) (x^2 + 1) dx + \int_1^{\infty} 0 dx \\
+        &= (.75)(\frac{x^5}{5} + \frac{x^3}{3} \; \textnormal{0 to 1} \\
+    \sigma^2 &= Var(X) \\
+        &= E(X^2) - (\frac{9}{16})^2 \\
+    \sigma &= \sqrt{\sigma^2}
+\end{align*}
+
+%%
+\section{15 March}
+\subsection{Named continuous probability distributions}
+\subsubsection{The uniform distribution}
+\textbf{Definition:} The r.v. $X$ is said to be uniformly distributed on the interval $[a,b]$ if
+\[
+    f_X (x) = \int_a^x \frac{1}{b-a} \; \text{ for } a \leq x \leq b
+\]
+and $f_X (x) = 0$ elsewhere.
+
+\textbf{Notes:}
+\begin{enumerate}
+    \item The p.d.f. is constant on $[a,b]$. On the graph, the height is constantly $\frac{1}{b-a}$, so the area under the curve is 1. The probability is uniformly spread out in the interval.
+    \item The uniform distribution is often used to model situations in which we believe outcomes occur completely at random.
+    \item An important special case is the uniform distribution $[0,1]$.
+    \item Notation -- we write $X ~ U[a,b]$ to mean that $X$ has a uniform distribution on the interval $[a,b]$.
+    \item The c.d.f. of $X$ is:
+        \begin{align*}
+            F_X (x) &= 0 \; \text{for} x < a \\
+                &= \frac{x-a}{b-a} \; \text{for} a \leq x \leq b \\
+                &= 1 \; \text{for} b < x
+        \end{align*}
+        The graph of the c.d.f. is $0$ up to $a$, then grows linearly up to $b$, then is constantly $1$ after.
+    \item
+        \begin{align*}
+            \mu = E(X) &= \int_{-\infty}^{\infty} x f_X (x) dx \\
+                &= 0 + \int_a^b x \frac{1}{b-a} dx + 0 \\
+                &= \frac{b^2 -a^2}{2(b-a)} \\
+                &= \frac{a+b}{2}
+        \end{align*}
+        It is easy to see that the variance of a uniform distribution is $Var(X) = \frac{(b-a)^2}{12}$.
+\end{enumerate}
+
+\subsubsection{The exponential distribution}
+\textbf{Definition:} $X$ has an exponential distribution with parameter $\beta > 0$ if:
+\[
+    f_X (x) = \frac{1}{\beta} e^{- \frac{x}{\beta}} \; \text{for } x \geq 0
+\]
+The distribution is equal to $0$ elsewhere.
+
+\textbf{Notes:}
+\begin{enumerate}
+    \item we write $X \sim Exp(\beta)$ to describe this distribution.
+    \item If $X$ is exponential, then $X$ is a non-negative r.v., meaning $P(X \geq 0) = 1$.
+    \item The p.d.f. of $f_X (x)$ is $\frac{1}{\beta}$ at $x=0$, and grows exponentially downwards as $x$ grows larger. The probability of an interval of length $L$ decreases as $L$ moves down the graph (e.g. the probability between 2 and 4 is greater than the probability between 4 and 6). The probability is concentrated towards the origin.
+    \item The c.d.f. of $X$ is:
+        \begin{align*}
+            F_X (x) &= 0 \; \; \; \forall x < 0 \\
+                &= 0 + \int_0^x \frac{a}{\beta} e^{\frac{-y}{\beta}} dy \; \textnormal{ for } x \geq 0 \\
+                &= 1 - e^{\frac{-x}{\beta}}
+        \end{align*}
+
+    \item $\mu = E(X) = \int_{-\infty}^{\infty} x f_X (x) dx = 0 + \int_0^{\infty} x \frac{1}{\beta} e^{-\frac{x}{\beta}} dx = \beta$
+        You can do this using integration by parts, or we'll see a trick for this later. Also, $\sigma^2 = Var(X) = \beta^2$.
+    \item Sometimes, the exponential distribution will be ``parameterized" in a different way, i.e. the parameter will be written in a different form. The alternative form for the p.d.f. is:
+        \begin{align*}
+            f_X (x) &= \lambda e^{\lambda x} \; \textnormal{for} x \geq 0 \\
+                &= 0 \; \textnormal{elsewhere}
+        \end{align*}
+        Watch out how the writer is writing in the parameter for the distribution! In this case, $E(X) = \frac{1}{\lambda}$ and $Var(X) = \frac{1}{\lambda^2}$.
+    \item \textbf{The memoryless property:} \\
+        \textbf{Theorem:} Let $X ~ Exp(\beta)$. Then, $P(x \leq X < x+h | X \geq x) = P(0 \leq X < h)$. \\
+        In other words, the information that $X \geq x$ is ``forgotten". \\
+        Important note: the memoryless property \emph{does not} assert that $P(0 \leq X < h) = P(x \leq X < x+h)$! \\
+        \textbf{Proof:} Let $x \leq X < x+h$ be $B$, and $X \geq x$ be $A$. Then,
+            \begin{align*}
+                P(x \leq X < x+h | X \geq x) &= P(B \cap A) / P(A) \\
+                    &= P(B)/P(B) \text{since B is a subset of A} \\
+                    &= \frac{F_X (x+h) - F_X (x)}{1 - P(X < x)} \\
+                    &= \frac{1 - e^{\frac{-(x+h)}{\beta}} - (1 - e^{\frac{-x}{\beta}})}{1 - (1 - e^{\frac{-x}{\beta}})} \\
+                    &= 1 - e^{\frac{-h}{\beta}} \\
+                    &= P(0 < X \leq h)
+            \end{align*}
+        There is an interesting converse -- the \emph{only} continuous distribution with the memoryless property is the exponential. The geometric discrete distribution also has this property.
+    \item The exponential distribution is used when you believe that $X$ has a constant ``hazard" (i.e. $P(x \leq X < x+h | X \geq x)$ is roughly constant in $x$ for small $h$). It is also used to model the times between events that occur according to a Poisson Process (explained in later statistic courses).
+
+\end{enumerate}
+
+%%
+\section{20 March}
+\subsection{The Gamma Distribution}
+Before defining the gamma distribution, we need to define the \emph{gamma function}.
+
+\subsubsection{The Gamma Function}
+Let $\alpha> 0$. We denote the gamma function by $\Gamma (\alpha)$ and define
+\[
+    \Gamma(\alpha) = \int_0^{\infty} x^{\alpha - 1} e^{-x} \; dx
+\]
+
+The gamma function has the following two important properties:
+\begin{enumerate}
+    \item $\Gamma (\frac{1}{2}) = \sqrt(\pi)$
+    \item $\Gamma(\alpha + 1) = \alpha \Gamma(\alpha)$
+\end{enumerate}
+
+\subsubsection{The Gamma Distribution}
+\textbf{Definition:} A r.v. $X$ has a gamma density with parameters $\alpha, \beta$ if its p.d.f. is given by:
+\[
+    f_X (x) = \frac{1}{\Gamma(\alpha)} \frac{x^{\alpha -1} e^{\frac{-x}{\beta}}}{\beta^{\alpha}} \textnormal{for $x \geq 0$}
+\]  
+$f_X (x) = 0$ when $x < 0$.
+
+        \textbf{Notes:}
+
+\textbf{(1)} 
+\[
+    \int_0^{\infty} \frac{1}{\Gamma(\alpha)} \frac{x^{\alpha -1}e^{\frac{-x}{\beta}}}{\beta^{\alpha}} \; dx = 1
+\]
+This is as it should be -- set $y = \frac{x}{\beta}$ to get $\frac{1}{\Gamma(\alpha)} \int_0^{\infty} y^{\alpha -1}e^{-y} \; dy = 1$. Set $y=\frac{x}{\beta}$ and $dx = \beta \; dy$ to get the same answer.
+
+This just proves that this given formula is a density, as it integrates out to 1.
+
+\textbf{(2)}
+The gamma distribution is said to ``flexible", meaning that many different shapes for the p.d.f. can be induced by changing the two parameters $\alpha$ and $\beta$.
+
+For $\alpha > 1$, the p.d.f. grows rapidly immediately after $x > 0$, then drops off with a tail as $x$ grows larger. $f_X (\alpha > 1)$ is said to be skewed to the right.
+
+For $\alpha = 1$, $f_X (\alpha = 1$ grows exponentially downwards, similar to the exponential distribution.
+
+For $\alpha < 1$, the p.d.f. also grows exponentially downwards, but more steeply.
+
+\textbf{(3)}
+The gamma density can be used to model the waiting time for the $n$th event if the times between events are independent exponential r.v.s.
+
+\textbf{(4)}
+There are two important special cases of the gamma distribution:
+\begin{enumerate}
+    \item If we set $\alpha = 1$, we get an exponential distribution with parameter $\beta$.
+    %% \nu or \mu?
+    \item If we set $\alpha = \frac{\nu}{2}$ and $\beta = 2$, then the density becomes:
+        \[
+            \frac{1}{\Gamma(\frac{\nu}{2})} \frac{x^{\frac{\nu}{2} - 1}}{2^{\frac{\nu}{2}}} e^{\frac{-x}{2}}
+        \]
+        For $x \geq 0$ (0 otherwise). \\
+        This particular p.d.f. plays an important role in statistics, and is called a \emph{Chi-square} p.d.f. ``with $\nu$ degrees of freedom". $\nu$ is just a parameter with this peculiar name. \\
+        We write $X \sim \chi_{\nu}^2$ to mean ``$X$ has a Chi-square distribution with $\nu$ degrees of freedom".
+\end{enumerate}
+
+\textbf{(5)}
+It is not too difficult to derive $E(X)$ and $Var(X)$ from the definition. It will be easier, however, once we know about moment-generating functions.
+
+In the end, $E(X) = \alpha \beta$. Write $x^{\alpha}$ as $x^{\alpha + 1 - 1}$ and let $y = \frac{x}{\beta}$, and carry out the integration.
+
+We get, similarly, $Var(X) = \alpha \beta^2$.
+
+In particular, if $X \sim \chi_{\nu}^2$, then $E(X) = \nu$ (set $\alpha = \frac{\nu}{2}$ and $\beta = 2$) and $Var(X) = 2 \nu$).
+
+\textbf{(6)}
+The c.d.f. $F_X$ is not known in closed form: $F(x) = 0$ for $x<0$ and:
+\[
+    F_X (x) = \int_0^x \frac{1}{\Gamma(\alpha)} \frac{y^{\alpha - 1}}{\beta^{\alpha}} e^{\frac{-y}{\beta}} \; dy
+\]
+For $x>0$.
+
+\textbf{(7)} Notation:
+
+We write $X ~ Gamma(\alpha, \beta)$ to mean ``$X$ has a gamma distribution with parameters $\alpha, \beta$".
+
+
+\subsection{The Normal (or Gaussian) Distribution}
+The normal or Gaussian distribution is easily the most important distribution in probability and statistics! The distribution seems to occur naturally all over.
+
+\subsubsection{Definition}
+The r.v. $X$ has a normal distribution with parameters $\mu, \sigma^2$ if its p.d.f. is given by
+\[
+    f_X (x) = \frac{1}{\sqrt{2\pi}} \frac{1}{\sigma} e^{- \frac{1}{2} (\frac{x - \mu}{\sigma})^2}
+\]
+for $-\infty < x < \infty$.
+
+\subsubsection{Notes}
+\textbf{(1)}
+We write $X \sim N(\mu, \sigma^2)$.
+
+\textbf{(2)}
+It is possible to show directly that $E(X)$ = the parameter $\mu$ and $Var(X)$ = the parameter $\sigma^2$. 
+
+Note that if $X \sim N(1.2, 7.8)$, we mean that $\mu = 1.2$ and $\sigma^2 = 7.8$ \emph{not} $\sigma = 7.8$. We'll derive $\mu$ and $\sigma^2$ by using the so-called moment generating function later, as the current integration would be a bit tricky (but not impossible).
+
+\textbf{(3)}
+The p.d.f. has the famous bell shape. The features are:
+\begin{enumerate}
+    \item $f_X$ is symmetric about $\mu$.
+    \item Changing $\mu$ changes the location of the p.d.f., i.e. where it is centred on the $x$-axis.
+    \item Increasing $\sigma^2$ increases the spread of the p.d.f. and decreasing $\sigma^2$ decreases the spread.
+\end{enumerate}
+
+\textbf{(4)}
+The c.d.f. is not known in closed form, similar to the gamma distribution. Probabilities of intervals need to be done using numerical integration. 
+
+However, unlike the gamma density, it is possible to use a single table to find any normal probability. The idea is to reduce the general problem to what is called a \emph{standard normal problem}.
+
+\subsubsection{Standard Normal Problem}
+\textbf{Background:} if I give you \emph{any} r.v. with mean $\mu$ and standard deviation $\sigma$, then 
+\[
+    Y = \frac{X - \mu}{\sigma}
+\]
+has $E(Y) = 0$ and $Var(Y) = 1$. 
+
+We are said to have \emph{standardized} $X$.
+
+However, if $X \sim N(\mu, \sigma^2)$, we have the following:
+\[
+    Z = \frac{X - \mu}{\sigma} \sim N(0,1)
+\]
+This is called a \emph{standard normal} r.v. or distribution. 
+
+%%
+\section{22 March}
+\subsection{Standardizing continued}
+Our main result from Tuesday: if $X \sim N(\mu, \sigma^2)$, then
+\[
+    Z = \frac{X - \mu}{\sigma} \sim N(0,1)
+\]
+\emph{Note}: For any r.v. with mean $\mu$ and variance $\sigma^2$, $\frac{X-\mu}{\sigma}$ will have mean 0 and variance 1. The proof of this is simple - just plug in the fraction for $X$ in $E(X)$ and $Var(X)$.
+
+The point of the main result is that, after standardizing, we still get a normal r.v. If you standardize a r.v., you don't always get a r.v. of the same type (unless you're standardizing a r.v. with a normal distribution).
+
+\subsubsection{Example 1}
+\textbf{Problem:} If $X \sim N(-1.2, 4)$, find $P(-1.9 \leq X < 2.2)$.
+
+\textbf{Solution:} The idea is to reduce the problem to a $N(0,1)$ problem, and then use $N(0,1)$ tables. 
+
+\emph{Step 1:} (do not draw a sketch now)
+\begin{align*}
+    P(-1.9 \leq X < 2.2) &= P( \frac{-1.9-(-1.2)}{2} \leq \frac{X - (-1.2)}{2} < \frac{2.2-(-1.2)}{2}) \\
+        &=  P(-.35 \leq Z < 1.7) \; \textnormal{ our main result from before }
+\end{align*}
+
+\emph{Step 2:} draw a sketch: (draw a standard normal distribution with mean = 0, shade in area A between $-.35$ and $1.7$)
+
+Tables will give you areas to the right of a value $z$. Areas to the right of $z=3$ is essentially 0, so tables will usually not give values of $z>3$. Recall that the areas will be the probabilities -- e.g. the area to the right of $z=1.78$ will equal $P(Z \geq 1.78)$.
+
+We'll call $A_1$ the area between $-.35$ and 0, and $A_2$ the area between $0$ and $1.7$. We'll get these values by using the symmetry of $N(0,1)$ about $\mu = 0$. Tables only give positive values of $z$, so to get $A_1$, subtract $P( Z \geq .35)$ from $.5$. 
+
+From the table values, $A_2 = .5 - .0446$ and $A_1 = .5 - .3632$, so $A = A_1 + A_2 = .5922$.
+
+\subsubsection{Example 2}
+\textbf{Problem:} Use the $N(0,1)$ tables inversely here. Suppose that a car battery is known to have a lifetime that is approximately normally distributed with a mean of 36 months and a standard deviation of 6 months. What should the warranty period be set at so that only 5\% of batteries will need to be replaced?
+
+\emph{Notice:} Batteries cannot have a negative lifetime, so our true normal distribution will not work. However, our lifetime is so skewed to the right that $2 \sigma$ is still way to the right of $0$, so we can shift our model. Strictly speaking, modelling anything that cannot hold negative values is not correctly, but for almost all cases, the normal distribution will work just fine.
+
+\textbf{Solution:} We have that $X \sim N(36,6^2)$. Let $x_0$ be the required warranty period. We want that $x_0$ such that $P(X < x_0) = .05$, i.e. such that $P(X \geq x_0) = .95$. 
+
+Reduce this distribution to a standard normal distribution. So, we seek $x_0$ such that:
+\[
+    P(\frac{X-36}{6} \geq \frac{x_0 - 36}{6}) = .95
+\]
+i.e. such that $P(Z \geq \frac{x_0 - 46}{6}) = .95$.
+
+Draw a sketch -- we're looking for a $z_0$ from standard normal tables such that the area to the right is $.95$, then set that equal to our above probability, and we can solve our problem.
+
+This $z_0$ must be to the left of the mean 0, since the area to the right of the mean is $.5$. Find a $z_1$ such that the area to the right of it is $.05$, and according to our tables, $z_1 = 1.64$. Take the negative, so the area to the right of $z_0 = -1.64$ is $.95$ (using the symmetry of the normal distribution). 
+
+From the $N(0,1)$ tables, we know that $P(Z \leq -1.64) = .95$. Finally, we must have that
+\[
+    \frac{x_0 - 36}{6} = -1.64
+\]
+We get $x_0 = 26.16$ months.
+
+\subsection{Moment Generating Functions}
+\subsubsection{Definition}
+Let $X$ be a r.v. with p.d.f. $f_X$ (respectively, probability $P_X$ for the discrete case). We define the moment generating function (denoted m.g.f.) to be that function of t, such that
+\[
+    M_X (t) = E ( e^{tx} )
+\]
+
+\subsubsection{Notes}
+\textbf{(1)} The m.g.f. is a function of the real values $t$.
+
+\textbf{(2)} In the continuous case, 
+\[
+    E(e^{tx}) = \int_{-\infty}^{\infty} e^{tx} f_X (x) \; dx
+\]
+
+In the discrete case,
+\[
+    E(e^{tx}) = \sum_x e^{tx} P(X = x)
+\]
+
+\textbf{(3)} For some distributions, the m.g.f. does not exist because the integral (or sum) does not converge. We say that the m.g.f. exists if it exists in some interval containing 0. 
+
+\textbf{(4)} If the m.g.f. exists, then it is possible to recover the p.d.f. or probability function, i.e. there is a one-to-one correspondence between a p.d.f. (pf) and a m.g.f.. Recovering it, although possible, is a bit complicated, and we will not be expected to do so.
+
+\textbf{(5)} \textbf{Uses of the m.g.f.} -- the m.g.f. can be used to find the \emph{moments} of a r.v., and is often easier than finding the moments ($E(X^k)$) by using the definition. 
+
+\textbf{Theorem:} $E(X^k) = M^{(k)} (0)$.
+
+\textbf{Proof (continuous case):} (discrete case -- replace integral by sum) We have, by definition:
+\begin{align*}
+   M_X (t) &= E(e^{tx}) = \int_{-\infty}{\infty} e^{tx} f_X (x) \; dx \\
+   M_X^1 (t) &= \frac{d}{dt} \; \int \ldots \\
+    &= \int \frac{d}{dt} \ldots \\
+    &= \int x e^{tx} f_X (x) \; dx \\
+   \textnormal{now set } t &= 0 \\
+   M_X^1 (t) &= \int_{-\infty}^{\infty} x f_X (x) \; dx \\
+    &= E(X)
+\end{align*}
+In general, we get 
+\[
+    M^{(k)} (t) = \int_{-\infty}{\infty} x^k e^{tx} f_X (x) \; dx
+\]
+This gives $M^{(k)} (t) = E(X^l)$, as advertised.
+\end{document}
