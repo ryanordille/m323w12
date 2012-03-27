@@ -812,4 +812,146 @@ In general, we get
     M^{(k)} (t) = \int_{-\infty}{\infty} x^k e^{tx} f_X (x) \; dx
 \]
 This gives $M^{(k)} (t) = E(X^l)$, as advertised.
+
+%%
+\section{27 March}
+\subsection{Recall}
+\[
+    M_X (t) = E(e^{tx})
+\]
+\[
+    M_X^{(k)} (0) = E(X^k)
+\]
+\subsection{The m.g.f.s of some important distributions}
+\subsubsection{Gamma distribution}
+$X \sim Gamma(\alpha,\beta)$
+\begin{align*}
+    M_X (t) &= \int_0^{\infty} e^{tx} \frac{1}{\Gamma(\alpha)} \frac{x^{\alpha -1}}{\beta^{\alpha}} e^{\frac{-x}{\beta}} \; dx \\
+        &= \frac{1}{\Gamma(\alpha)} \frac{1}{\beta^{\alpha}} \int_0^{\infty} x^{\alpha - 1} e^{-x ( \frac{1}{\beta} - t)} \; dx 
+\end{align*}
+Set $y = x(\frac{1}{\beta} - t)$ with $dy = (\frac{1}{\beta}) - t \; dx$ to get
+\[
+    M_X (t) = \frac{1}{(1-\beta t)^{\alpha}} \; \textnormal{ for } |\beta t| < 1 
+\]
+From $M_X (t)$, we immediately get
+\[
+    M_X^{\prime} (0) = \alpha \beta (1 - \beta t)^{\alpha - 1} \Big|_{t=0}
+\]
+by the chain rule. Therefore, $M_X^{\prime} (0) = \alpha \beta$. Similiarly,
+\[
+    M_X^{\prime \prime} (t) \Big|_{t=0} = \alpha \beta^2 + \alpha^2 \beta^2
+\]
+as $Var(Y) = E(Y^2) - (E(Y))^2$. Therefore, $Var(X) = \alpha \beta^2$.
+
+So, in particular, for $\alpha = 1$ (i.e. the exponential distribution), we have
+\[
+    M_X (t) = \frac{1}{(1-\beta t)}
+\]
+with $E(X) = \beta$ and $Var(X) = \beta^2$. 
+
+For $\alpha = \frac{\nu}{2}$ and $\beta = 2$ (i.e. a chi-square distribution with $\nu$ degrees of freedom), we get
+\[
+    M_X (t) = \frac{1}{(1-2t)^{\frac{\nu}{2}}}
+\]
+and $E(X) = \nu$ and $Var(X) = 2 \nu$.
+
+\subsubsection{Binomial distribution}
+$X \sim Bin(n,p)$
+\begin{align*}
+    M_X (t) &= \sum_{x=0}^n e^{tx} {n \choose x} p^x (1-p)^{n-x} \\
+        &= (1 - p + pe^t)^n \; \forall t \in (-\infty, \infty)
+\end{align*}
+(note: $1-p = a$ and $pe^t = b$)
+
+We get $M_X^{\prime} (0) = np$ and $M_X^{\prime \prime} (0) = np(1-p) + n^2 p^2$. Therefore, $Var(X) = np(1-p)$.
+
+\subsubsection{Poisson distribution}
+$X \sim Po(\lambda)$
+\begin{align*}
+    M_X (t) &= E(e^{tx}) \\
+        &= \sum_{x=0}^{\infty} \frac{e^{tx} \lambda^x e^{-\lambda}}{x!} \\
+        &= e^{\lambda (e^t - 1)}
+\end{align*}
+Therefore, $E(X) = M_X^{\prime} (0) = \lambda$ and $E(X^2) = \lambda + \lambda^2$, so therefore $Var(X) = \lambda$.
+
+\subsubsection{Normal distribution}
+Let $X \sim N(0,1)$ to start with. 
+\[
+    f_X (x) = \frac{1}{\sqrt{2 \pi}} e^{\frac{1}{2} x^2} \; \forall x \in (-\infty, \infty)
+\]
+Therefore,
+\begin{align*}
+    M_X (t) &= \int_{-\infty}^{\infty} e^{tx} \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} x^2} \; dx \\
+        &= \int_{-\infty}^{\infty} e^{-\frac{1}{2} (x^2 - 2tx + t^2)} e^{\frac{t^2}{2}} \frac{1}{\sqrt{2\pi}} \; dx \\
+        &= e^{\frac{t^2}{2}} \int_{-\infty}{\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} (x-t)^2} \; dx \\
+        &= e^{\frac{t^2}{2}} \textnormal{ since the integrand is just a $N(t,1)$ p.d.f..}
+\end{align*}
+
+To get the m.g.f. of a $N(\mu, \sigma^2)$ r.v. for arbitrary $\mu$ and $\sigma^2$, we use the following property of an m.g.f.: let $a$ and $b$ be constants. Then,
+\[
+    M_{aX + b} (t) = e^{bt} M_X (at)
+\]
+Now, recall that if $X \sim N(\mu, \sigma^2)$, then $Z = \frac{X-\mu}{\sigma} \sim N(0,1)$. Therefore, we can always write a $N(\mu, \sigma^2)$ r.v. $X$ as $X = \sigma Z + \mu$.
+
+Putting these two results together, we get
+\[
+    M_X (t) = M_{\sigma Z + \mu} (t) = e^{\mu t} e^{\frac{\sigma^2 t^2}{2}}
+\]
+and
+\[
+    M_X (t) = e^{\mu t + \frac{1}{2} \sigma^2 t^2} \; \forall t \in (-\infty, \infty)
+\]
+We find $M_X^{\prime} (0) = \mu$, $M_X^{\prime \prime} (0) = \sigma^2 + \mu^2$, and $Var(X) = \sigma^2$.
+
+\subsection{Transformations of random variables}
+Often, we're given the distribution of a r.v. $X$, but we're more interested in some function $Y = g(X)$ of this r.v., e.g. maybe we have the distribution of the velocity $v$, and we are interested in the distribution of the kinetic energy $Y = \frac{1}{2} m v^2$. In general, we're concerned with finding the distribution of $g(X)$ knowing the distribution of $X$. 
+
+First, consider the following two examples to illustrate the eventual formula for the continuous case. 
+
+\subsubsection{Example 1}
+Let $X \sim N(\mu, \sigma^2)$. Find the p.d.f. of $Z = \frac{X - \mu}{\sigma}$. We know the answer to this, but we don't know the proof for it.
+
+\textbf{Step 1:} write down the c.d.f. of $Z$.
+\begin{align*}
+    F_Z (z) &= P(Z \leq z) \\
+        &= P( \frac{X - \mu}{\sigma} \leq z)
+\end{align*}
+
+\textbf{Step 2:} write the $F_Z$ in terms of $F_X$.
+\begin{align*} 
+    P(\frac{X - \mu}{\sigma} \leq z) &= P(X \leq \sigma z + \mu) \\
+        &= F_X (\sigma z + \mu)
+\end{align*}
+
+\textbf{Step 3:} differentiate in terms of $z$.
+\begin{align*}
+    f_z (z) &= \frac{d}{dz} F_Z (z) \\
+        &= \sigma f_X (\sigma z + \mu) \; \textnormal{ by chain rule}
+\end{align*}
+
+\textbf{Finally:} 
+\begin{align*}
+    f_X (x) &= \frac{1}{\sqrt{2\pi}} \frac{1}{\sigma} e^{-\frac{1}{2} (\frac{x-\mu}{\sigma})^2} \Big|_{\sigma z + \mu} \\
+        &= \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} z^2} \; \forall z \in (-\infty, \infty)
+\end{align*}
+
+\subsubsection{Example 2 (Careful!)}
+Let $Z \sim N(0,1)$. Find the p.d.f. of $Y=Z^2$.
+
+\begin{align*}
+    F_Y (y) &= P(Y \leq y) \\
+        &= P(Z^2 \leq y) \\
+        &= P(|Z| \leq \sqrt{y}) \\
+        &= P(-\sqrt{y} \leq Z \leq \sqrt{y}) \\
+        &= F_Z (\sqrt{y}) - F_Z (-\sqrt{y}) \; \textnormal{ for } y \geq 0
+\end{align*}
+
+Finally,
+\begin{align*}
+    f_Y (y) &= \frac{d}{dy} F_Y (y) \\
+        &= \frac{1}{2} y^{-\frac{1}{2}} f_Z (\sqrt{y}) - \frac{1}{2} y^{-\frac{1}{2}} f_Z (-\sqrt{y}) \; \forall y \geq 0 \\
+        &= \frac{1}{2} y^{-\frac{1}{2}} (2 f_Z (\sqrt{y})) \textnormal{ ($N(0,1)$ density symmetric about 0)}
+\end{align*}
+
+
 \end{document}
