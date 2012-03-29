@@ -953,5 +953,101 @@ Finally,
         &= \frac{1}{2} y^{-\frac{1}{2}} (2 f_Z (\sqrt{y})) \textnormal{ ($N(0,1)$ density symmetric about 0)}
 \end{align*}
 
+%%
+\section{29 March}
+\subsection{Transformations continued}
+If $Z \sim N(0,1)$, then $Y = Z^2 \sim X^2$. We have
+\begin{align*}
+    F_Y (z) &= P(-\sqrt{z} \leq Z \leq \sqrt{z}) \\
+        & F_Z (\sqrt{z}) - F_Z (-\sqrt{z}) \\
+    f_Y (z) &= \frac{d}{dz} F_Y (z) \\
+        &= \frac{1}{2} z^{-\frac{1}{2}} f_Z (\sqrt{z}) + f_Z (-\sqrt{z}) \frac{1}{2} z^{-\frac{1}{2}}
+\end{align*}
+But $f_Z$ is a $N(0,1)$ p.d.f. which is symmetric about 0, and therefore $f_Z (\sqrt{z}) = f_Z (-\sqrt{z})$.
 
+Therefore, we have
+\begin{align*}
+    f_Y (z) &= z^{-\frac{1}{2}} f_Z (\sqrt{z}) \textnormal{ for } 0 < z < \infty \\
+        &= 0 \textnormal{ for } z \leq 0
+\end{align*}
+
+Finally, we use the following facts: (with $\alpha = \frac{\nu}{2} = \frac{1}{2}$ and $\beta = 2$)
+\[
+    f_Z (u) = \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} u^2} \textnormal{ for } -\infty < u < \infty
+\]
+
+If $W \sim \chi_1^2$, then
+\[
+    f_W (w) = \frac{1}{\sqrt{\pi}} \frac{1}{2^{\frac{1}{2}}} w^{-\frac{1}{2}} e^{-\frac{w}{2}} \textnormal{ for } w \geq 0
+\]
+with $f_W (w) = 0$ elsewhere.
+
+We have
+\begin{align*}
+    f_Y (z) &= z^{-\frac{1}{2}} \frac{1}{\sqrt{2} \sqrt{\pi}} e^{-\frac{1}{2} z} \textnormal{ for } z > 0 \\
+        &= 0 \textnormal{ for } z \leq 0
+\end{align*}
+
+We're done!
+
+\subsubsection{General formula and theorem}
+We can now give a general formula that allows us to go from the p.d.f. of a given r.v. $X$ to the p.d.f. of a transformed r.v. $Y = g(X)$.
+
+\textbf{Theorem:} Let $X$ have p.d.f. $f_X$. Let $y = g(x)$ be either strictly increasing or strictly decreasing as a function of $x$, and $X$ is continuous. Define $Y = g(X)$. Then, the p.d.f. of $Y$ be
+\[
+    f_Y (y) = f_X (g^{-1} (y)) |\frac{dx}{dy}| \textnormal{ for the appropriate range of values of $Y$.}
+\]
+Note that $|\frac{dx}{dy}| = \frac{1}{|\frac{dy}{dx}|}$.
+
+\textbf{Proof:} First, 
+\begin{align*}
+    F_Y (y) &= P(g(X) \leq y) \\
+        &= P(X \leq g^{-1}(y)) \textnormal{ (if $g$ increasing)} \\
+    \textnormal{while } &= P(X \geq g^{-1}(y) \textnormal{ (if $g$ decreasing)}
+\end{align*}
+
+Thus, we have,
+\begin{align*}
+    F_Y (y) &= F_X (g^{-1} (y)) \textnormal{ (if $g$ increasing)} \\
+        &= 1 - F_X (g^{-1} (y)) \textnormal{ (if $g$ decreasing)} 
+\end{align*}
+
+Finally, as $g(x) = y \Rightarrow x = g^{-1} (y)$,
+\begin{align*}
+    f_Y (y) &= \frac{d}{dy} F_Y (y) \\
+        &= f_X (g^{-1} (y)) \frac{dx}{dy} \textnormal{ (if $g$ increasing)} \\
+        &= - f_X (g^{-1}(y)) \frac{dx}{dy} \textnormal{ (if $g$ decreasing)}
+\end{align*}
+
+But if $g$ is decreasing, then $\frac{dy}{dx} = \frac{1}{\frac{dx}{dy}} < 0$, so that the two situations (where $g$ is increasing and $g$ is decreasing) can be combined into a single formula.
+\[
+    f_Y (y) = f_X (g^{-1} (y)) |\frac{dx}{dy}|
+\]
+\emph{Note:} do not apply this formula unless $g$ is either strictly increasing or strictly decreasing.
+
+\subsubsection{The probability integral transformation}
+The following is a very important result that allows one to simulate observations from a given probability distribution by knowing only how to simulate observations from a $U(0,1)$ distribution. This famous result is called \emph{the probability integral transformation}.
+
+Let $X$ be a continuous r.v. with a strictly increasing $F_X$. Let $Y = F_X (X)$. Then $Y \sim U(0,1)$.
+
+\emph{Note:} here, our $g$ is $F_X$, i.e. $Y = g(X) = F_X (X)$. Also, you must use $F_X$ and not some other $F$.
+
+\textbf{Proof:} by our formula, 
+\[
+    f_Y (y) = f_X (F_X^{-1} (y)) \frac{dx}{dy} 
+\]
+($|\frac{dx}{dy}| = \frac{dx}{dy}$ since $F_X$ is increasing)
+
+\[
+    f_Y (y) = f_X (F_X^{-1}(y)) \frac{1}{\frac{dy}{dx}}
+\]
+Recall $y = F_X (x)$, $\frac{dy}{dx} = f_X (x)$, and $x=F_X^{-1} (y)$. Therefore,
+\[
+    f_Y (y) = f_X (F_X^{-1} (y)) \frac{1}{f_X (F_X^{-1} (y))} = 1 \textnormal{ for } 0 < y < 1
+\]
+and $f_Y (y) = 0$ elsewhere.
+
+We recognize the above as a $U(0,1)$ p.d.f.
+
+(IN CLASS EXAMPLES)
 \end{document}
