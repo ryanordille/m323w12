@@ -17,7 +17,195 @@
 \begin{document}
 \maketitle
 
-Starting from after the midterm and break:
+%%
+These course notes are for McGill University's MATH 323: Probability course, offered in the Winter 2012 semester, taught by David Wolfson. These notes are simply what the instructor was writing on the board, and may contain errors. The notes are written by me, Ryan Ordille, and no copyright infringement is intended. 
+
+The notes up until 28 February (first class after the break and midterm) are concise -- without review or obvious proofs. Most pre-midterm examples (especially the ``nuts and bolts" examples) will be left out since, when these notes were typed up towards the end of the course, the solutions are obvious.
+
+\section{17 January}
+\subsection{Axioms and Theorems}
+\begin{enumerate}
+	\item $P(E) \geq 0$
+	\item $P(S) = 1$
+	\item $P(\cup_{i=1}^{\infty} E_i) = \sum_{i=1}^{\infty} P(E_i) \forall E_i \cap E_J = \emptyset$
+	\item \textbf{Theorem 1:} $P(\emptyset) = 0$
+	\item \textbf{Theorem 2:} $P(E^c) = 1 - P(E)$
+	\item \textbf{Theorem 3:} $P(E \cap F^c) = P(E) - P(E \cap F)$
+	\item \textbf{Theorem 4:} If $E \subset F$, then $P(E) \leq P(F)$.
+	\item \textbf{Theorem 5:} If $E$ and $F$ are \emph{any} two events, then $P(E \cup F) = P(E) + P(F) - P(E \cap F)$.
+\end{enumerate}
+
+Word problem hints:
+\begin{itemize}
+	\item ``either/or" corresponds to a union of two events
+	\item ``at least one" also corresponds to a union
+	\item ``not" -- complement
+	\item ``and" -- intersection
+	\item `` proportion" -- ``a probability statement about an individual"
+\end{itemize}
+% section 17_january (end)
+
+\section{19 January}
+\subsection{Using counting methods to compute probabilities}
+\textbf{Theorem 6:} Let $S$ be a sample space (set of all possible outcomes) with finitely many outcomes $N$. If all these outcomes are equally likely, then, if $E$ is any event,
+\[
+	P(E) = \frac{\textnormal{number of ways that $E$ can occur}}{\textnormal{total number of possible outcomes = $N$}}
+\]
+
+Counting the number of ways that $E$ can occur (and $N$) can be difficult without the following counting rules.
+
+\subsubsection{Factorial}
+By definition,
+\[
+	n! = n(n-1)\dots 2 1 \textnormal{ where } 0! = 1
+\]
+
+\subsubsection{Multiplication rule for counting}
+Suppose you have $k$ sets of distinct objects of size $n_1, n_2, \dots, n_k$ respectively. Then, the number of ways to choose one object from each set is $n_1, n_2, \dots, n_k$.
+
+\subsubsection{$n$ choose $k$}
+Suppose that a set contains $n$ distinct objects. Then, the number of ways to select $k$ objects from these $n$ objects, if we sample \emph{without replacement}, is denoted by ${n \choose k}$ (``$n$ choose $k$"), and it turns out that
+\[
+	{n \choose k} = \frac{n!}{k! (n-k)!}
+\]
+Note that here the order is not important, e.g. the selection $(A,B)$ is equivalent to the selection $(B,A)$.
+
+\subsubsection{Permutations}
+If the order is important in the previous example, this is denoted by $P_k^n$ and
+\[
+	P_k^n = \frac{n!}{(n-k)!}
+\]
+% section 19_january (end)
+
+\section{24 January}
+This lecture contained just examples of the previous counting rules.
+% section 24_january (end)
+
+\section{26 January}
+\subsection{Conditional Probabilities}
+Very often, if we know that some event $A$ has occurred, then this will affect the probability that the event $B$ will occur.
+
+\textbf{Definition:} for two events $A$ and $B$, with $P(A) \neq 0$, we defined the probability of $B$ given $A$, denoted by $P(B|A)$, as
+\[
+	P(B|A) = \frac{P(A \cap B)}{P(A)}
+\]
+If $P(A) = 0$, then $P(B|A)$ can be defined arbitrarily, so we consider it to be undefined.
+
+Notice that the right-hand side of the definition is given in terms of already-defined quantities -- straightforward, unconditional probabilities. 
+
+\subsubsection{Notes}
+\textbf{(1)} Conditional probabilities satisfies the three axioms, just like unconditional probabilities.
+
+\textbf{(2) (the multiplication rule for conditional probabilities)} Let $A$ and $B$ be two events. Then,
+\[
+	P(A \cap B) = P(B|A) P(A) = P(A|B) P(B)
+\]
+
+\textbf{(3)} When solving conditional probability problems, use the \emph{conditioning technique} to break a long intersection into a series of conditional and unconditional probabilities.
+% section 26_january (end)
+
+\section{31 January} 
+Note that it's not true in general that $P(A | (B_1 \cup B_2)) = P(A | B_1) + P(A | B_2)$ even if $B_1 \cap B_2 = \emptyset$. However, it is true that $P(B_1 \cup B_2 | A) = P(B_1 | A) + P(B_2 | A)$.
+
+\subsection{The Law of Total Probability}
+Let $A$ be any event and let $B_1, B_2, \dots, B_m$ be a collection of $m$ events satisfying:
+\begin{enumerate}
+	\item $B_i \cap B_j = \emptyset \forall i \neq j$
+	\item $\cup_{i=1}^{m} B_i = S$ (i.e. $B_1, B_2, \dots B_m$ form a partition of $S$)
+\end{enumerate}
+Then,
+\[
+	P(A) = \sum_{i=1}^{m} P(A | B_i) P(B_i)
+\]
+
+Notice here that the left-hand side ($P(A)$) may be difficult to find directly, while the components of the right-hand side might be known or easy to find.
+
+\subsection{Bayes' Theorem}
+Let $A$ be any event. Let $B_1, B_2, \dots, B_m$ form a partition of $S$. Then, for every $k = 1, 2, \dots, m$,
+\[
+	P(B_k | A) = \frac{P(A | B_k) P(B_k)}{P(A)} = \frac{P(A | B_k) P(B_k)}{\sum_{i=1}^m P(A | B_i) P(B_i)}
+\]
+% section 31_january (end)
+
+\section{02 February}
+\subsection{Independence}
+Sometimes, knowing that an event $A$ has occurred will not affect the probability that $B$ will occur. In such a situation, we say that $A$ and $B$ are \emph{independent}. More formally, two events $A,B$ are said to be independent ($A \perp B$) if and only if
+\[
+	P(B | A) = P(B) \textnormal{ or } P(A | B) = P(A)
+\]
+
+\textbf{Theorem:} if $A$ and $B$ are disjoint, then $A$ and $B$ can only be independent if either $P(A) = 0$ or $P(B) = 0$.
+
+There's another important (albeit less intuitive) definition of independence: $A \perp B$ if and only if $P(A \cap B) = P(A)P(B)$. 
+
+More generally, events $A_1, A_2, \dots, A_n$ are \emph{mutually independent} if and only if, for every subset $A_{i1}, A_{i2}, \dots, A_{ik}$ of $A_1, A_2, \dots, A_n$,
+\[
+	P(\cap_{j=1}^k A_{ij}) = \prod_{j=1}^k P(A_{ij})
+\]
+
+It follows that if $A \perp B$, then $P(A \cup B) = P(A) + P(B) - P(A) P(B)$.
+
+In general, sampling without replacement assumes dependence, while sampling with replacement assumes independence.  Disjointness 
+% section 02_february (end)
+
+\section{07 February} 
+\subsection{Random variables}
+Often, we are not so interested in the outcomes of an experiment themselves, but rather in numerical values that can be associated with these outcomes. 
+
+\textbf{Definition:} a function $X$ that maps the sample space $S$ to the real line in such a way that, for every $w \in S$, $X(w)$ is a real number, is called a \emph{random variable} (or r.v. for short). 
+
+Note that two or more distinct $w$'s can give the same value of $X(w)$. However, one value of $w$ is not allowed to give two different values of $X(w)$, as this would not make $X$ a function.
+
+The term ``random variable" comes about because the outcomes of the experiment are random or uncertain before we perform our experiment, and hence the value of $X$ will also be uncertain before the experiment.
+
+We denote r.v.s with capitals, and the values of r.v.s after experiments with lowercase letters.
+% section 07_february (end)
+
+\section{09 February}
+\subsection{Random variables continued}
+\subsubsection{The cumulative distribution function}
+We define $P(x \in B)$ to be $P(w \in S : x \in B : P(X^{-1} (B))$ (i.e. we refer back to the events of $S$ to find the probabilities of events on the real line).
+
+%[
+\textbf{Definition:} $P(X \in (-\infty, x]) = P(X \leq x)$ is a function of $X$ called the \emph{cumulative distribution function (c.d.f.)} of the r.v. $X$. 
+%)
+\[
+	F_X (x) = P(X \leq x) \forall x \in (-\infty, \infty)
+\]
+
+\subsubsection{Properties of the c.d.f.}
+\textbf{(1)} The c.d.f. is a real-valued function of $x$.
+
+\textbf{(2)} In order to specify $F_X$, we need to specify $F_X (x) \forall x \in (-\infty, \infty)$.
+
+\textbf{(3)} All c.d.f.s are non-decreasing and right-continuous.
+
+\textbf{(4)} $F_X (-\infty) = \lim_{x \to -\infty} F_X (x) = 0$ and $F_X (\infty) = \lim_{x \to \infty} F_X (x) = 1$.
+
+\subsubsection{Continuous vs discrete r.v.s}
+\textbf{Definition:} We call a r.v. \emph{continuous} if its c.d.f. is a real-valued function of $x$ (i.e. it has no jumps). If a r.v. is not continuous, the r.v. is said to be \emph{discrete}, and can assume at most a countable number of distinct values.
+
+\textbf{Definition:} For a discrete r.v. $X$, the real-valued function of $x$ specified by $P_X (x) = P(X = x) \forall x$ that $X$ can assume is called the \emph{probability function} of $X$.
+
+\textbf{Theorem:} If we know $P_X (x) \forall x$ that $X$ can assume, then we can find $F_X (x) \forall x \in (-\infty, \infty)$. Conversely, if we're given the c.d.f., we can find the probability function.
+% section 09_february_ (end)
+
+\section{14 February} 
+\subsection{Named probability distributions}
+\subsubsection{Discrete uniform distribution}
+\textbf{Definition:} $X$ has a \emph{discrete uniform distribution} on the set of $N$ real numbers $a_1 < a_2 < \dots, a_N$ if $P(X = a_i) = \frac{1}{N} \forall i = 1, 2, \dots, N$.
+
+The total probability (mass) is equally or uniformly spread out on each of the numbers $a_i$. 
+
+\subsubsection{Bernoulli distribution}
+\textbf{Definition:} a r.v. $X$ has a \emph{Bernoulli distribution} with parameter $p$ if $P(X = 1) = p$ and $P(X = 0) = 1 - p = q$.
+
+This is used as a ``building block" for more complicated r.v.s. 
+% section 14_february (end)
+
+
+%% POST MIDTERM
+\textbf{Starting from after the midterm and break:}
 
 \section{28 February}
 \subsection{Random variable distributions}
@@ -1049,5 +1237,20 @@ and $f_Y (y) = 0$ elsewhere.
 
 We recognize the above as a $U(0,1)$ p.d.f.
 
-(IN CLASS EXAMPLES)
+\subsection{Joint probability distributions}
+Very often, we're interested in the simultaneous behaviour of several r.v.s, rather than one at a time, as we have considered up until now, e.g. if $X$ = number of kilometers traveled by a tire and $Y$ = tread depth, we may wish to know about the simultaneous or joint distribution of $X$ and $Y$. This leads to so-called \emph{multivariate distributions.}
+
+We shall considered bivariate (i.e. pairs of r.v.s) distributions, and indicate the general extensions at the end. 
+
+\subsubsection{Definition}
+The r.v.s $X$ and $Y$ have joint c.d.f., denoted $F_{X,Y}$, if
+\[
+    F_{X,Y} (x,y) = P(X \leq x \cap Y \leq y)
+\]
+Which we denote as $P(X \leq x, Y \leq y)$. 
+
+\subsubsection{Notes}
+\textbf{(1)} This definition holds for both continuous and discrete r.v.s. 
+
+\textbf{(2)} It is possible to show (in an advanced probability course) that the joint c.d.f. uniquely determines the probability distirbution in two-dimensional space. 
 \end{document}
