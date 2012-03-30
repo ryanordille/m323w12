@@ -16,6 +16,7 @@
 
 \begin{document}
 \maketitle
+\date{}
 
 %%
 These course notes are for McGill University's MATH 323: Probability course, offered in the Winter 2012 semester, taught by David Wolfson. These notes are simply what the instructor was writing on the board, and may contain errors. The notes are written by me, Ryan Ordille, and no copyright infringement is intended. 
@@ -78,7 +79,7 @@ If the order is important in the previous example, this is denoted by $P_k^n$ an
 % section 19_january (end)
 
 \section{24 January}
-This lecture contained just examples of the previous counting rules.
+This lecture just contained examples of the previous counting rules.
 % section 24_january (end)
 
 \section{26 January}
@@ -110,7 +111,7 @@ Note that it's not true in general that $P(A | (B_1 \cup B_2)) = P(A | B_1) + P(
 \subsection{The Law of Total Probability}
 Let $A$ be any event and let $B_1, B_2, \dots, B_m$ be a collection of $m$ events satisfying:
 \begin{enumerate}
-	\item $B_i \cap B_j = \emptyset \forall i \neq j$
+	\item $B_i \cap B_j = \emptyset \; \forall i \neq j$
 	\item $\cup_{i=1}^{m} B_i = S$ (i.e. $B_1, B_2, \dots B_m$ form a partition of $S$)
 \end{enumerate}
 Then,
@@ -187,13 +188,13 @@ We define $P(x \in B)$ to be $P(w \in S : x \in B : P(X^{-1} (B))$ (i.e. we refe
 
 \textbf{Definition:} For a discrete r.v. $X$, the real-valued function of $x$ specified by $P_X (x) = P(X = x) \forall x$ that $X$ can assume is called the \emph{probability function} of $X$.
 
-\textbf{Theorem:} If we know $P_X (x) \forall x$ that $X$ can assume, then we can find $F_X (x) \forall x \in (-\infty, \infty)$. Conversely, if we're given the c.d.f., we can find the probability function.
+\textbf{Theorem:} If we know $P_X (x) \; \forall x$ that $X$ can assume, then we can find $F_X (x) \; \forall x \in (-\infty, \infty)$. Conversely, if we're given the c.d.f., we can find the probability function.
 % section 09_february_ (end)
 
 \section{14 February} 
 \subsection{Named probability distributions}
 \subsubsection{Discrete uniform distribution}
-\textbf{Definition:} $X$ has a \emph{discrete uniform distribution} on the set of $N$ real numbers $a_1 < a_2 < \dots, a_N$ if $P(X = a_i) = \frac{1}{N} \forall i = 1, 2, \dots, N$.
+\textbf{Definition:} $X$ has a \emph{discrete uniform distribution} on the set of $N$ real numbers $a_1 < a_2 < \dots, a_N$ if $P(X = a_i) = \frac{1}{N} \; \forall i = 1, 2, \dots, N$.
 
 The total probability (mass) is equally or uniformly spread out on each of the numbers $a_i$. 
 
@@ -205,6 +206,7 @@ This is used as a ``building block" for more complicated r.v.s.
 
 
 %% POST MIDTERM
+\newpage
 \textbf{Starting from after the midterm and break:}
 
 \section{28 February}
