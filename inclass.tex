@@ -18,6 +18,8 @@
 \maketitle
 \date{}
 
+\pagestyle{myheadings}
+\markright{Ryan Ordille\hfill MATH 323: Probability\hfill}
 %%
 These course notes are for McGill University's MATH 323: Probability course, offered in the Winter 2012 semester, taught by David Wolfson. These notes are simply what the instructor was writing on the board, and may contain errors. The notes are written by me, Ryan Ordille, and no copyright infringement is intended. 
 
@@ -39,7 +41,7 @@ The notes up until 28 February (first class after the break and midterm) are con
 Word problem hints:
 \begin{itemize}
 	\item ``either/or" corresponds to a union of two events
-	\item ``at least one" also corresponds to a union
+	\item ``at least one" -- union
 	\item ``not" -- complement
 	\item ``and" -- intersection
 	\item `` proportion" -- ``a probability statement about an individual"
@@ -58,21 +60,21 @@ Counting the number of ways that $E$ can occur (and $N$) can be difficult withou
 \subsubsection{Factorial}
 By definition,
 \[
-	n! = n(n-1)\dots 2 1 \textnormal{ where } 0! = 1
+	n! = n \times(n-1) \times \dots \times 2 \times 1 \textnormal{ where } 0! = 1
 \]
 
 \subsubsection{Multiplication rule for counting}
 Suppose you have $k$ sets of distinct objects of size $n_1, n_2, \dots, n_k$ respectively. Then, the number of ways to choose one object from each set is $n_1, n_2, \dots, n_k$.
 
 \subsubsection{$n$ choose $k$}
-Suppose that a set contains $n$ distinct objects. Then, the number of ways to select $k$ objects from these $n$ objects, if we sample \emph{without replacement}, is denoted by ${n \choose k}$ (``$n$ choose $k$"), and it turns out that
+Suppose that a set contains $n$ distinct objects. Then, the number of ways to select $k$ objects from these $n$ objects, if we sample \emph{without replacement}, is denoted by ${n \choose k}$ (``$n$ choose $k$"). It turns out that:
 \[
 	{n \choose k} = \frac{n!}{k! (n-k)!}
 \]
-Note that here the order is not important, e.g. the selection $(A,B)$ is equivalent to the selection $(B,A)$.
+Note that here the order of selections is not important, e.g. the selection $(A,B)$ is equivalent to the selection $(B,A)$.
 
 \subsubsection{Permutations}
-If the order is important in the previous example, this is denoted by $P_k^n$ and
+If the order is important in the previous example, this is denoted by $P_k^n$, and
 \[
 	P_k^n = \frac{n!}{(n-k)!}
 \]
@@ -86,7 +88,7 @@ This lecture just contained examples of the previous counting rules.
 \subsection{Conditional Probabilities}
 Very often, if we know that some event $A$ has occurred, then this will affect the probability that the event $B$ will occur.
 
-\textbf{Definition:} for two events $A$ and $B$, with $P(A) \neq 0$, we defined the probability of $B$ given $A$, denoted by $P(B|A)$, as
+\textbf{Definition:} for two events $A$ and $B$, with $P(A) \neq 0$, we define the probability of ``$B$ given $A$", denoted by $P(B|A)$, as
 \[
 	P(B|A) = \frac{P(A \cap B)}{P(A)}
 \]
@@ -94,7 +96,7 @@ If $P(A) = 0$, then $P(B|A)$ can be defined arbitrarily, so we consider it to be
 
 Notice that the right-hand side of the definition is given in terms of already-defined quantities -- straightforward, unconditional probabilities. 
 
-\subsubsection{Notes}
+\subsection{Notes}
 \textbf{(1)} Conditional probabilities satisfies the three axioms, just like unconditional probabilities.
 
 \textbf{(2) (the multiplication rule for conditional probabilities)} Let $A$ and $B$ be two events. Then,
@@ -144,22 +146,22 @@ More generally, events $A_1, A_2, \dots, A_n$ are \emph{mutually independent} if
 	P(\cap_{j=1}^k A_{ij}) = \prod_{j=1}^k P(A_{ij})
 \]
 
-It follows that if $A \perp B$, then $P(A \cup B) = P(A) + P(B) - P(A) P(B)$.
+It follows that, if $A \perp B$, then $P(A \cup B) = P(A) + P(B) - P(A) P(B)$.
 
-In general, sampling without replacement assumes dependence, while sampling with replacement assumes independence.  Disjointness 
+In general, sampling without replacement assumes dependence, while sampling with replacement assumes independence.  Disjointness is entirely a set property, and should not be confused with independence.  
 % section 02_february (end)
 
 \section{07 February} 
 \subsection{Random variables}
 Often, we are not so interested in the outcomes of an experiment themselves, but rather in numerical values that can be associated with these outcomes. 
 
-\textbf{Definition:} a function $X$ that maps the sample space $S$ to the real line in such a way that, for every $w \in S$, $X(w)$ is a real number, is called a \emph{random variable} (or r.v. for short). 
+\textbf{Definition:} a function $X$ that maps the sample space $S$ to the real line in such a way that, for every $\omega \in S$, $X(\omega)$ is a real number, is called a \emph{random variable} (or random variable for short). 
 
-Note that two or more distinct $w$'s can give the same value of $X(w)$. However, one value of $w$ is not allowed to give two different values of $X(w)$, as this would not make $X$ a function.
+Note that two or more distinct $\omega$'s can give the same value of $X(\omega)$. However, one value of $w$ is not allowed to give two different values of $X(\omega)$, as this would not make $X$ a function.
 
 The term ``random variable" comes about because the outcomes of the experiment are random or uncertain before we perform our experiment, and hence the value of $X$ will also be uncertain before the experiment.
 
-We denote r.v.s with capitals, and the values of r.v.s after experiments with lowercase letters.
+We denote random variables with capitals, and the values of random variables after experiments with lowercase letters.
 % section 07_february (end)
 
 \section{09 February}
@@ -168,25 +170,25 @@ We denote r.v.s with capitals, and the values of r.v.s after experiments with lo
 We define $P(x \in B)$ to be $P(w \in S : x \in B : P(X^{-1} (B))$ (i.e. we refer back to the events of $S$ to find the probabilities of events on the real line).
 
 %[
-\textbf{Definition:} $P(X \in (-\infty, x]) = P(X \leq x)$ is a function of $X$ called the \emph{cumulative distribution function (c.d.f.)} of the r.v. $X$. 
+\textbf{Definition:} $P(X \in (-\infty, x]) = P(X \leq x)$ is a function of $X$ called the \emph{cumulative distribution function} (or c.d.f.) of the random variable $X$, and
 %)
 \[
-	F_X (x) = P(X \leq x) \forall x \in (-\infty, \infty)
+	F_X (x) = P(X \leq x) \forall x \in (-\infty, \infty).
 \]
 
 \subsubsection{Properties of the c.d.f.}
 \textbf{(1)} The c.d.f. is a real-valued function of $x$.
 
-\textbf{(2)} In order to specify $F_X$, we need to specify $F_X (x) \forall x \in (-\infty, \infty)$.
+\textbf{(2)} In order to specify $F_X$, we need to specify $F_X (x) \; \forall x \in (-\infty, \infty)$.
 
 \textbf{(3)} All c.d.f.s are non-decreasing and right-continuous.
 
 \textbf{(4)} $F_X (-\infty) = \lim_{x \to -\infty} F_X (x) = 0$ and $F_X (\infty) = \lim_{x \to \infty} F_X (x) = 1$.
 
-\subsubsection{Continuous vs discrete r.v.s}
-\textbf{Definition:} We call a r.v. \emph{continuous} if its c.d.f. is a real-valued function of $x$ (i.e. it has no jumps). If a r.v. is not continuous, the r.v. is said to be \emph{discrete}, and can assume at most a countable number of distinct values.
+\subsubsection{Continuous vs discrete random variables}
+\textbf{Definition:} We call a random variable \emph{continuous} if its c.d.f. is a real-valued function of $x$ (i.e. it has no jumps). If a random variable is not continuous, the random variable is said to be \emph{discrete}, and can assume at most a countable number of distinct values.
 
-\textbf{Definition:} For a discrete r.v. $X$, the real-valued function of $x$ specified by $P_X (x) = P(X = x) \forall x$ that $X$ can assume is called the \emph{probability function} of $X$.
+\textbf{Definition:} For a discrete random variable $X$, the real-valued function of $x$ specified by $P_X (x) = P(X = x) \; \forall x$ that $X$ can assume is called the \emph{probability function} of $X$.
 
 \textbf{Theorem:} If we know $P_X (x) \; \forall x$ that $X$ can assume, then we can find $F_X (x) \; \forall x \in (-\infty, \infty)$. Conversely, if we're given the c.d.f., we can find the probability function.
 % section 09_february_ (end)
@@ -199,9 +201,9 @@ We define $P(x \in B)$ to be $P(w \in S : x \in B : P(X^{-1} (B))$ (i.e. we refe
 The total probability (mass) is equally or uniformly spread out on each of the numbers $a_i$. 
 
 \subsubsection{Bernoulli distribution}
-\textbf{Definition:} a r.v. $X$ has a \emph{Bernoulli distribution} with parameter $p$ if $P(X = 1) = p$ and $P(X = 0) = 1 - p = q$.
+\textbf{Definition:} a random variable $X$ has a \emph{Bernoulli distribution} with parameter $p$ if $P(X = 1) = p$ and $P(X = 0) = 1 - p = q$.
 
-This is used as a ``building block" for more complicated r.v.s. 
+This is used as a ``building block" for more complicated random variables. 
 % section 14_february (end)
 
 
@@ -211,7 +213,7 @@ This is used as a ``building block" for more complicated r.v.s.
 
 \section{28 February}
 \subsection{Random variable distributions}
-Cumulative distribution function (CDF): $F_X (x) = P(X \leq x)$
+Cumulative distribution function (c.d.f.): $F_X (x) = P(X \leq x)$
 
 For discrete random variables: $P(X = x) = P_X (x)$
 
@@ -229,22 +231,22 @@ Note that we should check if:
 	\item $\sum_{\textnormal{all x in range}} P_X (x) = 1$ (easy to check)
 \end{enumerate}
 
-We write $X ~ Bin (n, p)$ ($X$ has the binomial distribution).
+We write $X \sim Bin (n, p)$ to mean ``$X$ has the binomial distribution".
 
 \textbf{How the binomial distribution arises:} (the binomial setup)
 
-Firstly, we have a sequence of $n$ independent trials. That is, the outcomes of these trials are mutually independent.
+Firstly, we have a sequence of $n$ independent trials -- that is, the outcomes of these trials are mutually independent.
 
-Secondly, each trial can result in exactly one of two possible outcomes: ``success" (S) or ``failure" (F). We call such trials \emph{Bernoulli trials}.
+Secondly, each trial can result in exactly one of two possible outcomes: a ``success" (S) or a ``failure" (F). We call such trials \emph{Bernoulli trials}.
 
-Thirdly, the probability of success at trial $i$ is constant and equal to $p$, for every $i = 1, 2, \ldots, n$. For example, in a coin toss, we cannot change the probability of heads halfway through, so the probability of success is constant.
+Thirdly, the probability of success at trial $i$ is constant and equal to $p$ for every $i = 1, 2, \dots, n$. For example, in a coin toss, we cannot change the probability of heads halfway through, so the probability of success is constant.
 
 \emph{Theorem:} Let $X$ be the number of successes observed in these $n$ trials. Then,
 \[
 	P(X = x) = {n \choose x} p^x (1-p)^{n - x} \; \textnormal{ for } x = 0,1,2,\ldots, n
 \]
 
-\emph{Proof:} (same idea for the genetic mutation example) First, note that the probability of any particular configuration in which there are $x$ successes (and $(n-x)$ failures) is just $p^x (1-p)^{n-x}$.
+\emph{Proof:} (same idea for the genetic mutation example) First, note that the probability of any particular configuration in which there are $x$ successes (and $n-x$ failures) is just $p^x (1-p)^{n-x}$.
 
 E.g:
 \[ P(S_1 \cap S_2 \cap \ldots \cap S_x \cap F_{x+1} \cap F_{x+2} \cap \ldots \cap F_n) = P(S_1) P(S_2) \ldots P(S_x) P(F_{x+1}) \ldots P(F_n) \]
@@ -260,7 +262,7 @@ But,
 Note that the configurations are disjoint, so therefore, by axiom 3:
 
 \[
-	P(X = x) = \sum_{\textnormal{all configurations}} P(\textnormal{Configuration} i) = \sum p^x (1-p)^{n-x}
+	P(X = x) = \sum_{\textnormal{all configurations}} P(\textnormal{Configuration } i) = \sum p^x (1-p)^{n-x}
 \]
 
 Since each configuration is defined by a choice of $x$ objects from $n$ total objects, then for every $x = 0, 1, \ldots, n$:
@@ -297,7 +299,7 @@ Check that:
 
 The Poisson distribution arises as an approximation to the binomial for ``large $n$ and small $p$".
 
-\textbf{Theorem:} let $X ~ Bin(n,p)$, then the limit of $P(X=x)$ as $n$ tends to infinity and $p$ tends to 0, in such a way that $n \times p$ is constant ($ = \lambda$), is
+\textbf{Theorem:} Let $X \sim Bin(n,p)$. The limit of $P(X=x)$ as $n$ tends to infinity and $p$ tends to 0, in such a way that $n \times p$ is constant ($ = \lambda$), is
 \[
 	\frac{ \lambda^x e^{- \lambda}}{x!} \; \textnormal{ for } x = 0,1,2,\ldots
 \]
@@ -346,13 +348,13 @@ Notice that the second term has $x$ terms on both the top and the bottom. Now, l
 \[
     P(X \leq 3) = \sum_{x = 0}^{3} P(X = x) = \sum_{x=0}^{3} \frac{2^x e^{-2}}{x!}
 \]
-If $X$ has a Poisson distribution with parameter $\lambda$, we write $X ~ Po(\lambda)$.
+If $X$ has a Poisson distribution with parameter $\lambda$, we write $X \sim Po(\lambda)$.
 
 \subsection{The Hypergeometric Distribution}
 
 The random variable X has a hypergeometric distribution with parameters $N$, $a$, and $n$ if:
 \[
-    P(X = x) = \frac{{a \choose x} {{N - a} \choose {n -x}}}{N \choose n}
+    P(X = x) = \frac{{a \choose x} \binom{N-a}{n-x}}{Nn}
 \]
 (for $x \leq a$ and $n-x \leq N-a$)
 
@@ -361,13 +363,13 @@ The random variable X has a hypergeometric distribution with parameters $N$, $a$
 $X$ is said to have a geometric distribution with parameter $p$ if $P(X = x) = P_x (x) = (1-p)^{x-1} p$ for $x = 1, 2, \ldots$.
 
 \[
-    p \sum_{x = 1}^{\infty} (1-p)^{x-1} = p \frac{1}{1-(p-1)} = 1
+    p \sum_{x = 1}^{\infty} (1-p)^{x-1} = \frac{p}{1-(p-1)} = 1
 \]
 
-The geometric r.v. is used to describe or model the trial number at which the first success occurs in a sequence of independent Bernoulli trials, each with the probability of success $p$.
+The geometric random variable is used to describe or model the trial number at which the first success occurs in a sequence of independent Bernoulli trials, each with the probability of success $p$.
 
 \subsection{Expected values}
-The probability distribution of a random variable provides the complete story about the r.v.. There is no information about a r.v. once we know its probability distribution. However, we often wish to summarize a probability distribution. The two most common summaries are:
+The probability distribution of a random variable provides the complete story about the random variable. There is no information about a random variable once we know its probability distribution. However, we often wish to summarize a probability distribution. The two most common summaries are:
 \begin{enumerate}
     \item a parameter that discusses the ``centre of distribution" and
     \item a parameter that discusses how spread out the values are from the centre.
@@ -375,14 +377,14 @@ The probability distribution of a random variable provides the complete story ab
 
 To this end, we give the following definition:
 
-\textbf{Expected value:} let $Y$ be a discrete r.v. with the probability function $P_Y (y)$. Then, we define the expected value of $y$ denoted by $E(Y)$ to be
+\textbf{Expected value:} let $Y$ be a discrete random variable with the probability function $P_Y (y)$. Then, we define the expected value of $y$ denoted by $E(Y)$ to be
 \[
     E(Y) = \sum_{\textnormal{all } y} y P_Y (y) = \sum_{\textnormal{all } y} y P(Y = y)
 \]
 
 \section{06 March}
 \subsection{Review}
-Recall: given a r.v. $Y$, we define the expected value or expectation of $Y$ denoted by $E(Y)$ to be:
+Recall: given a random variable $Y$, we define the expected value or expectation of $Y$ denoted by $E(Y)$ to be:
 \[
     E(Y) = \sum_{\textnormal{all } y} y P(Y = y)
 \]
@@ -401,7 +403,7 @@ Notes:
     \item $\mu$ is a constant, a parameter specific to a given probability distribution. You need the distribution to compute $\mu$.
     \item $E(c Y) = c E(Y)$ where $c$ is a constant, and $E (\sum_{i=1}^{n} Y_i) = \sum_{i=1}^{n} E(Y_i)$ (the proof will come later)
     \item Note, however, that in general, $E(XY) \neq E(X)E(Y)$.
-    \item Let $g$ be some real-valued function of a r.v. $Y$. Then, if $X = g(y)$, we have
+    \item Let $g$ be some real-valued function of a random variable $Y$. Then, if $X = g(y)$, we have
         \[
             E(X) = E(g(y)) = \sum_{\textnormal{all } y} g(y) P(Y=y)
         \]
@@ -447,7 +449,7 @@ First, we need $P_Y (y)$ for all $y$. We have $P(Y = c) = .95$ (where the comput
 Setting $E(Y) = 0$ and solving for $c$, we get $c = 50$. Thus, if the company charges \$50 for the policy, on average, over a large number of clients, they would neither lose nor gain money.
 
 \subsubsection{Example 2}
-\textbf{``Nuts and Bolts" Example:} suppose that the r.v. $x$ has the probability distribution:
+\textbf{``Nuts and Bolts" Example:} suppose that the random variable $x$ has the probability distribution:
 \begin{align*}
     P(X = -1.2) &= .32 \\
     P(X = 2.6)  &= .40 \\
@@ -516,7 +518,7 @@ So, $E(X^2) = E(X(X-1)) + \mu$. Finally, $Var(X) = E(X(X-1)) + \mu - \mu^2$.
 
 \subsubsection{Bernoulli}
 
-In particular, the mean and variance of a Bernoulli r.v. are $p$ and $p (1-p)$ respectively (because $n=1$).
+In particular, the mean and variance of a Bernoulli random variable are $p$ and $p (1-p)$ respectively (because $n=1$).
 
 \subsubsection{Poisson}
 
@@ -526,7 +528,7 @@ In particular, the mean and variance of a Bernoulli r.v. are $p$ and $p (1-p)$ r
         &= \lambda
 \end{align*}
 
-So, the mean of a Poisson r.v. is just its parameter $\lambda$.
+So, the mean of a Poisson random variable is just its parameter $\lambda$.
 
 For the variance, first find $E(X(X-1))$. We find $Var(X) = \lambda$, the same as the mean.
 
@@ -548,7 +550,7 @@ For the variance, first find $E(X(X-1))$ (2 derivatives), and then you can find 
 \]
 
 \subsection{Continuous probability distributions}
-\textbf{Defintion:} a r.v. $X$ with cdf $F_X$ is said to be continuous if $F_X$ is continuous for all $- \infty < x < \infty$.
+\textbf{Defintion:} a random variable $X$ with cdf $F_X$ is said to be continuous if $F_X$ is continuous for all $- \infty < x < \infty$.
 
 The continuous cdfs split into two types:
 \begin{enumerate}
@@ -565,9 +567,9 @@ Remember (as $F_X (x) = P(X \leq x)$):
     P(X=x) = F_X (x) - P(X < x)
 \]
 
-Hence, we cannot specify a continuous r.v. by specifying the values $P(X=x)$ for all $x$ that $X$ can assume, as we did in the discrete case. Instead, we introduce an analogue of the probability function known as the \emph{probability density function} (pdf). It will turn out that the pdf also uniquely determines the probability distribution.
+Hence, we cannot specify a continuous random variable by specifying the values $P(X=x)$ for all $x$ that $X$ can assume, as we did in the discrete case. Instead, we introduce an analogue of the probability function known as the \emph{probability density function} (pdf). It will turn out that the pdf also uniquely determines the probability distribution.
 
-\textbf{Definition:} A real-valued function $f_x$ is said to be the probability density function of a r.v. $X$ if:
+\textbf{Definition:} A real-valued function $f_x$ is said to be the probability density function of a random variable $X$ if:
 \begin{enumerate}
     \item $f_x (x) \geq 0$ for all $- \infty < x < \infty$ and
     \item $P(X \in A) = \int_A f_x (x) dx$ (i.e. $f_x$ has the property that when you integrate it over a set, you get the probability of the set).
@@ -576,7 +578,7 @@ Hence, we cannot specify a continuous r.v. by specifying the values $P(X=x)$ for
 %%
 \section{13 March}
 \subsection{The probability density function}
-\textbf{Definition:} the probability density function (p.d.f.) of a r.v. $X$ is any function $f_X (x)$ such that:
+\textbf{Definition:} the probability density function (p.d.f.) of a random variable $X$ is any function $f_X (x)$ such that:
 \begin{enumerate}
     \item $f_X (x) \geq 0 \; \forall - \infty < x < \infty$ and
     \item $P(X \in A) = \int_A f_X (s) dx \; \forall \textnormal{ events } A \in \mathds[R]$
@@ -619,7 +621,7 @@ Note that, because the p.d.f. does not represent a probability on its own, it ca
 
 Any function whose total area equals 1 can qualify as a p.d.f., even if some points are larger than 1.
 
-\textbf{(4)} For continuous r.v.s, we define:
+\textbf{(4)} For continuous random variables, we define:
 \[
     E(g(X)) = \sum_{\textnormal{all} x} g(x) P_X (x) = \int_{-\infty}^{\infty} g(x) f_X (x) dx
 \]
@@ -704,7 +706,7 @@ To find $\sigma_X$, first find:
 \section{15 March}
 \subsection{Named continuous probability distributions}
 \subsubsection{The uniform distribution}
-\textbf{Definition:} The r.v. $X$ is said to be uniformly distributed on the interval $[a,b]$ if
+\textbf{Definition:} The random variable $X$ is said to be uniformly distributed on the interval $[a,b]$ if
 \[
     f_X (x) = \int_a^x \frac{1}{b-a} \; \text{ for } a \leq x \leq b
 \]
@@ -743,7 +745,7 @@ The distribution is equal to $0$ elsewhere.
 \textbf{Notes:}
 \begin{enumerate}
     \item we write $X \sim Exp(\beta)$ to describe this distribution.
-    \item If $X$ is exponential, then $X$ is a non-negative r.v., meaning $P(X \geq 0) = 1$.
+    \item If $X$ is exponential, then $X$ is a non-negative random variable, meaning $P(X \geq 0) = 1$.
     \item The p.d.f. of $f_X (x)$ is $\frac{1}{\beta}$ at $x=0$, and grows exponentially downwards as $x$ grows larger. The probability of an interval of length $L$ decreases as $L$ moves down the graph (e.g. the probability between 2 and 4 is greater than the probability between 4 and 6). The probability is concentrated towards the origin.
     \item The c.d.f. of $X$ is:
         \begin{align*}
@@ -796,7 +798,7 @@ The gamma function has the following two important properties:
 \end{enumerate}
 
 \subsubsection{The Gamma Distribution}
-\textbf{Definition:} A r.v. $X$ has a gamma density with parameters $\alpha, \beta$ if its p.d.f. is given by:
+\textbf{Definition:} A random variable $X$ has a gamma density with parameters $\alpha, \beta$ if its p.d.f. is given by:
 \[
     f_X (x) = \frac{1}{\Gamma(\alpha)} \frac{x^{\alpha -1} e^{\frac{-x}{\beta}}}{\beta^{\alpha}} \textnormal{for $x \geq 0$}
 \]  
@@ -822,7 +824,7 @@ For $\alpha = 1$, $f_X (\alpha = 1$ grows exponentially downwards, similar to th
 For $\alpha < 1$, the p.d.f. also grows exponentially downwards, but more steeply.
 
 \textbf{(3)}
-The gamma density can be used to model the waiting time for the $n$th event if the times between events are independent exponential r.v.s.
+The gamma density can be used to model the waiting time for the $n$th event if the times between events are independent exponential random variables.
 
 \textbf{(4)}
 There are two important special cases of the gamma distribution:
@@ -863,7 +865,7 @@ We write $X ~ Gamma(\alpha, \beta)$ to mean ``$X$ has a gamma distribution with 
 The normal or Gaussian distribution is easily the most important distribution in probability and statistics! The distribution seems to occur naturally all over.
 
 \subsubsection{Definition}
-The r.v. $X$ has a normal distribution with parameters $\mu, \sigma^2$ if its p.d.f. is given by
+The random variable $X$ has a normal distribution with parameters $\mu, \sigma^2$ if its p.d.f. is given by
 \[
     f_X (x) = \frac{1}{\sqrt{2\pi}} \frac{1}{\sigma} e^{- \frac{1}{2} (\frac{x - \mu}{\sigma})^2}
 \]
@@ -892,7 +894,7 @@ The c.d.f. is not known in closed form, similar to the gamma distribution. Proba
 However, unlike the gamma density, it is possible to use a single table to find any normal probability. The idea is to reduce the general problem to what is called a \emph{standard normal problem}.
 
 \subsubsection{Standard Normal Problem}
-\textbf{Background:} if I give you \emph{any} r.v. with mean $\mu$ and standard deviation $\sigma$, then 
+\textbf{Background:} if I give you \emph{any} random variable with mean $\mu$ and standard deviation $\sigma$, then 
 \[
     Y = \frac{X - \mu}{\sigma}
 \]
@@ -904,7 +906,7 @@ However, if $X \sim N(\mu, \sigma^2)$, we have the following:
 \[
     Z = \frac{X - \mu}{\sigma} \sim N(0,1)
 \]
-This is called a \emph{standard normal} r.v. or distribution. 
+This is called a \emph{standard normal} random variable or distribution. 
 
 %%
 \section{22 March}
@@ -913,9 +915,9 @@ Our main result from Tuesday: if $X \sim N(\mu, \sigma^2)$, then
 \[
     Z = \frac{X - \mu}{\sigma} \sim N(0,1)
 \]
-\emph{Note}: For any r.v. with mean $\mu$ and variance $\sigma^2$, $\frac{X-\mu}{\sigma}$ will have mean 0 and variance 1. The proof of this is simple - just plug in the fraction for $X$ in $E(X)$ and $Var(X)$.
+\emph{Note}: For any random variable with mean $\mu$ and variance $\sigma^2$, $\frac{X-\mu}{\sigma}$ will have mean 0 and variance 1. The proof of this is simple - just plug in the fraction for $X$ in $E(X)$ and $Var(X)$.
 
-The point of the main result is that, after standardizing, we still get a normal r.v. If you standardize a r.v., you don't always get a r.v. of the same type (unless you're standardizing a r.v. with a normal distribution).
+The point of the main result is that, after standardizing, we still get a normal random variable If you standardize a random variable, you don't always get a random variable of the same type (unless you're standardizing a random variable with a normal distribution).
 
 \subsubsection{Example 1}
 \textbf{Problem:} If $X \sim N(-1.2, 4)$, find $P(-1.9 \leq X < 2.2)$.
@@ -961,7 +963,7 @@ We get $x_0 = 26.16$ months.
 
 \subsection{Moment Generating Functions}
 \subsubsection{Definition}
-Let $X$ be a r.v. with p.d.f. $f_X$ (respectively, probability $P_X$ for the discrete case). We define the moment generating function (denoted m.g.f.) to be that function of t, such that
+Let $X$ be a random variable with p.d.f. $f_X$ (respectively, probability $P_X$ for the discrete case). We define the moment generating function (denoted m.g.f.) to be that function of t, such that
 \[
     M_X (t) = E ( e^{tx} )
 \]
@@ -983,7 +985,7 @@ In the discrete case,
 
 \textbf{(4)} If the m.g.f. exists, then it is possible to recover the p.d.f. or probability function, i.e. there is a one-to-one correspondence between a p.d.f. (pf) and a m.g.f.. Recovering it, although possible, is a bit complicated, and we will not be expected to do so.
 
-\textbf{(5)} \textbf{Uses of the m.g.f.} -- the m.g.f. can be used to find the \emph{moments} of a r.v., and is often easier than finding the moments ($E(X^k)$) by using the definition. 
+\textbf{(5)} \textbf{Uses of the m.g.f.} -- the m.g.f. can be used to find the \emph{moments} of a random variable, and is often easier than finding the moments ($E(X^k)$) by using the definition. 
 
 \textbf{Theorem:} $E(X^k) = M^{(k)} (0)$.
 
@@ -1077,11 +1079,11 @@ Therefore,
         &= e^{\frac{t^2}{2}} \textnormal{ since the integrand is just a $N(t,1)$ p.d.f..}
 \end{align*}
 
-To get the m.g.f. of a $N(\mu, \sigma^2)$ r.v. for arbitrary $\mu$ and $\sigma^2$, we use the following property of an m.g.f.: let $a$ and $b$ be constants. Then,
+To get the m.g.f. of a $N(\mu, \sigma^2)$ random variable for arbitrary $\mu$ and $\sigma^2$, we use the following property of an m.g.f.: let $a$ and $b$ be constants. Then,
 \[
     M_{aX + b} (t) = e^{bt} M_X (at)
 \]
-Now, recall that if $X \sim N(\mu, \sigma^2)$, then $Z = \frac{X-\mu}{\sigma} \sim N(0,1)$. Therefore, we can always write a $N(\mu, \sigma^2)$ r.v. $X$ as $X = \sigma Z + \mu$.
+Now, recall that if $X \sim N(\mu, \sigma^2)$, then $Z = \frac{X-\mu}{\sigma} \sim N(0,1)$. Therefore, we can always write a $N(\mu, \sigma^2)$ random variable $X$ as $X = \sigma Z + \mu$.
 
 Putting these two results together, we get
 \[
@@ -1094,7 +1096,7 @@ and
 We find $M_X^{\prime} (0) = \mu$, $M_X^{\prime \prime} (0) = \sigma^2 + \mu^2$, and $Var(X) = \sigma^2$.
 
 \subsection{Transformations of random variables}
-Often, we're given the distribution of a r.v. $X$, but we're more interested in some function $Y = g(X)$ of this r.v., e.g. maybe we have the distribution of the velocity $v$, and we are interested in the distribution of the kinetic energy $Y = \frac{1}{2} m v^2$. In general, we're concerned with finding the distribution of $g(X)$ knowing the distribution of $X$. 
+Often, we're given the distribution of a random variable $X$, but we're more interested in some function $Y = g(X)$ of this random variable, e.g. maybe we have the distribution of the velocity $v$, and we are interested in the distribution of the kinetic energy $Y = \frac{1}{2} m v^2$. In general, we're concerned with finding the distribution of $g(X)$ knowing the distribution of $X$. 
 
 First, consider the following two examples to illustrate the eventual formula for the continuous case. 
 
@@ -1181,7 +1183,7 @@ We have
 We're done!
 
 \subsubsection{General formula and theorem}
-We can now give a general formula that allows us to go from the p.d.f. of a given r.v. $X$ to the p.d.f. of a transformed r.v. $Y = g(X)$.
+We can now give a general formula that allows us to go from the p.d.f. of a given random variable $X$ to the p.d.f. of a transformed random variable $Y = g(X)$.
 
 \textbf{Theorem:} Let $X$ have p.d.f. $f_X$. Let $y = g(x)$ be either strictly increasing or strictly decreasing as a function of $x$, and $X$ is continuous. Define $Y = g(X)$. Then, the p.d.f. of $Y$ be
 \[
@@ -1218,7 +1220,7 @@ But if $g$ is decreasing, then $\frac{dy}{dx} = \frac{1}{\frac{dx}{dy}} < 0$, so
 \subsubsection{The probability integral transformation}
 The following is a very important result that allows one to simulate observations from a given probability distribution by knowing only how to simulate observations from a $U(0,1)$ distribution. This famous result is called \emph{the probability integral transformation}.
 
-Let $X$ be a continuous r.v. with a strictly increasing $F_X$. Let $Y = F_X (X)$. Then $Y \sim U(0,1)$.
+Let $X$ be a continuous random variable with a strictly increasing $F_X$. Let $Y = F_X (X)$. Then $Y \sim U(0,1)$.
 
 \emph{Note:} here, our $g$ is $F_X$, i.e. $Y = g(X) = F_X (X)$. Also, you must use $F_X$ and not some other $F$.
 
@@ -1240,19 +1242,19 @@ and $f_Y (y) = 0$ elsewhere.
 We recognize the above as a $U(0,1)$ p.d.f.
 
 \subsection{Joint probability distributions}
-Very often, we're interested in the simultaneous behaviour of several r.v.s, rather than one at a time, as we have considered up until now, e.g. if $X$ = number of kilometers traveled by a tire and $Y$ = tread depth, we may wish to know about the simultaneous or joint distribution of $X$ and $Y$. This leads to so-called \emph{multivariate distributions.}
+Very often, we're interested in the simultaneous behaviour of several random variables, rather than one at a time, as we have considered up until now, e.g. if $X$ = number of kilometers traveled by a tire and $Y$ = tread depth, we may wish to know about the simultaneous or joint distribution of $X$ and $Y$. This leads to so-called \emph{multivariate distributions.}
 
-We shall considered bivariate (i.e. pairs of r.v.s) distributions, and indicate the general extensions at the end. 
+We shall considered bivariate (i.e. pairs of random variables) distributions, and indicate the general extensions at the end. 
 
 \subsubsection{Definition}
-The r.v.s $X$ and $Y$ have joint c.d.f., denoted $F_{X,Y}$, if
+The random variables $X$ and $Y$ have joint c.d.f., denoted $F_{X,Y}$, if
 \[
     F_{X,Y} (x,y) = P(X \leq x \cap Y \leq y)
 \]
 Which we denote as $P(X \leq x, Y \leq y)$. 
 
 \subsubsection{Notes}
-\textbf{(1)} This definition holds for both continuous and discrete r.v.s. 
+\textbf{(1)} This definition holds for both continuous and discrete random variables. 
 
 \textbf{(2)} It is possible to show (in an advanced probability course) that the joint c.d.f. uniquely determines the probability distirbution in two-dimensional space. 
 \end{document}
