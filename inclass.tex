@@ -28,23 +28,23 @@ The notes up until 28 February (first class after the break and midterm) are con
 \section{17 January}
 \subsection{Axioms and Theorems}
 \begin{enumerate}
-	\item $P(E) \geq 0$
-	\item $P(S) = 1$
-	\item $P(\cup_{i=1}^{\infty} E_i) = \sum_{i=1}^{\infty} P(E_i) \forall E_i \cap E_J = \emptyset$
-	\item \textbf{Theorem 1:} $P(\emptyset) = 0$
-	\item \textbf{Theorem 2:} $P(E^c) = 1 - P(E)$
-	\item \textbf{Theorem 3:} $P(E \cap F^c) = P(E) - P(E \cap F)$
-	\item \textbf{Theorem 4:} If $E \subset F$, then $P(E) \leq P(F)$.
-	\item \textbf{Theorem 5:} If $E$ and $F$ are \emph{any} two events, then $P(E \cup F) = P(E) + P(F) - P(E \cap F)$.
+    \item $P(E) \geq 0$
+    \item $P(S) = 1$
+    \item $P(\cup_{i=1}^{\infty} E_i) = \sum_{i=1}^{\infty} P(E_i) \forall E_i \cap E_J = \emptyset$
+    \item \textbf{Theorem 1:} $P(\emptyset) = 0$
+    \item \textbf{Theorem 2:} $P(E^c) = 1 - P(E)$
+    \item \textbf{Theorem 3:} $P(E \cap F^c) = P(E) - P(E \cap F)$
+    \item \textbf{Theorem 4:} If $E \subset F$, then $P(E) \leq P(F)$.
+    \item \textbf{Theorem 5:} If $E$ and $F$ are \emph{any} two events, then $P(E \cup F) = P(E) + P(F) - P(E \cap F)$.
 \end{enumerate}
 
 Word problem hints:
 \begin{itemize}
-	\item ``either/or" corresponds to a union of two events
-	\item ``at least one" -- union
-	\item ``not" -- complement
-	\item ``and" -- intersection
-	\item `` proportion" -- ``a probability statement about an individual"
+    \item ``either/or" corresponds to a union of two events
+    \item ``at least one" -- union
+    \item ``not" -- complement
+    \item ``and" -- intersection
+    \item `` proportion" -- ``a probability statement about an individual"
 \end{itemize}
 % section 17_january (end)
 
@@ -52,7 +52,7 @@ Word problem hints:
 \subsection{Using counting methods to compute probabilities}
 \textbf{Theorem 6:} Let $S$ be a sample space (set of all possible outcomes) with finitely many outcomes $N$. If all these outcomes are equally likely, then, if $E$ is any event,
 \[
-	P(E) = \frac{\textnormal{number of ways that $E$ can occur}}{\textnormal{total number of possible outcomes = $N$}}
+    P(E) = \frac{\textnormal{number of ways that $E$ can occur}}{\textnormal{total number of possible outcomes = $N$}}
 \]
 
 Counting the number of ways that $E$ can occur (and $N$) can be difficult without the following counting rules.
@@ -60,7 +60,7 @@ Counting the number of ways that $E$ can occur (and $N$) can be difficult withou
 \subsubsection{Factorial}
 By definition,
 \[
-	n! = n \times(n-1) \times \dots \times 2 \times 1 \textnormal{ where } 0! = 1
+    n! = n \times(n-1) \times \dots \times 2 \times 1 \textnormal{ where } 0! = 1
 \]
 
 \subsubsection{Multiplication rule for counting}
@@ -69,14 +69,14 @@ Suppose you have $k$ sets of distinct objects of size $n_1, n_2, \dots, n_k$ res
 \subsubsection{$n$ choose $k$}
 Suppose that a set contains $n$ distinct objects. Then, the number of ways to select $k$ objects from these $n$ objects, if we sample \emph{without replacement}, is denoted by ${n \choose k}$ (``$n$ choose $k$"). It turns out that:
 \[
-	{n \choose k} = \frac{n!}{k! (n-k)!}
+    {n \choose k} = \frac{n!}{k! (n-k)!}
 \]
 Note that here the order of selections is not important, e.g. the selection $(A,B)$ is equivalent to the selection $(B,A)$.
 
 \subsubsection{Permutations}
 If the order is important in the previous example, this is denoted by $P_k^n$, and
 \[
-	P_k^n = \frac{n!}{(n-k)!}
+    P_k^n = \frac{n!}{(n-k)!}
 \]
 % section 19_january (end)
 
@@ -90,7 +90,7 @@ Very often, if we know that some event $A$ has occurred, then this will affect t
 
 \textbf{Definition:} for two events $A$ and $B$, with $P(A) \neq 0$, we define the probability of ``$B$ given $A$", denoted by $P(B|A)$, as
 \[
-	P(B|A) = \frac{P(A \cap B)}{P(A)}
+    P(B|A) = \frac{P(A \cap B)}{P(A)}
 \]
 If $P(A) = 0$, then $P(B|A)$ can be defined arbitrarily, so we consider it to be undefined.
 
@@ -101,7 +101,7 @@ Notice that the right-hand side of the definition is given in terms of already-d
 
 \textbf{(2) (the multiplication rule for conditional probabilities)} Let $A$ and $B$ be two events. Then,
 \[
-	P(A \cap B) = P(B|A) P(A) = P(A|B) P(B)
+    P(A \cap B) = P(B|A) P(A) = P(A|B) P(B)
 \]
 
 \textbf{(3)} When solving conditional probability problems, use the \emph{conditioning technique} to break a long intersection into a series of conditional and unconditional probabilities.
@@ -113,12 +113,12 @@ Note that it's not true in general that $P(A | (B_1 \cup B_2)) = P(A | B_1) + P(
 \subsection{The Law of Total Probability}
 Let $A$ be any event and let $B_1, B_2, \dots, B_m$ be a collection of $m$ events satisfying:
 \begin{enumerate}
-	\item $B_i \cap B_j = \emptyset \; \forall i \neq j$
-	\item $\cup_{i=1}^{m} B_i = S$ (i.e. $B_1, B_2, \dots B_m$ form a partition of $S$)
+    \item $B_i \cap B_j = \emptyset \; \forall i \neq j$
+    \item $\cup_{i=1}^{m} B_i = S$ (i.e. $B_1, B_2, \dots B_m$ form a partition of $S$)
 \end{enumerate}
 Then,
 \[
-	P(A) = \sum_{i=1}^{m} P(A | B_i) P(B_i)
+    P(A) = \sum_{i=1}^{m} P(A | B_i) P(B_i)
 \]
 
 Notice here that the left-hand side ($P(A)$) may be difficult to find directly, while the components of the right-hand side might be known or easy to find.
@@ -126,7 +126,7 @@ Notice here that the left-hand side ($P(A)$) may be difficult to find directly, 
 \subsection{Bayes' Theorem}
 Let $A$ be any event. Let $B_1, B_2, \dots, B_m$ form a partition of $S$. Then, for every $k = 1, 2, \dots, m$,
 \[
-	P(B_k | A) = \frac{P(A | B_k) P(B_k)}{P(A)} = \frac{P(A | B_k) P(B_k)}{\sum_{i=1}^m P(A | B_i) P(B_i)}
+    P(B_k | A) = \frac{P(A | B_k) P(B_k)}{P(A)} = \frac{P(A | B_k) P(B_k)}{\sum_{i=1}^m P(A | B_i) P(B_i)}
 \]
 % section 31_january (end)
 
@@ -134,7 +134,7 @@ Let $A$ be any event. Let $B_1, B_2, \dots, B_m$ form a partition of $S$. Then, 
 \subsection{Independence}
 Sometimes, knowing that an event $A$ has occurred will not affect the probability that $B$ will occur. In such a situation, we say that $A$ and $B$ are \emph{independent}. More formally, two events $A,B$ are said to be independent ($A \perp B$) if and only if
 \[
-	P(B | A) = P(B) \textnormal{ or } P(A | B) = P(A)
+    P(B | A) = P(B) \textnormal{ or } P(A | B) = P(A)
 \]
 
 \textbf{Theorem:} if $A$ and $B$ are disjoint, then $A$ and $B$ can only be independent if either $P(A) = 0$ or $P(B) = 0$.
@@ -143,7 +143,7 @@ There's another important (albeit less intuitive) definition of independence: $A
 
 More generally, events $A_1, A_2, \dots, A_n$ are \emph{mutually independent} if and only if, for every subset $A_{i1}, A_{i2}, \dots, A_{ik}$ of $A_1, A_2, \dots, A_n$,
 \[
-	P(\cap_{j=1}^k A_{ij}) = \prod_{j=1}^k P(A_{ij})
+    P(\cap_{j=1}^k A_{ij}) = \prod_{j=1}^k P(A_{ij})
 \]
 
 It follows that, if $A \perp B$, then $P(A \cup B) = P(A) + P(B) - P(A) P(B)$.
@@ -173,7 +173,7 @@ We define $P(x \in B)$ to be $P(w \in S : x \in B : P(X^{-1} (B))$ (i.e. we refe
 \textbf{Definition:} $P(X \in (-\infty, x]) = P(X \leq x)$ is a function of $X$ called the \emph{cumulative distribution function} (or c.d.f.) of the random variable $X$, and
 %)
 \[
-	F_X (x) = P(X \leq x) \forall x \in (-\infty, \infty).
+    F_X (x) = P(X \leq x) \forall x \in (-\infty, \infty).
 \]
 
 \subsubsection{Properties of the c.d.f.}
@@ -221,14 +221,14 @@ For discrete random variables: $P(X = x) = P_X (x)$
 
 The random variable $X$ has a \emph{binomial distribution} with parameters $n$ and $p$ if
 \[
-	P(X = x) = {n \choose x} p^x (1-p)^{n-x}
+    P(X = x) = {n \choose x} p^x (1-p)^{n-x}
 \]
 for $x = 0, 1, \ldots, n$, where $n$ is a non-negative integer and $0 \leq p \leq 1$.
 
 Note that we should check if:
 \begin{enumerate}
-	\item $P_X (x) \geq 0$ (obvious)
-	\item $\sum_{\textnormal{all x in range}} P_X (x) = 1$ (easy to check)
+    \item $P_X (x) \geq 0$ (obvious)
+    \item $\sum_{\textnormal{all x in range}} P_X (x) = 1$ (easy to check)
 \end{enumerate}
 
 We write $X \sim Bin (n, p)$ to mean ``$X$ has the binomial distribution".
@@ -243,7 +243,7 @@ Thirdly, the probability of success at trial $i$ is constant and equal to $p$ fo
 
 \emph{Theorem:} Let $X$ be the number of successes observed in these $n$ trials. Then,
 \[
-	P(X = x) = {n \choose x} p^x (1-p)^{n - x} \; \textnormal{ for } x = 0,1,2,\ldots, n
+    P(X = x) = {n \choose x} p^x (1-p)^{n - x} \; \textnormal{ for } x = 0,1,2,\ldots, n
 \]
 
 \emph{Proof:} (same idea for the genetic mutation example) First, note that the probability of any particular configuration in which there are $x$ successes (and $n-x$ failures) is just $p^x (1-p)^{n-x}$.
@@ -252,29 +252,29 @@ E.g:
 \[ P(S_1 \cap S_2 \cap \ldots \cap S_x \cap F_{x+1} \cap F_{x+2} \cap \ldots \cap F_n) = P(S_1) P(S_2) \ldots P(S_x) P(F_{x+1}) \ldots P(F_n) \]
 Assuming these are all independent. This is equal to
 \[
-	p p \ldots p (1-p) \ldots (1-p) = p^x (1-p)^{n-x}
+    p p \ldots p (1-p) \ldots (1-p) = p^x (1-p)^{n-x}
 \]
 But,
 \[
-	\{ X = x \} = \cup_{\textnormal{all possible configurations}} \{ \textnormal{configuration $i$ with $x$ successes} \}
+    \{ X = x \} = \cup_{\textnormal{all possible configurations}} \{ \textnormal{configuration $i$ with $x$ successes} \}
 \]
 
 Note that the configurations are disjoint, so therefore, by axiom 3:
 
 \[
-	P(X = x) = \sum_{\textnormal{all configurations}} P(\textnormal{Configuration } i) = \sum p^x (1-p)^{n-x}
+    P(X = x) = \sum_{\textnormal{all configurations}} P(\textnormal{Configuration } i) = \sum p^x (1-p)^{n-x}
 \]
 
 Since each configuration is defined by a choice of $x$ objects from $n$ total objects, then for every $x = 0, 1, \ldots, n$:
 \[
-	P (X = x) = {n \choose x} p^x (1-p)^{n-x}
+    P (X = x) = {n \choose x} p^x (1-p)^{n-x}
 \]
 
 \emph{Example:} Suppose that the five year survival probability for lung cancer is $.10$. If thirty people with lung cancer are sampled, what is the probability that at least three will survive five years or longer?
 
 \emph{Solution:} Let $Y =$ the number out of thirty who will survive five or more years. We shall reasonably assume the binomial setup, with $n = 30$ and $P(S_i) = .10$, where $S_i$ is the event where the $i$th subject survives five or more years. Therefore,
 \[
-	P(Y \geq 3) = \sum_{y=3}^{30} {30 \choose y} (.10)^y (1-.10)^{30-y} = 1 - \sum_{y=0}^{2} {30 \choose y} (.10)^y (1-.10)^{30-y}
+    P(Y \geq 3) = \sum_{y=3}^{30} {30 \choose y} (.10)^y (1-.10)^{30-y} = 1 - \sum_{y=0}^{2} {30 \choose y} (.10)^y (1-.10)^{30-y}
 \]
 
 Important note: do not immediately have the ``burning desire" to use the binomial distribution as soon as you see a bunch of trials, each of which can result in exactly one of two outcomes. You must check if the trials are independent -- they will not be if you are sampling without replacement!
@@ -286,47 +286,47 @@ Observe that the Bernoulli distribution is a special case of the binomial distri
 
 The random variable $X$ is said to have a \emph{Poisson distribution} with parameter $\lambda > 0$ if
 \[
-	P(X = x) = \frac{ \lambda^x e^{- \lambda}}{x!} \; \textnormal{ for } x = 0,1,2,\ldots
+    P(X = x) = \frac{ \lambda^x e^{- \lambda}}{x!} \; \textnormal{ for } x = 0,1,2,\ldots
 \]
 
 (Note the infinite range of $x$)
 
 Check that:
 \begin{enumerate}
-	\item $P_X (x) \geq 0$ -- obvious
-	\item $\sum_0^{\infty} P_X (x) = 1$ -- Taylor series expansion for $e^{\lambda}$
+    \item $P_X (x) \geq 0$ -- obvious
+    \item $\sum_0^{\infty} P_X (x) = 1$ -- Taylor series expansion for $e^{\lambda}$
 \end{enumerate}
 
 The Poisson distribution arises as an approximation to the binomial for ``large $n$ and small $p$".
 
 \textbf{Theorem:} Let $X \sim Bin(n,p)$. The limit of $P(X=x)$ as $n$ tends to infinity and $p$ tends to 0, in such a way that $n \times p$ is constant ($ = \lambda$), is
 \[
-	\frac{ \lambda^x e^{- \lambda}}{x!} \; \textnormal{ for } x = 0,1,2,\ldots
+    \frac{ \lambda^x e^{- \lambda}}{x!} \; \textnormal{ for } x = 0,1,2,\ldots
 \]
 (e.g. $p = \frac{6}{n} : np = n(\frac{6}{n}) = 6$)
 
 \emph{Proof:} We shall use the following result in proving our theorem.
 \[
-	\lim{n \to \infty} (1 + \frac{a}{n})^n = e^a
+    \lim{n \to \infty} (1 + \frac{a}{n})^n = e^a
 \]
 
 \[
-	P(X = x) = {n \choose x} p^x (1-p)^{n-x} \; \textnormal{ for } x = 0,1,\ldots,n
+    P(X = x) = {n \choose x} p^x (1-p)^{n-x} \; \textnormal{ for } x = 0,1,\ldots,n
 \]
 \[
-	(*) = \frac{n!}{x! (n-x)!} p^x (1-p)^n (1-p)^{-x}
+    (*) = \frac{n!}{x! (n-x)!} p^x (1-p)^n (1-p)^{-x}
 \]
 Now since $\lambda = np$, we have $p = \frac{\lambda}{n}$. Then, $(*)$ becomes:
 \[
-	\frac{n!}{x! (n-x)!} \frac{\lambda^x}{n^x} (1 - \frac{\lambda}{n})^n (1 - \frac{\lambda}{n})^{-x}
+    \frac{n!}{x! (n-x)!} \frac{\lambda^x}{n^x} (1 - \frac{\lambda}{n})^n (1 - \frac{\lambda}{n})^{-x}
 \]
 After some algebraic manipulation, this becomes:
 \[
-	\frac{1}{x!} \frac{n (n-1) (n-2) \ldots (n-x+1)}{n n \ldots n} (1 - \frac{\lambda}{n})^n (1 - \frac{\lambda}{n})^{-x} \lambda^x
+    \frac{1}{x!} \frac{n (n-1) (n-2) \ldots (n-x+1)}{n n \ldots n} (1 - \frac{\lambda}{n})^n (1 - \frac{\lambda}{n})^{-x} \lambda^x
 \]
 Notice that the second term has $x$ terms on both the top and the bottom. Now, let $n$ go to infinity to get the limit:
 \[
-	\frac{\lambda^x}{x!} e^{- \lambda} \; \blacksquare
+    \frac{\lambda^x}{x!} e^{- \lambda} \; \blacksquare
 \]
 
 % make-up notes -- missed class
@@ -1242,7 +1242,7 @@ and $f_Y (y) = 0$ elsewhere.
 We recognize the above as a $U(0,1)$ p.d.f.
 
 \subsection{Joint probability distributions}
-Very often, we're interested in the simultaneous behaviour of several random variables, rather than one at a time, as we have considered up until now, e.g. if $X$ = number of kilometers traveled by a tire and $Y$ = tread depth, we may wish to know about the simultaneous or joint distribution of $X$ and $Y$. This leads to so-called \emph{multivariate distributions.}
+Very often, we're interested in the simultaneous behaviour of several random variables, rather than one at a time, as we have considered up until now, e.g. if $X$ = number of kilometres traveled by a tire and $Y$ = tread depth, we may wish to know about the simultaneous or joint distribution of $X$ and $Y$. This leads to so-called \emph{multivariate distributions.}
 
 We shall considered bivariate (i.e. pairs of random variables) distributions, and indicate the general extensions at the end. 
 
@@ -1256,5 +1256,163 @@ Which we denote as $P(X \leq x, Y \leq y)$.
 \subsubsection{Notes}
 \textbf{(1)} This definition holds for both continuous and discrete random variables. 
 
-\textbf{(2)} It is possible to show (in an advanced probability course) that the joint c.d.f. uniquely determines the probability distirbution in two-dimensional space. 
+\textbf{(2)} It is possible to show (in an advanced probability course) that the joint c.d.f. uniquely determines the probability distribution in two-dimensional space. 
+
+
+%%
+\section{03 April}
+\subsection{Properties of the joint c.d.f.}
+
+\textbf{(1)} $F_{X,Y} (x,y)$ uniquely determines the joint probability distribution in two-dimensional space, i.e. in theory, given any event $B$ in $\mathds{R}^2$, once we know $F_{X,Y} (x,y)$ for all $-\infty < x < \infty$, $-\infty < x < \infty$, then $P((X,Y) \in B)$ is uniquely determined. 
+
+\textbf{(2)} We define the so-called \emph{marginal c.d.f.} $F_X$ and $F_Y$ of $F_{X,Y}$ as follows:
+\[
+	F_X (x) = P(X \leq x) = F_{X,Y} (x, + \infty) = \lim_{y \to \infty} F_{X,Y} (x,y)
+\]
+and, similarly,
+\[
+	F_Y (y) = F_{X,Y} (+ \infty, y)
+\]
+
+\textbf{(3)} $F_{X,Y} (x,y)$ is non-decreasing in $x$ and $y$ (e.g. $F_{X,Y} (x,y) \leq F_{X,Y} (x^{\prime},y)$ for $x^{\prime} > x$).
+
+\textbf{(4)} $F_{X,Y} (-\infty, \infty) = 0$ (c.f. $F_X (-\infty) = 0$) and $F_{X,Y} (\infty,\infty) = 1$.
+
+\textbf{(5)} $F_{X,Y} (x,y)$ is jointly continuous from the right (c.f. $F_X (x)$ is continuous from the right).
+
+\subsection{The role of the p.d.f. and probability functions in joint distributions}
+
+\textbf{Definition:} We call $f_{X,Y} (x,y)$ the \emph{joint p.d.f}. of $(X,Y)$ if 
+\[
+    P((X,Y) \in A) = \int \int_{A} f_{X,Y} (x,y) \; dx \; dy
+\]
+and $f_{X,Y} (x,y) \geq 0$.
+
+We call $P_{X,Y} (x,y)$ the \emph{joint probability function} of $(X,Y)$ if
+\[
+    P((X,Y) \in A) = \sum \sum_{(x,y) \in A} P_{X,Y} (x,y)
+\]
+for all events $A$ in $\mathds{R}^2$.
+
+%%[[
+In particular, for event $A = (-\infty, x] \times (\infty, y]$ in the continuous case: %% ))
+\[
+    F_{X,Y} (x,y) = \int_{-\infty}^y \int_{-\infty}^x f_{X,Y} (u,v) \; du \; dv
+\]
+
+For the discrete case:
+\[
+    F_{X,Y} (x,y) = \sum_{v \leq y} \sum_{u \leq x} P_{X,Y} (u,v)
+\]
+
+It follows that
+\[
+    f_{X,Y} (x,y) \; dx \; dy \approx P(x < X \leq x + dx, y < Y \leq y + dy)
+\]
+and that
+\[
+    P_{X,Y} (x,y) = P(X = x, Y = y).
+\]
+
+By the Fundamental Theorem of Calculus,
+\[
+    \frac{\delta^2}{\delta x \; \delta y} F_{X,Y} (x,y) = f_{X,Y} (x,y)
+\]
+%% partial derivative -- LaTeX?
+
+Given $f_{X,Y} (x,y)$, to find the marginal c.d.f., integrate out the variable you wish to get rid of:
+\[
+    f_X (x) = \int_{-\infty}^{\infty} f_{X,Y} (x,y) \; dy
+\]
+and
+\[
+    f_Y (y) = \int_{-\infty}^{\infty} f_{X,Y} (x,y) \; dx
+\]
+(beware of times when the p.d.f. changes its form -- see next example for details)
+
+\subsubsection{Example}
+Let
+\[
+    f_{X,Y} (x,y) = \frac{2}{3} (x + 2y) \textnormal{ for } 0 < x < 1, 0 < y < 1
+\]
+and $f_{X,Y} (x,y) = 0$ elsewhere.
+
+\textbf{(1)} Find the marginal p.d.f.s $f_X$ and $f_Y$.
+\begin{align*}
+    f_X (x) &= \int_{-\infty}^{\infty} f_{X,Y} (x,y) \; dy \\
+        &= 0 + \int_0^1 \frac{2}{3} (x + 2y) \; dy + 0 \\
+        &= \frac{2}{3} (x+1) \textnormal{ for } 0 < x < 1 \\
+        &= 0 \textnormal{ elsewhere}
+\end{align*}
+and
+\begin{align*}
+    f_Y (y) &= 0 + \int_0^1 \frac{2}{3} (x + 2y) \; dx \\
+        &= \frac{1}{3} (1 + 4y) \textnormal{ for } 0 < y < 1 \\
+        &= 0 \textnormal{ elsewhere}
+\end{align*}
+
+\textbf{(2)} Find the joint c.d.f. of $(X,Y)$.
+
+We need $F_{X,Y} (x,y)$ for all $(x,y) \in \mathds{R}^2$.
+
+\[
+    F_{X,Y} (x,y) = P(X \leq x, Y \leq y) = 0 \textnormal{ for either $x \leq 0$ or $y \leq 0$}
+\]
+
+For $0 < x < 1$ and $0 < y < 1$:
+\begin{align*}
+    F_{X,Y} (x,y) &= \int_{-\infty}^y \int_{-\infty}^x f_{X,Y} (u,v) \; du \; dv \\
+        &= \int_0^y \int_0^x \frac{2}{3} (u + 2v) \; du \; dv \\
+        &= \frac{1}{3} x^2 y + \frac{2}{3} x y^2
+\end{align*}
+
+For $0 < x < 1$ and $y \geq 1$:
+\begin{align*}
+    F_{X,Y} (x,y) &= \int_0^1 \int_0^x \frac{2}{3} (u + 2v) \; du \; dv + \int_1^y \int_0^x 0 \; du \; dv \\
+        &= \frac{x^2}{3} + \frac{2}{3} x
+\end{align*}
+
+For $x \geq 1$ and $0 < y < 1$:
+\begin{align*}
+    F_{X,Y} (x,y) &= \int_0^y \int_0^1 \frac{2}{3} (u + 2v) \; du \; dv + \int_0^y \int_1^x 0 \; du \; dv \\
+        &= \frac{y}{3} + \frac{2}{3} y^2
+\end{align*}
+
+For $x \geq 1$ and $y \geq 1$:
+\[
+    F_{X,Y} (x,y) = 1
+\]
+
+\textbf{(3)} Find the marginal c.d.f. $F_X$.
+
+The first possible way involves using the marginal p.d.f. that we got from part 1 of this example.
+\[
+    F_X (x) = 0 \textnormal{ for } x \leq 0
+\]
+and
+\begin{align*}
+    F_X (x) &= \int_0^x \frac{2}{3} (u + 1) \; du \textnormal{ for } 0 < x < 1 \\
+        &= \frac{x^2}{3} + \frac{2}{3} x 
+\end{align*}
+and, for $x \geq 1$, $F_X (x) = 1$.
+
+The second possible way:
+\begin{align*}
+    F_X (x) = F_{X,Y} (x,+ \infty) \\
+        &= 0 \textnormal{ for } x \leq 0 \\
+        &= \frac{x^2}{3} + \frac{2}{3} x \textnormal{ for } 0 < x < 1 \\
+        &= 1 \textnormal{ for } x \geq 1
+\end{align*}
+\emph{Note}: identify the part of the range of $F_{X,Y} (x,y)$ where $0 < x < 1$ and where you can let $y \rightarrow + \infty$. In this case, the part is $0 < x < 1$ and $y \geq 1$. Finally, for such $y$, $F_{X,Y} (x,y)$ \textbf{does not} change with $y$.
+
+Thus, we get the same marginal c.d.f. for $X$ by two different but equivalent methods.
+
+\subsection{Conditional Distributions}
+Conditioning plays a huge part in probability and statistics. Hence, we need to consider conditional distributions.
+
+\textbf{Definition:} Given the joint probability function of $(X,Y)$ $P_{X,Y} (x,y) = P(X = x, Y = y)$, we define the conditional probability function of $Y$ given $X = x$ to be:
+\[
+    P(Y = y \; | \; X = x) = \frac{P_{X,Y} (x,y)}{P_X (x)} \; \forall x : P_X (x) \neq 0
+\]
+
 \end{document}
