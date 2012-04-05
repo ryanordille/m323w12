@@ -1415,4 +1415,159 @@ Conditioning plays a huge part in probability and statistics. Hence, we need to 
     P(Y = y \; | \; X = x) = \frac{P_{X,Y} (x,y)}{P_X (x)} \; \forall x : P_X (x) \neq 0
 \]
 
+This is denoted as $F_{Y \; | \; X \leq x} (y \; | \; X \leq x)$.
+%%
+\section{05 April}
+\subsection{Conditional distributions continued}
+\subsubsection{Conditional probability function}
+Also straight-forward is the \emph{conditional probability function}:
+\[
+    P_{Y \; | \; X = x} (y) = P(Y = y \; | \; X = x)
+\]
+Again, by the definition of conditional probability, the right hand side is equal to
+\[
+    \frac{P(X = x, Y = y)}{P(X = x)} = \frac{P_{X,Y} (x,y)}{P_X (x)}
+\]
+(provided that $P(X = x) \neq 0$).
+
+\subsubsection{Conditional probability density function}
+Something more interesting is how we deal with, say, $P(Y \leq y \; | \; X = x)$ when $X$ and $Y$ are jointly continuous. We cannot define this as the ratio of the joint divided by the $P(X = x)$ since the latter is $0$ for \emph{all} $x$. Because of this, we need to take a slightly different route. 
+
+First, define the \emph{conditional p.d.f.} of $Y$ given $X=x$ denoted by 
+\[
+    f_{Y \; | \; X = x} (y \; | \; x) = \frac{f_{X,Y} (x,y)}{f_X (x)}
+\]
+for all $x$ such that $f_X (x) \neq 0$. 
+
+Now, since we know that if we integrate a p.d.f. over a region $A$, we get the probability of that region. Therefore,
+\begin{align*}
+    F_{Y \; | \; X = x} (y \; | \; x) &= P(Y \leq y \; | \; X = x) \\
+        &= \int_{- \infty}^y f_{Y \; | \; X = x} (u \; | \; x) \; du
+\end{align*}
+
+It follows that
+\[
+    E(Y \; | \; X = x) = \int_{- \infty}^{\infty} y \; f_{Y \; | \; X = x} (y \; | \; x) \; dy
+\]
+Note that this is the usual definition of expected value, except that we use the conditional p.d.f..
+
+In the discrete case:
+\[
+    P(Y \leq y \; | \; X = x) = \sum_{\forall u : u \leq y} P_{Y \; | \; X = x} (u \; | \; x)
+\]
+It's only in the continuous case where things get a bit more complicated.
+
+\subsection{The Law of Total Probability for Random Variables}
+The following theorems are very useful analogues of the Law of Total Probability for events. 
+
+Recall:
+\[
+    P(A) = \sum_{i = 1}^n P(A \; | \; B_i)P(B_i)
+\] 
+
+\subsubsection{Discrete case}
+For discrete random variables:
+\begin{align*}
+    P(Y = y) &= \sum_{\forall x} P(Y = y \; | \; X = x)P(X = x) \\
+        &= \sum_{\forall x} P_{Y \; | \; X = x} P_X (x)
+\end{align*}
+The proof of this is the same as the proof for sets.
+
+\subsubsection{Continuous case}
+For continuous random variables, we have the following theorem:
+
+\textbf{Theorem:} Let $X,Y$ have joint p.d.f $X,Y$ with conditional p.d.f. $f_{Y \; | \; X = x} (y \; | \; x)$. Then,
+\begin{align*}
+    \textnormal{(a) } f_Y (y) &= \int_{-\infty}^{\infty} f_{Y \; | \; X = x} (y \; | \; x) f_X (x) \; dx \\
+    \textnormal{(b) and } F_Y (y) &= \int_{-\infty}^{\infty} F_{Y \; | \; X = x} (y \; | \; x) f_X (x) \; dx
+\end{align*}
+
+\textbf{Proof of (a):} We have
+\begin{align*}
+    f_Y (y) &= \int_{-\infty}^{\infty} f_{X,Y} (x,y) \; dx \\
+        &= \int_{-\infty}^{\infty} f_{Y \; | \; X} (y \; | \; x) f_X (x) \; dx
+\end{align*}
+
+Try part (b) yourself. Or not. Doesn't matter to me.
+
+\subsection{Example}
+From Tuesday's example, we had
+\[
+    f_{X,Y} (x,y) = \frac{2}{3} (x + 2y) \textnormal{ for } 0 < x < 1, 0 < y < 1
+\]
+and $f_{X,Y} (x,y) = 0$ elsewhere.
+
+\textbf{(4)} Find $f_{Y \; | \; X = x} (y \; | \; x)$.
+
+We must find
+\[
+    \frac{f_{X,Y} (x,y)}{f_X (x)}
+\]
+
+By (1), we have:
+
+For $0 < y < 1$ and $0 < x < 1$:
+\begin{align*}
+    f_{Y \; | \; X = x} (y \; | \; x) = \frac{\frac{2}{3} (x + 2y)}{\frac{2}{3} (x+1)}
+\end{align*}
+
+Otherwise, for $y \notin (0,1)$, 
+\[
+    f_{Y \; | \; X = x} (y \; | \; x) = 0
+\]
+
+\textbf{(5)} Find $E(Y \; | \; X = x)$ for $0 < x < 1$ and, in particular, find $E(Y \; | \; X = \frac{1}{2})$.
+
+By definition,
+\begin{align*}
+    E(Y \; | \; X = x) &= \int_{-\infty}^{\infty} y \; f_{Y \; | \; X = x} (y \; | \; x) \; dy \\
+        &= \int_0^1 \frac{y(x + 2y)}{x + 1} \; dy \\
+        &= \frac{3}{2(x+1)} (\frac{x}{3} + \frac{2}{3}) \textnormal{ for } 0 < x < 1
+\end{align*}
+
+In particular,
+\[
+    E(Y \; | \; X = \frac{1}{2}) = \frac{3}{2(\frac{1}{2} + 1)} (\frac{1}{6} + \frac{2}{3}) = \frac{5}{6}
+\]
+
+\subsection{Bivariate analogues}
+We seek a summary of a bivariate distribution -- a sort of analogue to $E(X)$ or $Var(X)$ for a univariate distribution. Before doing this, however, we need another definition.
+
+\textbf{Definition:} Let $g(x,y)$ be a real-valued function of $(x,y)$. Then, we define for the continuous case:
+\[
+    E(g(X,Y)) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} g(x,y) \; f_{X,Y} (x,y) \; dx \; dy
+\]
+In the discrete case:
+\[
+    E(g(X,Y)) = \sum_y \sum_x g(x,y) \; P_{X,Y} (x,y)
+\]
+
+\subsubsection{Covariance}
+An important special case is when 
+\[
+    g(X,Y) = (X - \mu_X)(Y - \mu_Y)
+\]
+(i.e. $E(X) - \mu_X$ and $E(Y) = \mu_Y$)
+
+Thus, in this case, we're talking about
+\[
+    E((X - \mu_X)(Y - \mu_Y))
+\]
+This is given a special name -- the \emph{covariance} between $X$ and $Y$, the $Cov(X,Y)$, and is denoted by $\sigma_{XY}$.
+
+\subsubsection{Notes}
+\textbf{(1)} $Cov(X,Y)$ is a measure of how $X$ and $Y$ vary about their means simultaneously. If $Cov(X,Y) > 0$, then this tells us that as $X$ increases, so does $Y$, and also as $X$ decreases, so does $Y$. Conversely, if $Cov(X,Y) < 0$, then as $X$ increases, $Y$ tends to decrease, and vice versa.
+
+\textbf{(2) ``little theorem"} 
+\[
+    Cov(X,Y) = E(XY) - E(X) E(Y)
+\]
+Proof: by definition, 
+\begin{align*}
+    Cov(X,Y) &= E((X - \mu_X)(Y - \mu_Y)) \\
+        &= E(XY - \mu_Y X - \mu_X Y + \mu_X \mu_Y) \\
+        &= E(XY) - \mu_Y E(X) - \mu_X E(Y) + \mu_X \mu_Y \\
+        &= E(XY) + \mu_X \mu_Y
+\end{align*}
+
 \end{document}
