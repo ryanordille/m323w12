@@ -155,7 +155,7 @@ In general, sampling without replacement assumes dependence, while sampling with
 \subsection{Random variables}
 Often, we are not so interested in the outcomes of an experiment themselves, but rather in numerical values that can be associated with these outcomes. 
 
-\textbf{Definition:} a function $X$ that maps the sample space $S$ to the real line in such a way that, for every $\omega \in S$, $X(\omega)$ is a real number, is called a \emph{random variable} (or random variable for short). 
+\textbf{Definition:} a function $X$ that maps the sample space $S$ to the real line in such a way that, for every $\omega \in S$, $X(\omega)$ is a real number, is called a \emph{random variable} (or r.v. for short). 
 
 Note that two or more distinct $\omega$'s can give the same value of $X(\omega)$. However, one value of $w$ is not allowed to give two different values of $X(\omega)$, as this would not make $X$ a function.
 
@@ -338,13 +338,13 @@ Notice that the second term has $x$ terms on both the top and the bottom. Now, l
 
 \textbf{Example:} Suppose that in a book of 1000 pages, on any particular page, there can be either zero errors or one error. Suppose further that the probability of an error on any particular page is $.002$. what is the approximate probability that there will be at most three errors in the book?
 
-\textbf{Exact solution:} There is a binomial setup -- errors are likely to occur independently amongst the $n = 1000$ trials. Each trial can result in either a success (an error is found) or a failure (an error is not found). There is also a constant probability of success ($.002$) for every trial. Let $X$ be the number of successes in 1000 pages. Then $X ~ Bin(1000, .002)$.
+\textbf{Exact solution:} There is a binomial setup -- errors are likely to occur independently amongst the $n = 1000$ trials. Each trial can result in either a success (an error is found) or a failure (an error is not found). There is also a constant probability of success ($.002$) for every trial. Let $X$ be the number of successes in 1000 pages. Then $X \sim Bin(1000, .002)$.
 
 \[
     P(X \leq 3) = \sum_{x = 0}^{3} {1000 \choose x} (.002)^x (1 - .002)^{1000-x}
 \]
 
-\textbf{Approximate solution:} Since $n$ is large and $p$ is small, we can use the Poisson approximation with $x = n \times p = 1000 \times \frac{2}{1000} = 2$. Therefore:
+\textbf{Approximate solution:} Since $n$ is large and $p$ is small, we can use the Poisson approximation with $\lambda = n \times p = 1000 \times \frac{2}{1000} = 2$. Therefore:
 \[
     P(X \leq 3) = \sum_{x = 0}^{3} P(X = x) = \sum_{x=0}^{3} \frac{2^x e^{-2}}{x!}
 \]
@@ -354,7 +354,7 @@ If $X$ has a Poisson distribution with parameter $\lambda$, we write $X \sim Po(
 
 The random variable X has a hypergeometric distribution with parameters $N$, $a$, and $n$ if:
 \[
-    P(X = x) = \frac{{a \choose x} \binom{N-a}{n-x}}{Nn}
+    P(X = x) = \frac{{a \choose x} \binom{N-a}{n-x}}{{N \choose n}}
 \]
 (for $x \leq a$ and $n-x \leq N-a$)
 
@@ -393,7 +393,7 @@ provided that the sum is finite.
 \subsection{Theory}
 Notes:
 \begin{enumerate}
-    \item $E(Y)$ is often denoted by $\mu_y$, and also is termed the \emph{mean} of $Y$ (also called the ``population mean").
+    \item $E(Y)$ is often denoted by $\mu_Y$, and also is termed the \emph{mean} of $Y$ (also called the ``population mean").
     \item \textbf{Interpretation:} $E(Y)$ is a weighted average or mean of the possible values of the random variable $Y$, where the weights are the probabilities of these values. \\
         For example, in the special case where $Y$ has a discrete uniform distribution $a_1, a_2, \ldots, a_N$, then \\
             \[
@@ -403,11 +403,11 @@ Notes:
     \item $\mu$ is a constant, a parameter specific to a given probability distribution. You need the distribution to compute $\mu$.
     \item $E(c Y) = c E(Y)$ where $c$ is a constant, and $E (\sum_{i=1}^{n} Y_i) = \sum_{i=1}^{n} E(Y_i)$ (the proof will come later)
     \item Note, however, that in general, $E(XY) \neq E(X)E(Y)$.
-    \item Let $g$ be some real-valued function of a random variable $Y$. Then, if $X = g(y)$, we have
+    \item Let $g$ be some real-valued function of a random variable $Y$. Then, if $X = g(Y)$, we have
         \[
-            E(X) = E(g(y)) = \sum_{\textnormal{all } y} g(y) P(Y=y)
+            E(X) = E(g(Y)) = \sum_{\textnormal{all } y} g(y) P(Y=y)
         \]
-        The point of this: by definition, $E(g(y)) = E(X) = \sum_{\textnormal{all } x} x P(X = x)$. Thus, in order to find $E(g(y))$, it would appear that we first need to find the probability distribution of $X = g(y)$. We'll see such transformations later -- they can be difficult. You do not have to first find the distribution of $X$ -- you can use the distribution of the original $Y$ and sum $g(y)P(Y=y)$.
+        The point of this: by definition, $E(g(Y)) = E(X) = \sum_{\textnormal{all } x} x P(X = x)$. Thus, in order to find $E(g(Y))$, it would appear that we first need to find the probability distribution of $X = g(Y)$. We'll see such transformations later -- they can be difficult. You do not have to first find the distribution of $X$ -- you can use the distribution of the original $Y$ and sum $g(y)P(Y=y)$.
 \end{enumerate}
 
 In particular, if $g(Y) = Y^k$, we can call $E(g(Y)) = E(Y^k)$ is called the $k$th moment of $Y$. $\mu$ is called the first moment of $Y$.
@@ -483,7 +483,7 @@ Standard Deviation -- $\sqrt{\sigma^2} = \sigma$
 \]
 
 \subsection{The Mean and Variance of Some Named Distributions}
-\subsubsection{Binonmial}
+\subsubsection{Binomial}
 \begin{align*}
     E(X) = \mu &= \sum_{x=1}^{n} x {n \choose x} p^x (1-p)^{n-x} \\
         &= \sum \frac{n(n-1)!}{(x-1)! (n-1-(x-1))!} p p^{x-1} (1-p)^{n-1-(x-1)} \; \textnormal{ as } (n-x)! = (n-1-(x-1))! \\
@@ -508,7 +508,7 @@ So, $E(X^2) = E(X(X-1)) + \mu$. Finally, $Var(X) = E(X(X-1)) + \mu - \mu^2$.
 \begin{align*}
     E(X(X-1)) &= \sum_{x=2}^{n} x (x-1) {n \choose x} p^x (1-p)^{n-x} \\
         &= n (n-1) p^2 \sum \frac{(n-2)!}{(x-2)! (n-2-(x-2))!} p^{x-2} (1-p)^{n-2-(x-2)} \\
-        &= n (n-1) P^2 \sum {{n-2} \choose {x-2}} p^{x-2} (1-p)^{n-2-(x-2)} \\
+        &= n (n-1) p^2 \sum {{n-2} \choose {x-2}} p^{x-2} (1-p)^{n-2-(x-2)} \\
         &= n (n-1) p^2
 \end{align*}
 
@@ -593,11 +593,11 @@ A pdf gives $P(X \in A)$ by integrating over $A$.
     P(X \in A) = P(X \leq x) = \int_{-\infty}^{x} f_X (y) dy
 \]
 
-In short, $F_X (x) = \int_{-\infty}^{x} f_x (y) dy$.
+In short, $F_X (x) = \int_{-\infty}^{x} f_X (y) dy$.
 
 \textbf{(2)} Conversely, we can recover the p.d.f. from the c.d.f. by the Fundamental Theorem of Calculus, since:
 \[
-    \frac{d}{dx} F_X (x) = F_X (x) = f_X (x) \forall x
+    \frac{d}{dx} F_X (x) = F^\prime_X (x) = f_X (x) \forall x
 \]
 
 Thus, in particular, if $f_X$ is a p.d.f., then:
@@ -607,11 +607,11 @@ Thus, in particular, if $f_X$ is a p.d.f., then:
 
 \textbf{(3)} Interpretation of a p.d.f: We have, for small $\Delta x$, that:
 \[
-    \frac{F_X (x + \delta x) - F_X (x)}{\Delta x} \approx f_X (x)
+    \frac{F_X (x + \Delta x) - F_X (x)}{\Delta x} \approx f_X (x)
 \]
 So it follows that:
 \[
-    F_X (x+\delta x) - F_X (x) \approx \Delta x f_X (x)
+    F_X (x+\Delta x) - F_X (x) \approx \Delta x f_X (x)
 \]
 
 %[
@@ -688,7 +688,7 @@ This gives $c=.75$.
 \begin{align*}
     E(X) &= \int_{-\infty}^{\infty} x f_X (x) dx \\
         &= \int_{0}^{1} x (.75) (x^2 + 1) dx \\
-        &= (.75) (\frac{x^4}{4} + \frac{x^2}{2}) \textnormal{(0 to 1)} \\
+        &= (.75) (\frac{x^4}{4} + \frac{x^2}{2}) \Bigr|_0^1 \\
         &= (.75)(.25 + .50) \\
         &= \frac{9}{16}
 \end{align*}
@@ -696,7 +696,7 @@ This gives $c=.75$.
 To find $\sigma_X$, first find:
 \begin{align*}
     E(X^2) &= \int_{-\infty}^{0} 0 dx + \int_0^1 x^2 (.75) (x^2 + 1) dx + \int_1^{\infty} 0 dx \\
-        &= (.75)(\frac{x^5}{5} + \frac{x^3}{3} \; \textnormal{0 to 1} \\
+        &= (.75)(\frac{x^5}{5} + \frac{x^3}{3}) \Bigr|_0^1 \\
     \sigma^2 &= Var(X) \\
         &= E(X^2) - (\frac{9}{16})^2 \\
     \sigma &= \sqrt{\sigma^2}
@@ -717,7 +717,7 @@ and $f_X (x) = 0$ elsewhere.
     \item The p.d.f. is constant on $[a,b]$. On the graph, the height is constantly $\frac{1}{b-a}$, so the area under the curve is 1. The probability is uniformly spread out in the interval.
     \item The uniform distribution is often used to model situations in which we believe outcomes occur completely at random.
     \item An important special case is the uniform distribution $[0,1]$.
-    \item Notation -- we write $X ~ U[a,b]$ to mean that $X$ has a uniform distribution on the interval $[a,b]$.
+    \item Notation -- we write $X \sim U(a,b)$ to mean that $X$ has a uniform distribution on the interval $[a,b]$.
     \item The c.d.f. of $X$ is:
         \begin{align*}
             F_X (x) &= 0 \; \text{for} x < a \\
@@ -763,7 +763,7 @@ The distribution is equal to $0$ elsewhere.
         \end{align*}
         Watch out how the writer is writing in the parameter for the distribution! In this case, $E(X) = \frac{1}{\lambda}$ and $Var(X) = \frac{1}{\lambda^2}$.
     \item \textbf{The memoryless property:} \\
-        \textbf{Theorem:} Let $X ~ Exp(\beta)$. Then, $P(x \leq X < x+h | X \geq x) = P(0 \leq X < h)$. \\
+        \textbf{Theorem:} Let $X \sim Exp(\beta)$. Then, $P(x \leq X < x+h | X \geq x) = P(0 \leq X < h)$. \\
         In other words, the information that $X \geq x$ is ``forgotten". \\
         Important note: the memoryless property \emph{does not} assert that $P(0 \leq X < h) = P(x \leq X < x+h)$! \\
         \textbf{Proof:} Let $x \leq X < x+h$ be $B$, and $X \geq x$ be $A$. Then,
@@ -793,7 +793,7 @@ Let $\alpha> 0$. We denote the gamma function by $\Gamma (\alpha)$ and define
 
 The gamma function has the following two important properties:
 \begin{enumerate}
-    \item $\Gamma (\frac{1}{2}) = \sqrt(\pi)$
+    \item $\Gamma (\frac{1}{2}) = \sqrt{\pi}$
     \item $\Gamma(\alpha + 1) = \alpha \Gamma(\alpha)$
 \end{enumerate}
 
@@ -817,9 +817,9 @@ This just proves that this given formula is a density, as it integrates out to 1
 \textbf{(2)}
 The gamma distribution is said to ``flexible", meaning that many different shapes for the p.d.f. can be induced by changing the two parameters $\alpha$ and $\beta$.
 
-For $\alpha > 1$, the p.d.f. grows rapidly immediately after $x > 0$, then drops off with a tail as $x$ grows larger. $f_X (\alpha > 1)$ is said to be skewed to the right.
+For $\alpha > 1$, the p.d.f. grows rapidly immediately after $x > 0$, then drops off with a tail as $x$ grows larger. $f_X$ is said to be skewed to the right.
 
-For $\alpha = 1$, $f_X (\alpha = 1$ grows exponentially downwards, similar to the exponential distribution.
+For $\alpha = 1$, $f_X$ grows exponentially downwards, similar to the exponential distribution.
 
 For $\alpha < 1$, the p.d.f. also grows exponentially downwards, but more steeply.
 
@@ -858,7 +858,7 @@ For $x>0$.
 
 \textbf{(7)} Notation:
 
-We write $X ~ Gamma(\alpha, \beta)$ to mean ``$X$ has a gamma distribution with parameters $\alpha, \beta$".
+We write $X \sim Gamma(\alpha, \beta)$ to mean ``$X$ has a gamma distribution with parameters $\alpha, \beta$".
 
 
 \subsection{The Normal (or Gaussian) Distribution}
@@ -991,19 +991,19 @@ In the discrete case,
 
 \textbf{Proof (continuous case):} (discrete case -- replace integral by sum) We have, by definition:
 \begin{align*}
-   M_X (t) &= E(e^{tx}) = \int_{-\infty}{\infty} e^{tx} f_X (x) \; dx \\
-   M_X^1 (t) &= \frac{d}{dt} \; \int \ldots \\
+   M_X (t) &= E(e^{tx}) = \int_{-\infty}^{\infty} e^{tx} f_X (x) \; dx \\
+   M_X^{(1)} (t) &= \frac{d}{dt} \; \int \ldots \\
     &= \int \frac{d}{dt} \ldots \\
     &= \int x e^{tx} f_X (x) \; dx \\
    \textnormal{now set } t &= 0 \\
-   M_X^1 (t) &= \int_{-\infty}^{\infty} x f_X (x) \; dx \\
+   M_X^{(1)} (0) &= \int_{-\infty}^{\infty} x f_X (x) \; dx \\
     &= E(X)
 \end{align*}
 In general, we get 
 \[
-    M^{(k)} (t) = \int_{-\infty}{\infty} x^k e^{tx} f_X (x) \; dx
+    M^{(k)} (t) = \int_{-\infty}^{\infty} x^k e^{tx} f_X (x) \; dx
 \]
-This gives $M^{(k)} (t) = E(X^l)$, as advertised.
+This gives $M^{(k)} (0) = E(X^l)$, as advertised.
 
 %%
 \section{27 March}
@@ -1027,7 +1027,7 @@ Set $y = x(\frac{1}{\beta} - t)$ with $dy = (\frac{1}{\beta}) - t \; dx$ to get
 \]
 From $M_X (t)$, we immediately get
 \[
-    M_X^{\prime} (0) = \alpha \beta (1 - \beta t)^{\alpha - 1} \Big|_{t=0}
+    M_X^{\prime} (0) = \alpha \beta (1 - \beta t)^{-\alpha - 1} \Big|_{t=0}
 \]
 by the chain rule. Therefore, $M_X^{\prime} (0) = \alpha \beta$. Similarly,
 \[
@@ -1062,6 +1062,8 @@ $X \sim Po(\lambda)$
 \begin{align*}
     M_X (t) &= E(e^{tx}) \\
         &= \sum_{x=0}^{\infty} \frac{e^{tx} \lambda^x e^{-\lambda}}{x!} \\
+        &= e^{-\lambda} \sum_{x=0}^{\infty} \frac{ {(e^{t}\lambda)}^x}{x!} \\
+        &= e^{-\lambda} e^{e^t \lambda} \\
         &= e^{\lambda (e^t - 1)}
 \end{align*}
 Therefore, $E(X) = M_X^{\prime} (0) = \lambda$ and $E(X^2) = \lambda + \lambda^2$, so therefore $Var(X) = \lambda$.
@@ -1075,7 +1077,7 @@ Therefore,
 \begin{align*}
     M_X (t) &= \int_{-\infty}^{\infty} e^{tx} \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} x^2} \; dx \\
         &= \int_{-\infty}^{\infty} e^{-\frac{1}{2} (x^2 - 2tx + t^2)} e^{\frac{t^2}{2}} \frac{1}{\sqrt{2\pi}} \; dx \\
-        &= e^{\frac{t^2}{2}} \int_{-\infty}{\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} (x-t)^2} \; dx \\
+        &= e^{\frac{t^2}{2}} \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2} (x-t)^2} \; dx \\
         &= e^{\frac{t^2}{2}} \textnormal{ since the integrand is just a $N(t,1)$ p.d.f..}
 \end{align*}
 
@@ -1096,7 +1098,7 @@ and
 We find $M_X^{\prime} (0) = \mu$, $M_X^{\prime \prime} (0) = \sigma^2 + \mu^2$, and $Var(X) = \sigma^2$.
 
 \subsection{Transformations of random variables}
-Often, we're given the distribution of a random variable $X$, but we're more interested in some function $Y = g(X)$ of this random variable, e.g. maybe we have the distribution of the velocity $v$, and we are interested in the distribution of the kinetic energy $Y = \frac{1}{2} m v^2$. In general, we're concerned with finding the distribution of $g(X)$ knowing the distribution of $X$. 
+Often, we're given the distribution of a random variable $X$, but we're more interested in some function $Y = g(X)$ of this random variable, e.g. maybe we have the distribution of the velocity $V$, and we are interested in the distribution of the kinetic energy $Y = \frac{1}{2} m V^2$. In general, we're concerned with finding the distribution of $g(X)$ knowing the distribution of $X$. 
 
 First, consider the following two examples to illustrate the eventual formula for the continuous case. 
 
@@ -1141,8 +1143,8 @@ Let $Z \sim N(0,1)$. Find the p.d.f. of $Y=Z^2$.
 Finally,
 \begin{align*}
     f_Y (y) &= \frac{d}{dy} F_Y (y) \\
-        &= \frac{1}{2} y^{-\frac{1}{2}} f_Z (\sqrt{y}) - \frac{1}{2} y^{-\frac{1}{2}} f_Z (-\sqrt{y}) \; \forall y \geq 0 \\
-        &= \frac{1}{2} y^{-\frac{1}{2}} (2 f_Z (\sqrt{y})) \textnormal{ ($N(0,1)$ density symmetric about 0)}
+        &= \frac{1}{2} y^{-\frac{1}{2}} f_Z (\sqrt{y}) + \frac{1}{2} y^{-\frac{1}{2}} f_Z (-\sqrt{y}) \; \forall y \geq 0 \\
+        &=y^{-\frac{1}{2}}  f_Z (\sqrt{y}) \textnormal{ ($N(0,1)$ density symmetric about 0)}
 \end{align*}
 
 %%
@@ -1276,7 +1278,7 @@ and, similarly,
 
 \textbf{(3)} $F_{X,Y} (x,y)$ is non-decreasing in $x$ and $y$ (e.g. $F_{X,Y} (x,y) \leq F_{X,Y} (x^{\prime},y)$ for $x^{\prime} > x$).
 
-\textbf{(4)} $F_{X,Y} (-\infty, \infty) = 0$ (c.f. $F_X (-\infty) = 0$) and $F_{X,Y} (\infty,\infty) = 1$.
+\textbf{(4)} $F_{X,Y} (-\infty, -\infty) = 0$ (c.f. $F_X (-\infty) = 0$) and $F_{X,Y} (\infty,\infty) = 1$.
 
 \textbf{(5)} $F_{X,Y} (x,y)$ is jointly continuous from the right (c.f. $F_X (x)$ is continuous from the right).
 
@@ -1295,7 +1297,7 @@ We call $P_{X,Y} (x,y)$ the \emph{joint probability function} of $(X,Y)$ if
 for all events $A$ in $\mathds{R}^2$.
 
 %%[[
-In particular, for event $A = (-\infty, x] \times (\infty, y]$ in the continuous case: %% ))
+In particular, for event $A = (-\infty, x] \times (-\infty, y]$ in the continuous case: %% ))
 \[
     F_{X,Y} (x,y) = \int_{-\infty}^y \int_{-\infty}^x f_{X,Y} (u,v) \; du \; dv
 \]
@@ -1320,7 +1322,7 @@ By the Fundamental Theorem of Calculus,
 \]
 %% partial derivative -- LaTeX?
 
-Given $f_{X,Y} (x,y)$, to find the marginal c.d.f., integrate out the variable you wish to get rid of:
+Given $f_{X,Y} (x,y)$, to find the marginal p.d.f., integrate out the variable you wish to get rid of:
 \[
     f_X (x) = \int_{-\infty}^{\infty} f_{X,Y} (x,y) \; dy
 \]
@@ -1547,7 +1549,7 @@ An important special case is when
 \[
     g(X,Y) = (X - \mu_X)(Y - \mu_Y)
 \]
-(i.e. $E(X) - \mu_X$ and $E(Y) = \mu_Y$)
+(i.e. $E(X) = \mu_X$ and $E(Y) = \mu_Y$)
 
 Thus, in this case, we're talking about
 \[
