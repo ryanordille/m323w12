@@ -1571,7 +1571,153 @@ Proof: by definition,
     Cov(X,Y) &= E((X - \mu_X)(Y - \mu_Y)) \\
         &= E(XY - \mu_Y X - \mu_X Y + \mu_X \mu_Y) \\
         &= E(XY) - \mu_Y E(X) - \mu_X E(Y) + \mu_X \mu_Y \\
-        &= E(XY) + \mu_X \mu_Y
+        &= E(XY) - \mu_X \mu_Y
 \end{align*}
 
+%%
+\section{10 April}
+\subsection{Covariance continued}
+\subsubsection{Covariance and Correlation}
+While the sign of $Cov(X,Y)$ tells you whether or not $X$ and $Y$ tend to vary in the same direction together (positive if they do, negative if in opposite directions), the magnitude of $Cov(X,Y)$ depends on the scale of measurement. Thus,
+\begin{align*}
+    Cov(aX,bY) &= E((aX - a \mu_X)(bY - b \mu_Y)) \\
+        &= E(ab(X - \mu_X)(Y- \mu_Y)) \\
+        &= a b E((X-\mu_X)(Y-\mu_Y)) \\
+        &= a b Cov(X,Y)
+\end{align*}
+In other words, $Cov(aX, bY) \neq Cov(X,Y)$. Therefore, we define a new quantity that has the same sign as $Cov(X,Y)$, but which is \emph{scale invariant}. This way, it does not matter what scale we take our measurements in (Celsius vs Fahrenheit, kilometres vs miles, etc.). Thus, we define the \emph{correlation} between $X$ and $Y$, written as $Corr(X,Y)$ (also $\rho(X,Y)$), and is defined as
+\[
+    \rho (X,Y) = \frac{Cov(X,Y)}{\sqrt{Var(X) Var(Y)}} = \frac{\sigma_{XY}}{\sigma_X \sigma_Y}
+\]
+Note that the sign of $\rho (X,Y)$ is the same as the sign of $Cov(X,Y)$, and
+\[
+    | \rho (aX,bY) | = |\frac{Cov(aX,bY)}{\sqrt{Var(aX) Var(aY)}}| = \frac{|ab|Cov(X,Y)}{|ab|\sqrt{Var(X) Var(Y)}} = \rho (X,Y)
+\]
+(i.e. $\rho$ is scale invariant).
+
+\subsubsection{Important remarks on the correlation coefficient}
+\textbf{(1)} It is not difficult to show that $|\rho(X,Y)| \leq 1$ (i.e. $-1 \leq \rho(X,Y) \leq 1$) using the Cauchy-Schwartz inequality ($E(XY) \leq (E(X^2)E(Y^2))^{\frac{1}{2}}$), or using the fact that $0 \leq E((X-Y)^2) = E(X^2) - 2E(XY) + E(Y^2) \Rightarrow 2 E(XY) \leq E(X^2)+E(Y^2)$. The proof was given in class, but will not be on the final.
+
+\textbf{(2)} $|\rho| = 1$ if and only if $Y = aX + b$ for constants $a,b$, i.e. if and only if there is a perfect linear relationship. Further, the above proof from \textbf{(1)} gives us the claim for \textbf{(2)}, since $E(X \pm Y)^2 = 0 \Leftrightarrow Y = \pm X$.
+
+\textbf{(3)} It is important to note that the correlation between two random variables is a measure of \textbf{linear} dependence between them, and \emph{nothing else.} Avoid using the term ``correlation" to describe dependence in general.
+
+\subsubsection{Example}
+(Same numbers from Thursday)
+
+\[
+    f_{X,Y} (x,y) = \frac{2}{3} (x + 2y) \textnormal{ for } 0 < x < 1, 0 < y < 1
+\]
+and $f_{X,Y} (x,y) = 0$ elsewhere.
+
+\textbf{(6)} Find $Cov(X,Y)$.
+
+We need $\mu_X$ and $\mu_Y$. We then need $E(XY)$.
+
+\begin{align*}
+    \mu_X &= \int_{-\infty}^{\infty} x f_X (x) \; dx \\
+        &= \int_0^1 x \frac{2}{3} (x + 1) \; dx \\
+        &= \frac{5}{9} \\
+    \mu_Y &= \int_{-\infty}^{\infty} y f_Y (y) \; dy \\
+        &= \int_0^1 y \frac{1}{3} (1 + 4y) \; dy \\
+        &= \frac{11}{18}
+    E(XY) &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x y f_{X,Y} (x,y) \; dx \; dy \\
+        &= \int_0^1 \int_0^1 x y \frac{2}{3} (x + 2y) \; dx \; dy \\
+        &= \frac{1}{3} \\
+    Cov(X,Y) &= \frac{1}{3} - \frac{5}{9} \frac{11}{18} \\
+        &= \frac{-3}{486}
+\end{align*}
+
+\textbf{(7)} Find $Corr(X,Y) = \rho (X,Y)$.
+
+We need $Var(X)$ and $Var(Y)$. 
+
+\begin{align*}
+    E(X^2) &= \int_0^1 x^2 \frac{2}{3} (x+1) \; dx \\
+        &= \frac{7}{18} \\
+    Var(X) &= \frac{7}{18} - (\frac{5}{9})^2 \\
+        &= .0803 \\
+    \sigma_X &= \sqrt{.0803} \\
+        &= .2833 \\
+    \dots &= \dots \\
+    Var(Y) &= .6821 \\
+    \sigma_Y &= \sqrt{.6821} \\
+        &= .8259
+\end{align*}
+
+So, at last, we can find $Corr(X,Y)$.
+\begin{align*}
+    Corr(X,Y) &= \frac{\frac{-3}{486}}{.2833 \times .8259} \\
+        &= -0.0319
+\end{align*}
+
+\subsubsection{Linking variance and covariance}
+\textbf{Theorem:} $Var(X \pm Y) = Var(X) + Var(Y) \pm 2 Cov(X,Y)$.
+
+\textbf{Proof:}
+\begin{align*}
+    Var(X + Y) &= E((X+Y)^2) - (\mu_X + \mu_Y)^2 \\
+        &= E(X^2) - \mu_X^2 + E(Y^2) - \mu_Y^2 + 2 E(XY) - 2 \mu_X \mu_Y \\
+        &= Var(X) + Var(Y) + 2 Cov(X,Y)
+\end{align*}
+For $Var(X - Y)$, we get $Var(X) + Var(Y) - 2 Cov(X,Y)$.
+
+\textbf{Corollary:} if $Cov(X,Y) = 0$, then $Var(X+Y) = Var(X) + Var(Y)$. In general:
+\[
+    Var(\sum_{i=1}^n X_i) = \sum_{i=1}^n Var(X_i)
+\]
+if $X_i, X_j$ are uncorrelated and $i \neq j$.
+
+\subsection{Independence between random variables}
+We talked about independence of events, and so now it is natural to discuss the notion of independence between random variables. 
+
+\subsubsection{Definition}
+Note: This definition is valid whether the random variables are continuous or discrete.
+
+The random variables $X_1, X_2, \dots, X_n$ are said to be \emph{independent} if and only if
+\[
+    F_{X_1, X_2, \dots, X_n} (x_1, x_2, \dots, x_n) = F_{X_1} (x_1) F_{X_2} (x_2) \dots F_{X_n} (x_n)
+\]
+for all $-\infty < x_i < \infty$.
+
+If $X_1, X_2, \dots, X_n$ are jointly continuous, then it is easy to see that they are independent if and only if
+\[
+    f_{X_1, X_2, \dots, X_n} (x_1, x_2, \dots, x_n) = f_{X_1} (x_1) f_{X_2} (x_2) \dots f_{X_n} (x_n)
+\]
+for all $-\infty < x_i < \infty$.
+
+If $X_1, X_2, \dots, X_n$ are jointly discrete, then they are independent if and only if
+\[
+    P_{X_1, X_2, \dots, X_n} (x_1, x_2, \dots, x_n) = P_{X_1} (x_1) P_{X_2} (x_2) \dots P_{X_n} (x_n)
+\]
+for all $-\infty < x_i < \infty$.
+
+\subsubsection{Example continued}
+\textbf{(8)} Are $X$ and $Y$ independent?
+
+Use $f_{X,Y} (x,y)$ and $f_X (x) f_Y (y)$. Try $x = \frac{1}{4}, y = \frac{1}{4}$.
+
+\begin{align*}
+    f_{X,Y} (\frac{1}{4}, \frac{1}{4}) &= \frac{2}{3} (\frac{1}{4} + \frac{2}{4}) \\
+    f_X (\frac{1}{4}) &= \frac{2}{3} \frac{5}{4} \\
+    f_Y (\frac{1}{4}) &= \frac{1}{3} (1 + \frac{4}{4})
+\end{align*}
+So that
+\[
+    f_X (\frac{1}{4}) f_Y (\frac{1}{4}) = \frac{5}{9} \neq \frac{1}{2}
+\]
+Therefore, $X$ and $Y$ are not independent. 
+
+\subsubsection{Independence and covariance}
+What is the relationship between independence and covariance?
+
+\textbf{Theorem:} If $X$ and $Y$ are independent, then $Cov(X,Y) = 0$. Note that the converse is not true.
+
+\textbf{Proof: (continuous case)} Assume $X \perp Y$. We must show that $E(XY) = E(X)E(Y)$.
+\begin{align*}
+    E(XY) &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x y f_{X,Y} (x,y) \; dx \; dy \\
+         &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x y f_X (x) f_Y (y) \; dx \; dy \\
+         &= \int_{-\infty}^{\infty} y f_Y (y) \; dy \; \int_{-\infty}^{\infty} x f_X (x) \; dx \\
+         &= \mu_X \mu_Y 
+\end{align*}
 \end{document}
