@@ -1720,4 +1720,127 @@ What is the relationship between independence and covariance?
          &= \int_{-\infty}^{\infty} y f_Y (y) \; dy \; \int_{-\infty}^{\infty} x f_X (x) \; dx \\
          &= \mu_X \mu_Y 
 \end{align*}
+
+%%
+\section{12 April}
+\subsection{Sums of independent random variables}
+Sums of random variables are particularly important in probability and statistics since we frequently encounter averages of random variables, apart from the divisor $n$, 
+\[
+    \frac{1}{n} \sum_{i = 1}^n
+\]
+denoted $\bar{x}$, is just a sum.
+
+We'll do three things:
+
+First off, use the m.g.f. method to find the \emph{exact} distribution of a sum of independent random variables, under certain circumstances. 
+
+Secondly, use the Central Limit Theorem to use the approximate distribution of a sum of a ``large" number of independent random variables under general conditions.
+
+Thirdly, we'll discuss the Weak Law of Large Numbers that enables to us to interpret probability as a limiting relative frequency. 
+
+\textbf{The moment generating function method for finding the distribution of a sum of independent random variables:} Recall from last class that if $X \perp Y$, then $E(XY) = E(X)E(Y)$ (i.e. $Cov(X,Y) = 0$). In general, if $X_1, X_2, \dots, X_n$ are independent, then
+\[
+    E(\prod_{i = 1}^n X_i) = \prod_{i = 1}^n E(X_i).
+\]
+
+The following extended result is true: if $X \perp Y$, then $g_1 (x) \perp g_2 (y)$ for all functions $g_1, g_2$.
+
+\subsubsection{Setup}
+We have independent r.v.s $X_1, X_2, \dots, X_n$ that are assumed to come from some known distribution (e.g. Poisson, Normal, etc.). We want to find the distribution of
+\[
+    S_n = \sum_{i = 1}^n X_i.
+\]
+
+This is how the m.g.f. method works:
+
+\textbf{Step 1:} find the m.g.f.s $M_{X_i} (t)$.
+
+\textbf{Step 2:} find the m.g.f. of $S_n$, $M_{S_n} (t)$ as follows:
+\begin{align*}
+    M_{S_n} (t) &= M_{\sum_{i = 1}^n X_i} (t) \\
+        &= E(e^{t \sum_{i = 1}^n X_i}) \\
+        &= E(e^{t X_1} e^{t X_2} \dots e^{t X_n}) \\
+        &= E(g(X_1) g(X_2) \dots g(X_n)) \textnormal{ where $g = e^{t X_i}$.} \\
+        &= \prod_{i = 1}^n E(e^{t X_i}) 
+\end{align*}
+The last step above is valid because functions of independent random variables are themselves independent, and $E(g(X_1) g(X_2)) = E(g(X_1)) E(g(X_2))$. Then,
+\begin{align*}
+    \dots &= \dots \\
+    M_{S_n} (t) &= \prod_{i = 1}^n M_{X_i} (t)
+\end{align*}
+
+\emph{Remark:} if the $X_i$'s all have the same distribution (termed \emph{identically distributed}), then
+\[
+    M_{S_n} (t) = (M_{X_i} (t))^n.
+\]
+
+\textbf{Step 3:} having found $\prod_{i = 1}^n M_{X_i} (t)$, we hope to recognize its form as the m.g.f. of a familiar distribution. If so, then by the Uniqueness Theorem of M.G.F.s, that distribution \textbf{must be} the distribution of $S_n$. 
+
+\subsubsection{In practice}
+\textbf{Theorem:} Let $X_1, X_2, \dots, X_n$ be independent random variables. 
+
+\textbf{(a)} Let $X_i \sim Poisson (\lambda_i)$. 
+
+\textbf{(b)} Let $X_i \sim N(\mu_i, \sigma_i^2)$.
+
+\textbf{(c)} Let $X_i \sim Binomial (n_i, p)$.
+
+\textbf{(d)} Let $X_i \sim \chi_{\nu_i}^2$.
+
+Find the distributions of of $S_n$ in \textbf{(a)} through \textbf{(d)}.
+
+\textbf{Solution:} (easy!)
+
+\textbf{(a)} We have $M_{X_i} (t) = e^{\lambda_i (e^t - 1)}$. Therefore, 
+\[
+   M_{S_n} (t) = \prod_{i=1}^n e^{\lambda_i (e^t -1)} = e^{\sum_{i=1}^n \lambda_i (e^t - 1)} 
+\]
+which we recognize as the m.g.f. of a $Poisson(\sum_{i = 1}^n \lambda_i)$ random variable. Therefore, by the Uniqueness Theorem, $S_n \sim Poisson(\sum_{i = 1}^n \lambda_i)$. In particular, if $\lambda_1 = \lambda_2 = \dots = \lambda_n = \lambda$, then $S_n \sim Poisson(n \lambda)$.
+
+\textbf{(b)} $M_{X_i} (t) = e^{\mu_i t + \frac{\sigma_i^2 t^2}{2}}$
+
+\begin{align*}
+    M_{S_n} (t) &= \prod_{i = 1}^n e^{\mu_i t + \frac{\sigma_i^2 t^2}{2}} \\
+        &= e^{\sum_{i=1}^n \mu_i t + \sum_{i = 1}^n \sigma_i^2 \frac{t^2}{2}}
+\end{align*}
+which we recognize as the m.g.f. of a $N(\sum_{i = 1}^n \mu_i, \sum_{i = 1}^n \sigma_i^2)$ random variable.
+
+\textbf{(c)} (try it yourself)
+
+\textbf{(d)} (MISSED)
+
+\subsection{The Central Limit Theorem}
+Roughly, the Central Limit Theorem says: sums of a large number of independent random variables are approximately normally distributed.
+
+\textbf{Theorem:} Let $X_1, X_2, \dots$ be independent and identically distributed (i.i.d.) random variables with mean $\mu$ and variance $\sigma^2$. Then, 
+\[
+    P(\frac{S_n - n \mu}{\sqrt{n} \sigma}) \leq x) \rightarrow P(Z \leq x) \; \forall x \textnormal{ as } n \to \infty
+\]
+where $Z$ is a Standard Normal distribution (i.e. $Z \sim N(0,1)$). 
+
+Remember this is talking about the \emph{sums} of the r.v.s, not the r.v.s themselves!
+
+This helps explains why, in the real world, a lot of factors seem to be normally distributed -- IQ scores, heights, weights, etc.. This does not prove why, say, heights are normally distributed, however -- it's just an observation and a plausibility argument.
+
+\subsubsection{Notes}
+\textbf{(1)} $Var(S_n) = \sum_{i = 1}^n Var(X_i) = n \sigma^2$, while $E(S_n) = n \mu$. Therefore, the l.h.s. of the Central Limit Theorem is just $S_n$ standardized to have mean 0 and standard deviation 1.
+
+\textbf{(2)} The C.L.T. can be written in the form
+\[
+    P(\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq x) \rightarrow P(Z \leq x)
+\]
+where $Z \sim N(0,1)$. Just divide top and bottom by $n$.
+
+\textbf{(3)} Note that the C.L.T. gives us a Normal distribution as the approximate  distribution as the sum of \textbf{any} i.i.d. random variables. 
+
+\subsubsection{Application}
+Suppose that it is known that the survival time for patients with Alzheimer's disease from onset of symptoms has a mean of 8 years and a standard deviation of 4 years. If a sample of 30 patients with the disease is taken, what is the approximate probability that their average survival will be less than seven years?
+
+\textbf{Solution:} the C.L.T. generally works well with $n \geq 30$. We'll let $\bar{X} = \frac{\sum_{i=1}^{30} X_i}{30}$. We want $P(\bar{X} < 7)$. Use the C.L.T. as follows:
+\begin{align*}
+    P(\bar{X} < 7) &= P(\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} < \frac{7 - \mu}{\frac{\sigma}{\sqrt{n}}}) \\
+        &= P(\frac{\bar{X} - 8}{\frac{4}{\sqrt{30}}} < \frac{7 - 8}{\frac{4}{\sqrt{30}}}) \\
+        &\approx P(Z < -1.37) \\
+        &= .0853
+\end{align*}
 \end{document}
