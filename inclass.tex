@@ -1807,7 +1807,18 @@ which we recognize as the m.g.f. of a $N(\sum_{i = 1}^n \mu_i, \sum_{i = 1}^n \s
 
 \textbf{(c)} (try it yourself)
 
-\textbf{(d)} (MISSED)
+\textbf{(d)} 
+$$
+    M_{X_i}(t) = \frac{1}{(1-2t)^{\frac{\nu_i}{2}}}
+$$
+Therefore,
+\[
+	M_{S_n}(t) = \frac{1}{(1-2t)^{\sum_{i=1}^n \frac{\nu_i}{2}}}
+\]
+Which is the m.g.f. of a 
+$$ 
+    \chi_{\sum_{i=1}^n \nu_i}^2 \text{ r.v.}
+$$
 
 \subsection{The Central Limit Theorem}
 Roughly, the Central Limit Theorem says: sums of a large number of independent random variables are approximately normally distributed.
