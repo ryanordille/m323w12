@@ -1,5 +1,5 @@
 \documentclass[12pt]{article}
-\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\usepackage{geometry}                % See geometry.p.d.f. to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ...
 %\geometry{landscape}                % Activate for for rotated page geometry
 \usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
@@ -32,7 +32,10 @@ The notes up until 28 February (first class after the break and midterm) are con
 \begin{enumerate}
     \item $P(E) \geq 0$
     \item $P(S) = 1$
-    \item $P(\cup_{i=1}^{\infty} E_i) = \sum_{i=1}^{\infty} P(E_i) \forall E_i \cap E_J = \emptyset$
+    \item $\forall E_i \cap E_J = \emptyset$:
+        \[
+            P(\cup_{i=1}^{\infty} E_i) = \sum_{i=1}^{\infty} P(E_i)
+        \]
     \item \textbf{Theorem 1:} $P(\emptyset) = 0$
     \item \textbf{Theorem 2:} $P(E^c) = 1 - P(E)$
     \item \textbf{Theorem 3:} $P(E \cap F^c) = P(E) - P(E \cap F)$
@@ -46,7 +49,7 @@ Word problem hints:
     \item ``at least one" -- union
     \item ``not" -- complement
     \item ``and" -- intersection
-    \item `` proportion" -- ``a probability statement about an individual"
+    \item ``proportion" -- ``a probability statement about an individual"
 \end{itemize}
 % section 17_january (end)
 
@@ -90,11 +93,11 @@ This lecture just contained examples of the previous counting rules.
 \subsection{Conditional Probabilities}
 Very often, if we know that some event $A$ has occurred, then this will affect the probability that the event $B$ will occur.
 
-\textbf{Definition:} for two events $A$ and $B$, with $P(A) \neq 0$, we define the probability of ``$B$ given $A$", denoted by $P(B|A)$, as
+\textbf{Definition:} for two events $A$ and $B$, with $P(A) \neq 0$, we define the probability of ``$B$ given $A$", denoted by $P(B \; | \; A)$, as
 \[
     P(B|A) = \frac{P(A \cap B)}{P(A)}
 \]
-If $P(A) = 0$, then $P(B|A)$ can be defined arbitrarily, so we consider it to be undefined.
+If $P(A) = 0$, then $P(B \; | \; A)$ can be defined arbitrarily, so we consider it to be undefined.
 
 Notice that the right-hand side of the definition is given in terms of already-defined quantities -- straightforward, unconditional probabilities. 
 
@@ -103,14 +106,14 @@ Notice that the right-hand side of the definition is given in terms of already-d
 
 \textbf{(2) (the multiplication rule for conditional probabilities)} Let $A$ and $B$ be two events. Then,
 \[
-    P(A \cap B) = P(B|A) P(A) = P(A|B) P(B)
+    P(A \cap B) = P(B \; | \; A) P(A) = P(A \; | \; B) P(B)
 \]
 
 \textbf{(3)} When solving conditional probability problems, use the \emph{conditioning technique} to break a long intersection into a series of conditional and unconditional probabilities.
 % section 26_january (end)
 
 \section{31 January} 
-Note that it's not true in general that $P(A | (B_1 \cup B_2)) = P(A | B_1) + P(A | B_2)$ even if $B_1 \cap B_2 = \emptyset$. However, it is true that $P(B_1 \cup B_2 | A) = P(B_1 | A) + P(B_2 | A)$.
+Note that it's not true in general that $P(A \; | \; (B_1 \cup B_2)) = P(A \; | \; B_1) + P(A \; | \; B_2)$ even if $B_1 \cap B_2 = \emptyset$. However, it is true that $P(B_1 \cup B_2 | A) = P(B_1 | A) + P(B_2 | A)$.
 
 \subsection{The Law of Total Probability}
 Let $A$ be any event and let $B_1, B_2, \dots, B_m$ be a collection of $m$ events satisfying:
@@ -120,7 +123,7 @@ Let $A$ be any event and let $B_1, B_2, \dots, B_m$ be a collection of $m$ event
 \end{enumerate}
 Then,
 \[
-    P(A) = \sum_{i=1}^{m} P(A | B_i) P(B_i)
+    P(A) = \sum_{i=1}^{m} P(A \; | \; B_i) P(B_i)
 \]
 
 Notice here that the left-hand side ($P(A)$) may be difficult to find directly, while the components of the right-hand side might be known or easy to find.
@@ -128,7 +131,7 @@ Notice here that the left-hand side ($P(A)$) may be difficult to find directly, 
 \subsection{Bayes' Theorem}
 Let $A$ be any event. Let $B_1, B_2, \dots, B_m$ form a partition of $S$. Then, for every $k = 1, 2, \dots, m$,
 \[
-    P(B_k | A) = \frac{P(A | B_k) P(B_k)}{P(A)} = \frac{P(A | B_k) P(B_k)}{\sum_{i=1}^m P(A | B_i) P(B_i)}
+    P(B_k \; | \; A) = \frac{P(A \; | \; B_k) P(B_k)}{P(A)} = \frac{P(A \; | \; B_k) P(B_k)}{\sum_{i=1}^m P(A | B_i) P(B_i)}
 \]
 % section 31_january (end)
 
@@ -136,7 +139,7 @@ Let $A$ be any event. Let $B_1, B_2, \dots, B_m$ form a partition of $S$. Then, 
 \subsection{Independence}
 Sometimes, knowing that an event $A$ has occurred will not affect the probability that $B$ will occur. In such a situation, we say that $A$ and $B$ are \emph{independent}. More formally, two events $A,B$ are said to be independent ($A \perp B$) if and only if
 \[
-    P(B | A) = P(B) \textnormal{ or } P(A | B) = P(A)
+    P(B \; | \; A) = P(B) \textnormal{ or } P(A \; | \; B) = P(A)
 \]
 
 \textbf{Theorem:} if $A$ and $B$ are disjoint, then $A$ and $B$ can only be independent if either $P(A) = 0$ or $P(B) = 0$.
@@ -159,7 +162,7 @@ Often, we are not so interested in the outcomes of an experiment themselves, but
 
 \textbf{Definition:} a function $X$ that maps the sample space $S$ to the real line in such a way that, for every $\omega \in S$, $X(\omega)$ is a real number, is called a \emph{random variable} (or r.v. for short). 
 
-Note that two or more distinct $\omega$'s can give the same value of $X(\omega)$. However, one value of $w$ is not allowed to give two different values of $X(\omega)$, as this would not make $X$ a function.
+Note that two or more distinct $\omega$'s can give the same value of $X(\omega)$. However, one value of $\omega$ is not allowed to give two different values of $X(\omega)$, as this would not make $X$ a function.
 
 The term ``random variable" comes about because the outcomes of the experiment are random or uncertain before we perform our experiment, and hence the value of $X$ will also be uncertain before the experiment.
 
@@ -243,18 +246,18 @@ Secondly, each trial can result in exactly one of two possible outcomes: a ``suc
 
 Thirdly, the probability of success at trial $i$ is constant and equal to $p$ for every $i = 1, 2, \dots, n$. For example, in a coin toss, we cannot change the probability of heads halfway through, so the probability of success is constant.
 
-\emph{Theorem:} Let $X$ be the number of successes observed in these $n$ trials. Then,
+\textbf{Theorem:} Let $X$ be the number of successes observed in these $n$ trials. Then,
 \[
-    P(X = x) = {n \choose x} p^x (1-p)^{n - x} \; \textnormal{ for } x = 0,1,2,\ldots, n
+    P(X = x) = {n \choose x} p^x (1-p)^{n - x} \; \textnormal{ for } x = 0,1,2,\ldots, n.
 \]
 
-\emph{Proof:} (same idea for the genetic mutation example) First, note that the probability of any particular configuration in which there are $x$ successes (and $n-x$ failures) is just $p^x (1-p)^{n-x}$.
+\textbf{Proof:} (same idea for the genetic mutation example) First, note that the probability of any particular configuration in which there are $x$ successes (and $n-x$ failures) is just $p^x (1-p)^{n-x}$.
 
 E.g:
 \[ P(S_1 \cap S_2 \cap \ldots \cap S_x \cap F_{x+1} \cap F_{x+2} \cap \ldots \cap F_n) = P(S_1) P(S_2) \ldots P(S_x) P(F_{x+1}) \ldots P(F_n) \]
 Assuming these are all independent. This is equal to
 \[
-    p p \ldots p (1-p) \ldots (1-p) = p^x (1-p)^{n-x}
+    p \times p \times  \ldots \times p \times (1-p) \times \ldots \times (1-p) = p^x (1-p)^{n-x}
 \]
 But,
 \[
@@ -264,7 +267,7 @@ But,
 Note that the configurations are disjoint, so therefore, by axiom 3:
 
 \[
-    P(X = x) = \sum_{\textnormal{all configurations}} P(\textnormal{Configuration } i) = \sum p^x (1-p)^{n-x}
+    P(X = x) = \sum_{\textnormal{all configurations}} P(\textnormal{configuration } i) = \sum p^x (1-p)^{n-x}
 \]
 
 Since each configuration is defined by a choice of $x$ objects from $n$ total objects, then for every $x = 0, 1, \ldots, n$:
@@ -272,14 +275,15 @@ Since each configuration is defined by a choice of $x$ objects from $n$ total ob
     P (X = x) = {n \choose x} p^x (1-p)^{n-x}
 \]
 
-\emph{Example:} Suppose that the five year survival probability for lung cancer is $.10$. If thirty people with lung cancer are sampled, what is the probability that at least three will survive five years or longer?
+\subsubsection{Binomial distribution example}
+Suppose that the five year survival probability for lung cancer is $.10$. If thirty people with lung cancer are sampled, what is the probability that at least three will survive five years or longer?
 
-\emph{Solution:} Let $Y =$ the number out of thirty who will survive five or more years. We shall reasonably assume the binomial setup, with $n = 30$ and $P(S_i) = .10$, where $S_i$ is the event where the $i$th subject survives five or more years. Therefore,
+\textbf{Solution:} Let $Y =$ the number out of thirty who will survive five or more years. We shall reasonably assume the binomial setup, with $n = 30$ and $P(S_i) = .10$, where $S_i$ is the event where the $i$th subject survives five or more years. Therefore,
 \[
     P(Y \geq 3) = \sum_{y=3}^{30} {30 \choose y} (.10)^y (1-.10)^{30-y} = 1 - \sum_{y=0}^{2} {30 \choose y} (.10)^y (1-.10)^{30-y}
 \]
 
-Important note: do not immediately have the ``burning desire" to use the binomial distribution as soon as you see a bunch of trials, each of which can result in exactly one of two outcomes. You must check if the trials are independent -- they will not be if you are sampling without replacement!
+\emph{Important note}: do not immediately have the ``burning desire" to use the binomial distribution as soon as you see a bunch of trials, each of which can result in exactly one of two outcomes. You must check if the trials are independent -- they will not be if you are sampling without replacement!
 
 Observe that the Bernoulli distribution is a special case of the binomial distribution, where $n = 1$. So, $P_X (x) = p^x (1-p)^{1-x}$ for $x = 0,1$.
 
@@ -307,7 +311,7 @@ The Poisson distribution arises as an approximation to the binomial for ``large 
 \]
 (e.g. $p = \frac{6}{n} : np = n(\frac{6}{n}) = 6$)
 
-\emph{Proof:} We shall use the following result in proving our theorem.
+\textbf{Proof:} We shall use the following result in proving our theorem.
 \[
     \lim{n \to \infty} (1 + \frac{a}{n})^n = e^a
 \]
@@ -334,11 +338,12 @@ Notice that the second term has $x$ terms on both the top and the bottom. Now, l
 % make-up notes -- missed class
 \section{01 March}
 \subsection{Poisson distribution continued}
+\subsubsection{Poisson distribution example}
 \[
     P(X = x) = \frac{\lambda^x e^{- \lambda}}{x!} \; \textnormal{where } x = 0, 1, 2, \ldots
 \]
 
-\textbf{Example:} Suppose that in a book of 1000 pages, on any particular page, there can be either zero errors or one error. Suppose further that the probability of an error on any particular page is $.002$. what is the approximate probability that there will be at most three errors in the book?
+Suppose that in a book of 1000 pages, on any particular page, there can be either zero errors or one error. Suppose further that the probability of an error on any particular page is $.002$. what is the approximate probability that there will be at most three errors in the book?
 
 \textbf{Exact solution:} There is a binomial setup -- errors are likely to occur independently amongst the $n = 1000$ trials. Each trial can result in either a success (an error is found) or a failure (an error is not found). There is also a constant probability of success ($.002$) for every trial. Let $X$ be the number of successes in 1000 pages. Then $X \sim Bin(1000, .002)$.
 
@@ -358,12 +363,16 @@ The random variable X has a hypergeometric distribution with parameters $N$, $a$
 \[
     P(X = x) = \frac{{a \choose x} \binom{N-a}{n-x}}{{N \choose n}}
 \]
-(for $x \leq a$ and $n-x \leq N-a$)
+(for $x \leq a$ and $n-x \leq N-a$).
+
+The hypergeometric distribution discusses the probability of $a$ successes in $n$ draws of $N$ objects. 
 
 \subsection{The Geometric Distribution}
 
-$X$ is said to have a geometric distribution with parameter $p$ if $P(X = x) = P_x (x) = (1-p)^{x-1} p$ for $x = 1, 2, \ldots$.
-
+$X$ is said to have a geometric distribution with parameter $p$ if 
+\[
+    P(X = x) = P_x (x) = (1-p)^{x-1} p \textnormal{ for } x = 1, 2, \ldots.
+\]
 \[
     p \sum_{x = 1}^{\infty} (1-p)^{x-1} = \frac{p}{1-(p-1)} = 1
 \]
@@ -552,15 +561,15 @@ For the variance, first find $E(X(X-1))$ (2 derivatives), and then you can find 
 \]
 
 \subsection{Continuous probability distributions}
-\textbf{Defintion:} a random variable $X$ with cdf $F_X$ is said to be continuous if $F_X$ is continuous for all $- \infty < x < \infty$.
+\textbf{Definition:} a random variable $X$ with c.d.f. $F_X$ is said to be continuous if $F_X$ is continuous for all $- \infty < x < \infty$.
 
-The continuous cdfs split into two types:
+The continuous c.d.f.s split into two types:
 \begin{enumerate}
-    \item the so-called ``absolutely continuous" cdfs (essentially, they are differentiable) and
-    \item the so-called ``singular" cdfs (without derivatives).
+    \item the so-called ``absolutely continuous" c.d.f.s (essentially, they are differentiable) and
+    \item the so-called ``singular" c.d.f.s (without derivatives).
 \end{enumerate}
 
-From now on in this course, we'll assume for continuos cdfs $F_X$, that they are differentiable for all $- \infty < x < \infty$.
+From now on in this course, we'll assume for continuos c.d.f.s $F_X$, that they are differentiable for all $- \infty < x < \infty$.
 
 It follows that if $X$ is continuous, then $P(X=x)=0$ for every $x$. Consider the ``area under a curve" analogy.
 
@@ -569,7 +578,7 @@ Remember (as $F_X (x) = P(X \leq x)$):
     P(X=x) = F_X (x) - P(X < x)
 \]
 
-Hence, we cannot specify a continuous random variable by specifying the values $P(X=x)$ for all $x$ that $X$ can assume, as we did in the discrete case. Instead, we introduce an analogue of the probability function known as the \emph{probability density function} (pdf). It will turn out that the pdf also uniquely determines the probability distribution.
+Hence, we cannot specify a continuous random variable by specifying the values $P(X=x)$ for all $x$ that $X$ can assume, as we did in the discrete case. Instead, we introduce an analogue of the probability function known as the \emph{probability density function} (p.d.f.). It will turn out that the p.d.f. also uniquely determines the probability distribution.
 
 \textbf{Definition:} A real-valued function $f_x$ is said to be the probability density function of a random variable $X$ if:
 \begin{enumerate}
@@ -586,7 +595,7 @@ Hence, we cannot specify a continuous random variable by specifying the values $
     \item $P(X \in A) = \int_A f_X (s) dx \; \forall \textnormal{ events } A \in \mathds[R]$
 \end{enumerate}
 
-A pdf gives $P(X \in A)$ by integrating over $A$.
+A p.d.f. gives $P(X \in A)$ by integrating over $A$.
 
 \subsection{Notes on the p.d.f.}
 %[
