@@ -787,7 +787,7 @@ The distribution is equal to $0$ elsewhere.
                     &= P(0 < X \leq h)
             \end{align*}
         There is an interesting converse -- the \emph{only} continuous distribution with the memoryless property is the exponential. The geometric discrete distribution also has this property.
-    \item The exponential distribution is used when you believe that $X$ has a constant ``hazard" (i.e. $P(x \leq X < x+h | X \geq x)$ is roughly constant in $x$ for small $h$). It is also used to model the times between events that occur according to a Poisson Process (explained in later statistic courses).
+    \item The exponential distribution is used when you believe that $X$ has a constant ``hazard" (i.e. $P(x \leq X < x+h \; | \; X \geq x)$ is roughly constant in $x$ for small $h$). It is also used to model the times between events that occur according to a Poisson Process (explained in later statistic courses).
 
 \end{enumerate}
 
@@ -815,13 +815,17 @@ The gamma function has the following two important properties:
 \]  
 $f_X (x) = 0$ when $x < 0$.
 
-        \textbf{Notes:}
+\textbf{Notes:}
 
 \textbf{(1)} 
 \[
     \int_0^{\infty} \frac{1}{\Gamma(\alpha)} \frac{x^{\alpha -1}e^{\frac{-x}{\beta}}}{\beta^{\alpha}} \; dx = 1
 \]
-This is as it should be -- set $y = \frac{x}{\beta}$ to get $\frac{1}{\Gamma(\alpha)} \int_0^{\infty} y^{\alpha -1}e^{-y} \; dy = 1$. Set $y=\frac{x}{\beta}$ and $dx = \beta \; dy$ to get the same answer.
+This is as it should be -- set $y = \frac{x}{\beta}$ to get 
+\[
+    \frac{1}{\Gamma(\alpha)} \int_0^{\infty} y^{\alpha -1}e^{-y} \; dy = 1.
+\]
+Set $y=\frac{x}{\beta}$ and $dx = \beta \; dy$ to get the same answer.
 
 This just proves that this given formula is a density, as it integrates out to 1.
 
