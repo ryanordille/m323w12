@@ -731,9 +731,9 @@ and $f_X (x) = 0$ elsewhere.
     \item Notation -- we write $X \sim U(a,b)$ to mean that $X$ has a uniform distribution on the interval $[a,b]$.
     \item The c.d.f. of $X$ is:
         \begin{align*}
-            F_X (x) &= 0 \; \text{for} x < a \\
-                &= \frac{x-a}{b-a} \; \text{for} a \leq x \leq b \\
-                &= 1 \; \text{for} b < x
+            F_X (x) &= 0 \text{ for } x < a \\
+                &= \frac{x-a}{b-a} \text{ for } a \leq x \leq b \\
+                &= 1 \text{ for } b < x
         \end{align*}
         The graph of the c.d.f. is $0$ up to $a$, then grows linearly up to $b$, then is constantly $1$ after.
     \item
@@ -743,7 +743,7 @@ and $f_X (x) = 0$ elsewhere.
                 &= \frac{b^2 -a^2}{2(b-a)} \\
                 &= \frac{a+b}{2}
         \end{align*}
-        It is easy to see that the variance of a uniform distribution is $Var(X) = \frac{(b-a)^2}{12}$.
+        It is then easy to see that the variance of a uniform distribution is $Var(X) = \frac{(b-a)^2}{12}$.
 \end{enumerate}
 
 \subsubsection{The exponential distribution}
@@ -769,7 +769,7 @@ The distribution is equal to $0$ elsewhere.
         You can do this using integration by parts, or we'll see a trick for this later. Also, $\sigma^2 = Var(X) = \beta^2$.
     \item Sometimes, the exponential distribution will be ``parameterized" in a different way, i.e. the parameter will be written in a different form. The alternative form for the p.d.f. is:
         \begin{align*}
-            f_X (x) &= \lambda e^{\lambda x} \; \textnormal{for} x \geq 0 \\
+            f_X (x) &= \lambda e^{\lambda x} \textnormal{ for } x \geq 0 \\
                 &= 0 \; \textnormal{elsewhere}
         \end{align*}
         Watch out how the writer is writing in the parameter for the distribution! In this case, $E(X) = \frac{1}{\lambda}$ and $Var(X) = \frac{1}{\lambda^2}$.
