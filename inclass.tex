@@ -213,7 +213,6 @@ This is used as a ``building block" for more complicated random variables.
 
 
 %% POST MIDTERM
-\newpage
 \textbf{Starting from after the midterm and break:}
 
 \section{28 February}
@@ -893,7 +892,7 @@ We write $X \sim N(\mu, \sigma^2)$.
 \textbf{(2)}
 It is possible to show directly that $E(X)$ = the parameter $\mu$ and $Var(X)$ = the parameter $\sigma^2$. 
 
-Note that if $X \sim N(1.2, 7.8)$, we mean that $\mu = 1.2$ and $\sigma^2 = 7.8$ \emph{not} $\sigma = 7.8$. We'll derive $\mu$ and $\sigma^2$ by using the so-called moment generating function later, as the current integration would be a bit tricky (but not impossible).
+Note that if $X \sim N(1.2, 7.8)$, we mean that $\mu = 1.2$ and $\sigma^2 = 7.8$ \textbf{not} $\sigma = 7.8$. We'll derive $\mu$ and $\sigma^2$ by using the so-called moment generating function later, as the current integration would be a bit tricky (but not impossible).
 
 \textbf{(3)}
 The p.d.f. has the famous bell shape. The features are:
@@ -932,7 +931,7 @@ Our main result from Tuesday: if $X \sim N(\mu, \sigma^2)$, then
 \]
 \emph{Note}: For any random variable with mean $\mu$ and variance $\sigma^2$, $\frac{X-\mu}{\sigma}$ will have mean 0 and variance 1. The proof of this is simple - just plug in the fraction for $X$ in $E(X)$ and $Var(X)$.
 
-The point of the main result is that, after standardizing, we still get a normal random variable If you standardize a random variable, you don't always get a random variable of the same type (unless you're standardizing a random variable with a normal distribution).
+The point of the main result is that, after standardizing, we still get a normal random variable. If you standardize a random variable, you don't always get a random variable of the same type (unless you're standardizing a random variable with a normal distribution).
 
 \subsubsection{Example 1}
 \textbf{Problem:} If $X \sim N(-1.2, 4)$, find $P(-1.9 \leq X < 2.2)$.
@@ -1018,7 +1017,7 @@ In general, we get
 \[
     M^{(k)} (t) = \int_{-\infty}^{\infty} x^k e^{tx} f_X (x) \; dx
 \]
-This gives $M^{(k)} (0) = E(X^l)$, as advertised.
+This gives $M^{(k)} (0) = E(X^k)$, as advertised.
 
 %%
 \section{27 March}
@@ -1237,7 +1236,7 @@ But if $g$ is decreasing, then $\frac{dy}{dx} = \frac{1}{\frac{dx}{dy}} < 0$, so
 \subsubsection{The probability integral transformation}
 The following is a very important result that allows one to simulate observations from a given probability distribution by knowing only how to simulate observations from a $U(0,1)$ distribution. This famous result is called \emph{the probability integral transformation}.
 
-Let $X$ be a continuous random variable with a strictly increasing $F_X$. Let $Y = F_X (X)$. Then $Y \sim U(0,1)$.
+\textbf{Theorem:} Let $X$ be a continuous random variable with a strictly increasing $F_X$. Let $Y = F_X (X)$. Then $Y \sim U(0,1)$.
 
 \emph{Note:} here, our $g$ is $F_X$, i.e. $Y = g(X) = F_X (X)$. Also, you must use $F_X$ and not some other $F$.
 
@@ -1291,7 +1290,7 @@ and, similarly,
 	F_Y (y) = F_{X,Y} (+ \infty, y)
 \]
 
-\textbf{(3)} $F_{X,Y} (x,y)$ is non-decreasing in $x$ and $y$ (e.g. $F_{X,Y} (x,y) \leq F_{X,Y} (x^{\prime},y)$ for $x^{\prime} > x$).
+\textbf{(3)} $F_{X,Y} (x,y)$ is non-decreasing in $x$ and $y$ (e.g. $F_{X,Y} (x,y) \leq F_{X,Y} (x^{\prime},y)$ for $x < x^{\prime}$).
 
 \textbf{(4)} $F_{X,Y} (-\infty, -\infty) = 0$ (c.f. $F_X (-\infty) = 0$) and $F_{X,Y} (\infty,\infty) = 1$.
 
@@ -1427,12 +1426,12 @@ Thus, we get the same marginal c.d.f. for $X$ by two different but equivalent me
 \subsection{Conditional Distributions}
 Conditioning plays a huge part in probability and statistics. Hence, we need to consider conditional distributions.
 
-\textbf{Definition:} Given the joint probability function of $(X,Y)$ $P_{X,Y} (x,y) = P(X = x, Y = y)$, we define the conditional probability function of $Y$ given $X = x$ to be:
+\textbf{Definition:} Given the joint probability function of $(X,Y)$, $P_{X,Y} (x,y) = P(X = x, Y = y)$, we define the \emph{conditional probability function} of $Y$ given $X = x$ to be:
 \[
     P(Y = y \; | \; X = x) = \frac{P_{X,Y} (x,y)}{P_X (x)} \; \forall x : P_X (x) \neq 0
 \]
 
-This is denoted as $F_{Y \; | \; X \leq x} (y \; | \; X \leq x)$.
+This is denoted as $F_{Y} (y \; | \; X \leq x)$.
 %%
 \section{05 April}
 \subsection{Conditional distributions continued}
