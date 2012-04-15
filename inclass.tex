@@ -540,7 +540,22 @@ In particular, the mean and variance of a Bernoulli random variable are $p$ and 
 
 So, the mean of a Poisson random variable is just its parameter $\lambda$.
 
-For the variance, first find $E(X(X-1))$. We find $Var(X) = \lambda$, the same as the mean.
+For the variance, first find $E(X(X-1))$. 
+
+% from wetmore's notes:
+For the variance, we use the trick we used for the variance of a binomial distribution. First, we solve for $E(X(X-1))$:
+
+\begin{align*}
+    E(X(X-1)) &= \sum_{x=2}^{n} x (x-1) \frac{\lambda^x e^{-\lambda}}{x!}{} \\
+        &= \lambda^2 \sum x (x-1) \frac{\lambda^{x-2} e^{-\lambda}}{x(x-1)(x-2)!} \\
+        &= \lambda^2 \sum \frac{\lambda^{x-2} e^{-\lambda}}{(x-2)!} \\
+        &= \lambda^{2} \textnormal{ as the sum represents a Poisson distribution where } x = x - 2
+\end{align*}
+
+Since $E(X^2) = E(X(X-1)) + \mu$, $Var(X) = E(X(X-1)) + \mu - \mu^2$. 
+
+$\therefore Var(X) = \lambda^2 + \lambda - \lambda^2 = \lambda$
+
 
 \subsubsection{Geometric}
 
