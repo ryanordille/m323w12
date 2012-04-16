@@ -75,12 +75,12 @@ Conditional expectation:
 \subsection{Named distribution p.f.s}
 \textbf{Bernoulli $X \sim Bern(p)$:} where $P(X = 1) = p$ ``success" and $P(X = 0) = 1 - p$ ``failure"
 
-\textbf{Binomial $X \sim Bin(n,p)$:} ``number of successes in $n$ trials" (for $x = 0, 1, \dots$)
+\textbf{Binomial $X \sim Bin(n,p)$:} ``number of successes in $n$ trials" (for $x = 0, 1, \dots, n$)
 \[
     P(X = x) = \binom{n}{x} p^x (1-p)^{n-x}
 \]
 
-\textbf{Poisson $X \sim Po(\lambda)$:} ``large $n$ and small $p$ binomial" where $np = \lambda$
+\textbf{Poisson $X \sim Po(\lambda)$:} ``large $n$ and small $p$ binomial" where $np = \lambda$ (for $x = 1, 2, \dots$)
 \[
     P(X = x) = \frac{\lambda^x e^{-\lambda}}{x!}
 \]
@@ -137,13 +137,13 @@ As $P(X = x) = 0$ for all $x$ in a continuous distribution, our definition of th
 \subsection{P.d.f.s of named distributions}
 \subsubsection{Uniform $X \sim U(a,b)$:}
 \[
-	f_X (x) = \int_a^x \frac{1}{b-a} \; dx   
+	f_X (x) =  \frac{1}{b-a}
 \] for $a \leq x \leq b$, and $f_X (x) = 0$ elsewhere.
-The c.d.f grows linearly, with $F_X (x) = \frac{x - a}{b-a}$ where $a \leq x \leq b$.
+The c.d.f grows linearly, with $F_X (x) = \int_a^x \frac{1}{b-a} \; dx = \frac{x - a}{b-a}$ where $a \leq x \leq b$.
 
 \subsubsection{Exponential $X \sim Exp(\beta)$:}
 \[
-    f_X (x) = \frac{1}{\beta} e^{-x / \beta} = \lambda e^{\lambda x}
+    f_X (x) = \frac{1}{\beta} e^{-x / \beta} = \lambda e^{-\lambda x}
 \] for $x \geq 0$, with $f_X (x) = 0$ elsewhere.
 
 \[
@@ -167,12 +167,12 @@ $E(X) = \mu = \beta$, $Var(X) = \sigma^2 = \beta^2$.
 
 $E(X) = \alpha \beta$, $Var(X) = \alpha \beta^2$.
 \[
-    F_X (x) = \int_0^x \frac{1}{\Gamma (\alpha) \beta^{\alpha}} y^{\alpha - 1} \; dy \text{ for } x > 0
+    F_X (x) = \int_0^x \frac{1}{\Gamma (\alpha) \beta^{\alpha}} y^{\alpha - 1} e^{-y / \beta} \; dy  \text{ for } x > 0
 \]
 
 \subsubsection{Chi-Square $X \sim \chi_{\nu}^2$:}
 \[
-    f_X (x) = \frac{1}{\Gamma (\nu / 2) 2^{\nu / 2}} x^{\nu / 2 - 1} \text{ for } x \geq 0
+    f_X (x) = \frac{1}{\Gamma (\nu / 2) 2^{\nu / 2}} x^{\nu / 2 - 1} e^{-y / 2} \text{ for } x \geq 0
 \] with $f_X (x) = 0$ elsewhere.
 
 \subsubsection{Gaussian/Normal $X \sim N(\mu, \sigma^2)$:}
