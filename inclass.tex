@@ -21,11 +21,11 @@
 \pagestyle{myheadings}
 \markright{Ryan Ordille\hfill MATH 323: Probability\hfill}
 %%
-These course notes are for McGill University's MATH 323: Probability course, offered in the Winter 2012 semester, taught by David Wolfson. These notes are simply what the instructor was writing on the board, and may contain errors. The notes are written by me, Ryan Ordille, and no copyright infringement is intended. 
+These course notes are for MATH 323: Probability, offered at McGill University in the Winter 2012 semester, taught by Professor David Wolfson. These notes are simply what the instructor wrote on the board, and may contain errors. The notes are written by me, Ryan Ordille, and no copyright infringement is intended. Please don't sell these notes, or pass them off as your own. 
 
-The notes up until 28 February (first class after the break and midterm) are concise -- without review or obvious proofs. Most pre-midterm examples (especially the ``nuts and bolts" examples) will be left out since, when these notes were typed up towards the end of the course, the solutions are obvious.
+The notes up until 28 February (first class after the break and midterm) are concise -- i.e. without review or obvious proofs. Most pre-midterm examples will be left out since, when these notes were typed up towards the end of the course, the solutions are obvious.
 
-
+Thank you to everyone who submitted corrections, and good luck!
 
 \section{17 January}
 \subsection{Axioms and Theorems}
@@ -1774,7 +1774,7 @@ Thirdly, we'll discuss the Weak Law of Large Numbers that enables to us to inter
 
 \textbf{The moment generating function method for finding the distribution of a sum of independent random variables:} Recall from last class that if $X \perp Y$, then $E(XY) = E(X)E(Y)$ (i.e. $Cov(X,Y) = 0$). In general, if $X_1, X_2, \dots, X_n$ are independent, then
 \[
-    E(\prod_{i = 1}^n X_i) = \prod_{i = 1}^n E(X_i).
+    E\left(\prod_{i = 1}^n X_i\right) = \prod_{i = 1}^n E(X_i).
 \]
 
 The following extended result is true: if $X \perp Y$, then $g_1 (x) \perp g_2 (y)$ for all functions $g_1, g_2$.
@@ -1859,7 +1859,7 @@ Roughly, the Central Limit Theorem says: sums of a large number of independent r
 
 \textbf{Theorem:} Let $X_1, X_2, \dots$ be independent and identically distributed (i.i.d.) random variables with mean $\mu$ and variance $\sigma^2$. Then, 
 \[
-    P(\frac{S_n - n \mu}{\sqrt{n} \sigma}) \leq x) \rightarrow P(Z \leq x) \; \forall x \textnormal{ as } n \to \infty
+    P\left(\frac{S_n - n \mu}{\sqrt{n} \sigma}\right) \leq x) \rightarrow P(Z \leq x) \; \forall x \textnormal{ as } n \to \infty
 \]
 where $Z$ is a Standard Normal distribution (i.e. $Z \sim N(0,1)$). 
 
@@ -1872,7 +1872,7 @@ This helps explains why, in the real world, a lot of factors seem to be normally
 
 \textbf{(2)} The C.L.T. can be written in the form
 \[
-    P(\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq x) \rightarrow P(Z \leq x)
+    P\left(\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq x\right) \rightarrow P(Z \leq x)
 \]
 where $Z \sim N(0,1)$. Just divide top and bottom by $n$.
 
@@ -1883,8 +1883,8 @@ Suppose that it is known that the survival time for patients with Alzheimer's di
 
 \textbf{Solution:} the C.L.T. generally works well with $n \geq 30$. We'll let $\bar{X} = \frac{\sum_{i=1}^{30} X_i}{30}$. We want $P(\bar{X} < 7)$. Use the C.L.T. as follows:
 \begin{align*}
-    P(\bar{X} < 7) &= P(\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} < \frac{7 - \mu}{\frac{\sigma}{\sqrt{n}}}) \\
-        &= P(\frac{\bar{X} - 8}{\frac{4}{\sqrt{30}}} < \frac{7 - 8}{\frac{4}{\sqrt{30}}}) \\
+    P(\bar{X} < 7) &= P\left(\frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} < \frac{7 - \mu}{\frac{\sigma}{\sqrt{n}}}\right) \\
+        &= P\left(\frac{\bar{X} - 8}{\frac{4}{\sqrt{30}}} < \frac{7 - 8}{\frac{4}{\sqrt{30}}}\right) \\
         &\approx P(Z < -1.37) \\
         &= .0853
 \end{align*}
