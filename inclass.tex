@@ -364,7 +364,7 @@ The random variable X has a hypergeometric distribution with parameters $N$, $a$
 \]
 (for $x \leq a$ and $n-x \leq N-a$).
 
-The hypergeometric distribution discusses the probability of $a$ successes in $n$ draws of $N$ objects. 
+The hypergeometric distribution is applied to a situation where there are $a$ objects of some type in a set of $N$ objects. The distribution discusses the probability of drawing $x$ objects of this type in a sample of size $n$.
 
 \subsection{The Geometric Distribution}
 
@@ -539,8 +539,6 @@ In particular, the mean and variance of a Bernoulli random variable are $p$ and 
 \end{align*}
 
 So, the mean of a Poisson random variable is just its parameter $\lambda$.
-
-For the variance, first find $E(X(X-1))$. 
 
 % from wetmore's notes:
 For the variance, we use the trick we used for the variance of a binomial distribution. First, we solve for $E(X(X-1))$:
@@ -998,7 +996,7 @@ Let $X$ be a random variable with p.d.f. $f_X$ (respectively, probability $P_X$ 
 \]
 
 \subsubsection{Notes}
-\textbf{(1)} The m.g.f. is a function of the real values $t$.
+\textbf{(1)} The m.g.f. is a function of the real valued $t$.
 
 \textbf{(2)} In the continuous case, 
 \[
@@ -1084,6 +1082,15 @@ $X \sim Bin(n,p)$
 \end{align*}
 (note: $1-p = a$ and $pe^t = b$)
 
+\begin{align*}
+   M_X (t) &= \sum_{x=0}^{n} e^{tx} {n \choose x} p^x(1-p)^{n-x} \\	
+   &= \sum_{x=0}^{n} {n \choose x} (pe^t)^x(1-p)^{n-x} \\
+   &= (pe^t + (1 - p))^n \textnormal{ by the Binomial theorem} \\	
+   &= (1 - p + pe^t)^n \; \forall t \in (-\infty, \infty)
+\end{align*}
+	
+\emph{Note}: the Binomial theorem is $\sum_{x=0}^{n} {n \choose x} a^x b^{n-x} = (a+b)^n$.
+
 We get $M_X^{\prime} (0) = np$ and $M_X^{\prime \prime} (0) = np(1-p) + n^2 p^2$. Therefore, $Var(X) = np(1-p)$.
 
 \subsubsection{Poisson distribution}
@@ -1092,7 +1099,7 @@ $X \sim Po(\lambda)$
     M_X (t) &= E(e^{tx}) \\
         &= \sum_{x=0}^{\infty} \frac{e^{tx} \lambda^x e^{-\lambda}}{x!} \\
         &= e^{-\lambda} \sum_{x=0}^{\infty} \frac{ {(e^{t}\lambda)}^x}{x!} \\
-        &= e^{-\lambda} e^{e^t \lambda} \\
+        &= e^{-\lambda} e^{e^t \lambda} \textnormal{ by Taylor series of } e^x \\\\
         &= e^{\lambda (e^t - 1)}
 \end{align*}
 Therefore, $E(X) = M_X^{\prime} (0) = \lambda$ and $E(X^2) = \lambda + \lambda^2$, so therefore $Var(X) = \lambda$.
@@ -1216,11 +1223,11 @@ We're done!
 \subsubsection{General formula and theorem}
 We can now give a general formula that allows us to go from the p.d.f. of a given random variable $X$ to the p.d.f. of a transformed random variable $Y = g(X)$.
 
-\textbf{Theorem:} Let $X$ have p.d.f. $f_X$. Let $y = g(x)$ be either strictly increasing or strictly decreasing as a function of $x$, and $X$ is continuous. Define $Y = g(X)$. Then, the p.d.f. of $Y$ be
+\textbf{Theorem:} Let $X$ have p.d.f. $f_X$. Let $y = g(x)$ be either strictly increasing or strictly decreasing as a function of $x$, and $X$ is continuous. Define $Y = g(X)$. Then, the p.d.f. of $Y$ is
 \[
     f_Y (y) = f_X (g^{-1} (y)) |\frac{dx}{dy}| \textnormal{ for the appropriate range of values of $Y$.}
 \]
-Note that $|\frac{dx}{dy}| = \frac{1}{|\frac{dy}{dx}|}$.
+Note that $\left|\frac{dx}{dy}\right| = \frac{1}{|\frac{dy}{dx}|}$.
 
 \textbf{Proof:} First, 
 \begin{align*}
@@ -1275,7 +1282,7 @@ We recognize the above as a $U(0,1)$ p.d.f.
 \subsection{Joint probability distributions}
 Very often, we're interested in the simultaneous behaviour of several random variables, rather than one at a time, as we have considered up until now, e.g. if $X$ = number of kilometres traveled by a tire and $Y$ = tread depth, we may wish to know about the simultaneous or joint distribution of $X$ and $Y$. This leads to so-called \emph{multivariate distributions.}
 
-We shall considered bivariate (i.e. pairs of random variables) distributions, and indicate the general extensions at the end. 
+We shall consider bivariate (i.e. pairs of random variables) distributions, and indicate the general extensions at the end. 
 
 \subsubsection{Definition}
 The random variables $X$ and $Y$ have joint c.d.f., denoted $F_{X,Y}$, if
